@@ -21,5 +21,8 @@ namespace TreeService
 
         [OperationContract]
         UserDto AuthenticateUser(string login, string password);
+
+        [OperationContract]
+        List<Guid> GetSystemObjects();
     }
 }

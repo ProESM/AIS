@@ -49,9 +49,14 @@ namespace Domain.Implementation
 
             return userDto == null
                 ? null
-                : (CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(password) + userDto.Salt) != userDto.Password
+                : (CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(password) + userDto.Salt) == userDto.Password
                     ? userDto
                     : null);
+        }
+
+        public List<Guid> GetSystemObjects()
+        {
+            return BaseDataHelper.GetSystemObjects();
         }
     }
 }

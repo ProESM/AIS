@@ -25,6 +25,17 @@ namespace Common.Base
             }
             return false;
         }
+
+        public static List<Guid> GetSystemObjects()
+        {
+            var systemObjects = typeof (SystemObjects).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)).ToList();
+
+            systemObjects.AddRange(typeof (ObjectStates).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)));
+
+            systemObjects.AddRange(typeof (ObjectTypes).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)));
+
+            return systemObjects;
+        }
     }
 
     public static class SystemObjects

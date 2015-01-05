@@ -41,5 +41,10 @@ namespace TreeService
         {
             return _domainTreeService.AuthenticateUser(login, password);
         }
+
+        public List<Guid> GetSystemObjects()
+        {
+            return _domainTreeService.GetSystemObjects();
+        }
     }
 }

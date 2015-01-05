@@ -15,6 +15,8 @@ namespace Domain
         UserDto FindUserByLogin(string login);
 
         UserDto AuthenticateUser(string login, string password);
+
+        List<Guid> GetSystemObjects();
     }
 
 }

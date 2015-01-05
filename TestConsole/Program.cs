@@ -21,6 +21,8 @@ namespace TestConsole
 
             var treeList = treeServiceClient.GetTrees();
 
+            var so = treeServiceClient.GetSystemObjects();
+
             Console.ReadLine();
         }
     }
