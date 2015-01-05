@@ -13,6 +13,8 @@ namespace Domain
         List<TreeDto> GetTrees();
 
         UserDto FindUserByLogin(string login);
+
+        UserDto AuthenticateUser(string login, string password);
     }
 
 }

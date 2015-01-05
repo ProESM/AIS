@@ -18,5 +18,8 @@ namespace TreeService
 
         [OperationContract]
         UserDto FindUserByLogin(string login);
+
+        [OperationContract]
+        UserDto AuthenticateUser(string login, string password);
     }
 }

@@ -36,5 +36,10 @@ namespace TreeService
         {
             return _domainTreeService.FindUserByLogin(login);
         }
+
+        public UserDto AuthenticateUser(string login, string password)
+        {
+            return _domainTreeService.AuthenticateUser(login, password);
+        }
     }
 }

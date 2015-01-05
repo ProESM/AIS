@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Common.Base;
 using DTO;
 using Infrastructure;
 using Infrastructure.DtoFetchers;
@@ -40,6 +41,17 @@ namespace Domain.Implementation
             var userDaos = new List<UserDao> { _treeRepository.FindUserByLogin(login) }.AsQueryable();
 
             return _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault(); //ToList();
+        }
+
+        public UserDto AuthenticateUser(string login, string password)
+        {
+            var userDto = FindUserByLogin(login);
+
+            return userDto == null
+                ? null
+                : (CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(password) + userDto.Salt) != userDto.Password
+                    ? userDto
+                    : null);
         }
     }
 }
