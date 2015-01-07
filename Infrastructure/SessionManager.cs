@@ -86,7 +86,7 @@ namespace Infrastructure
 #if DEBUG
             cfg.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");
 #else
-            cfg.SetProperty(NHibernate.Cfg.Environment.ShowSql, "false");
+            //cfg.SetProperty(NHibernate.Cfg.Environment.ShowSql, "false");
 #endif
 
             //using (var f = new FileStream(@"D:\777.xml", FileMode.Append))

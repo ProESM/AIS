@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using AISSPO.Attributes;
+using Common.Base;
 using Domain;
 using Domain.Implementation;
 using DTO;
@@ -30,10 +31,10 @@ namespace AISSPO.Controllers
         // GET api/values
         [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get")]
         [IntegrationAuthentication]
-        public JsonResult<IEnumerable<TreeDto>> Get()        
+        public JsonResult<IEnumerable<VirtualTreeDto>> Get()        
         {
-            var treeDtos = _treeService.GetTrees();
-            var trees = treeDtos.Select(t => new TreeDto
+            var treeDtos = _treeService.GetTrees(SystemObjects.Root, SystemObjects.Root);
+            var trees = treeDtos.Select(t => new VirtualTreeDto
             {
                 Id = t.Id,
                 ParentId = t.ParentId,
@@ -65,6 +66,22 @@ namespace AISSPO.Controllers
             //return Json(trees.AsEnumerable());
 
             return "Hello, World2!";
+        }
+        
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("AuthenticateUser")]
+        public JsonResult<UserDto> AuthenticateUser(AuthenticationUserDto authenticationUser)
+        {            
+            var user = _treeService.AuthenticateUser(authenticationUser.Login, authenticationUser.Password);
+
+            return Json(user);
+        }
+
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("RegisterUser")]
+        public JsonResult<UserDto> RegisterUser(RegistrationUserDto registrationUser)
+        {
+            var user = _treeService.RegisterUser(registrationUser);
+
+            return Json(user);
         }
     }
 }

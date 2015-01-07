@@ -57,10 +57,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.TreeDto.datasource">
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.UserDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.UserDto.datasource">
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.VirtualTreeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TreeServiceReference\TreeService.wsdl" />

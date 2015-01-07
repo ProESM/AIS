@@ -9,8 +9,8 @@ namespace Infrastructure
 {
     public interface ITreeRepository : IRepository
     {
-        List<TreeDao> GetTrees();
-
         UserDao FindUserByLogin(string login);
+
+        List<VirtualTreeDao> GetTreesByParent(Guid? parent, Guid treeParentType, bool includeParent = false);
     }
 }

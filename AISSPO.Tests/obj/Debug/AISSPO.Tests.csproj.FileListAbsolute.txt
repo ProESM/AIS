@@ -58,3 +58,13 @@ D:\git\AIS\AISSPO.Tests\obj\Debug\AISSPO.Tests.dll
 D:\git\AIS\AISSPO.Tests\obj\Debug\AISSPO.Tests.pdb
 D:\git\AIS\AISSPO.Tests\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
 D:\git\AIS\AISSPO.Tests\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
+D:\git\AIS\AISSPO.Tests\bin\Debug\Common.Base.dll
+D:\git\AIS\AISSPO.Tests\bin\Debug\Domain.dll
+D:\git\AIS\AISSPO.Tests\bin\Debug\DTO.dll
+D:\git\AIS\AISSPO.Tests\bin\Debug\Domain.Implementation.dll
+D:\git\AIS\AISSPO.Tests\bin\Debug\Infrastructure.dll
+D:\git\AIS\AISSPO.Tests\bin\Debug\Common.Base.pdb
+D:\git\AIS\AISSPO.Tests\bin\Debug\Domain.pdb
+D:\git\AIS\AISSPO.Tests\bin\Debug\DTO.pdb
+D:\git\AIS\AISSPO.Tests\bin\Debug\Domain.Implementation.pdb
+D:\git\AIS\AISSPO.Tests\bin\Debug\Infrastructure.pdb

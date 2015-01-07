@@ -20,6 +20,7 @@ namespace Domain.Implementation
 
         private readonly IDtoFetcher<TreeDao, TreeDto> _treeDtoFetcher;
         private readonly IDtoFetcher<UserDao, UserDto> _userDtoFetcher;
+        private readonly IDtoFetcher<VirtualTreeDao, VirtualTreeDto> _virtualTreeDtoFetcher;
 
         public DomainTreeService()
         {
@@ -29,11 +30,7 @@ namespace Domain.Implementation
             _treeRepository = _kernel.Get<ITreeRepository>();
             _treeDtoFetcher = new TreeDtoFetcher(_treeRepository);
             _userDtoFetcher = new UserDtoFetcher(_treeRepository);
-        }
-
-        public List<TreeDto> GetTrees()
-        {
-            return _treeDtoFetcher.Fetch(_treeRepository.GetTrees().AsQueryable(), Page.All, FetchAim.Card).ToList();
+            _virtualTreeDtoFetcher = new VirtualTreeDtoFetcher(_treeRepository);
         }
 
         public UserDto FindUserByLogin(string login)
@@ -54,9 +51,24 @@ namespace Domain.Implementation
                     : null);
         }
 
+        public UserDto RegisterUser(RegistrationUserDto registrationUser)
+        {
+            var userDto = FindUserByLogin("user");
+            return userDto;
+        }
+
         public List<Guid> GetSystemObjects()
         {
             return BaseDataHelper.GetSystemObjects();
+        }
+
+        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
+        {
+            var virtualTreeDaos = _treeRepository.GetTreesByParent(parent, treeParentType);
+
+            var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+
+            return virtualTreeDtos;
         }
     }
 }

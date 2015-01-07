@@ -10,13 +10,15 @@ namespace Domain
 {    
     public interface IDomainTreeService
     {
-        List<TreeDto> GetTrees();
-
         UserDto FindUserByLogin(string login);
 
         UserDto AuthenticateUser(string login, string password);
 
+        UserDto RegisterUser(RegistrationUserDto userDto);
+
         List<Guid> GetSystemObjects();
+
+        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false);
     }
 
 }

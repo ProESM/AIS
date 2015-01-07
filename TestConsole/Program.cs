@@ -17,9 +17,12 @@ namespace TestConsole
 
             var treeServiceClient = new TreeServiceReference.TreeServiceClient();
 
-            var user = treeServiceClient.FindUserByLogin("architect");
+            //var user = treeServiceClient.FindUserByLogin("architect");
 
-            var treeList = treeServiceClient.GetTrees();
+            //var treeList = treeServiceClient.GetTrees();
+
+            var vt = treeServiceClient.GetTreesByParent(new Guid("F37FF71C-D144-4B67-A411-7216E2FBD328"),
+                new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B"));
 
             var so = treeServiceClient.GetSystemObjects();
 

@@ -75,9 +75,12 @@
     <Compile Include="DtoFetchers\IFetchDtoMap.cs" />
     <Compile Include="DtoFetchers\TreeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\UserDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\VirtualTreeDtoFetcher.cs" />
     <Compile Include="Entities\TreeDao.cs" />
     <Compile Include="Entities\ITreeDao.cs" />
+    <Compile Include="Entities\TreeParentDao.cs" />
     <Compile Include="Entities\UserDao.cs" />
+    <Compile Include="Entities\VirtualTreeDao.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="FetchAim.cs" />

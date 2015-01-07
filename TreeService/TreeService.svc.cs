@@ -25,12 +25,7 @@ namespace TreeService
             _kernel.AddBindings();
 
             _domainTreeService = _kernel.Get<IDomainTreeService>();
-        }       
-
-        public List<TreeDto> GetTrees()
-        {
-            return _domainTreeService.GetTrees();
-        }
+        }               
 
         public UserDto FindUserByLogin(string login)
         {
@@ -45,6 +40,11 @@ namespace TreeService
         public List<Guid> GetSystemObjects()
         {
             return _domainTreeService.GetSystemObjects();
+        }
+
+        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
+        {
+            return _domainTreeService.GetTrees(parent, treeParentType);
         }
     }
 }

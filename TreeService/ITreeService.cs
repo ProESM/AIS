@@ -14,9 +14,6 @@ namespace TreeService
     public interface ITreeService
     {
         [OperationContract]
-        List<TreeDto> GetTrees();
-
-        [OperationContract]
         UserDto FindUserByLogin(string login);
 
         [OperationContract]
@@ -24,5 +21,8 @@ namespace TreeService
 
         [OperationContract]
         List<Guid> GetSystemObjects();
+
+        [OperationContract]
+        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false);
     }
 }
