@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Base;
 using Infrastructure.Entities;
 using NHibernate;
 using NHibernate.Linq;
@@ -95,11 +96,20 @@ namespace Infrastructure
             }            
         }
 
-        public TreeDao GetTree(Guid treeId)
+        public TreeDao GetTree(Guid treeId, bool includeDeleted = false)
         {
             using (var transaction = _session.BeginTransaction())
             {
-                return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeId.ToString().ToUpper());
+                if (includeDeleted)
+                {
+                    return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeId.ToString().ToUpper());   
+                }
+                else
+                {
+                    return
+                        _session.Query<TreeDao>()
+                            .Where(t => t._Id == treeId.ToString().ToUpper()).FirstOrDefault(t => t.State._Id != ObjectStates.osDeleted.ToString().ToUpper());
+                }                
             }
         }
 

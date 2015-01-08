@@ -52,9 +52,9 @@ namespace TreeService
             return _domainTreeService.CreateTree(treeDto);
         }
 
-        public TreeDto GetTree(Guid treeId)
+        public TreeDto GetTree(Guid treeId, bool includeDeleted = false)
         {
-            return _domainTreeService.GetTree(treeId);
+            return _domainTreeService.GetTree(treeId, includeDeleted);
         }
 
         public void UpdateTree(TreeDto treeDto)

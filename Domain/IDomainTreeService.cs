@@ -22,7 +22,7 @@ namespace Domain
 
         TreeDto CreateTree(TreeDto treeDto);
 
-        TreeDto GetTree(Guid treeId);
+        TreeDto GetTree(Guid treeId, bool includeDeleted = false);
 
         void UpdateTree(TreeDto treeDto);
 

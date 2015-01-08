@@ -101,9 +101,9 @@ namespace Domain.Implementation
             return treeDto;
         }
 
-        public TreeDto GetTree(Guid treeId)
+        public TreeDto GetTree(Guid treeId, bool includeDeleted = false)
         {
-            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
+            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId, includeDeleted) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
         }
 
         public void UpdateTree(TreeDto treeDto)

@@ -29,7 +29,7 @@ namespace TreeService
         TreeDto CreateTree(TreeDto treeDto);
 
         [OperationContract]
-        TreeDto GetTree(Guid treeId);
+        TreeDto GetTree(Guid treeId, bool includeDeleted = false);
 
         [OperationContract]
         void UpdateTree(TreeDto treeDto);

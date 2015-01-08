@@ -321,10 +321,10 @@ namespace TestConsole.TreeServiceReference {
         System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> CreateTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTree", ReplyAction="http://tempuri.org/ITreeService/GetTreeResponse")]
-        TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId);
+        TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId, bool includeDeleted);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTree", ReplyAction="http://tempuri.org/ITreeService/GetTreeResponse")]
-        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId);
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId, bool includeDeleted);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateTree", ReplyAction="http://tempuri.org/ITreeService/UpdateTreeResponse")]
         void UpdateTree(TestConsole.TreeServiceReference.TreeDto treeDto);
@@ -406,12 +406,12 @@ namespace TestConsole.TreeServiceReference {
             return base.Channel.CreateTreeAsync(treeDto);
         }
         
-        public TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId) {
-            return base.Channel.GetTree(treeId);
+        public TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId, bool includeDeleted) {
+            return base.Channel.GetTree(treeId, includeDeleted);
         }
         
-        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId) {
-            return base.Channel.GetTreeAsync(treeId);
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId, bool includeDeleted) {
+            return base.Channel.GetTreeAsync(treeId, includeDeleted);
         }
         
         public void UpdateTree(TestConsole.TreeServiceReference.TreeDto treeDto) {

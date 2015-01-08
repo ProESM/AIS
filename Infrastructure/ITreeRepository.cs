@@ -15,7 +15,7 @@ namespace Infrastructure
 
         TreeDao CreateTree(TreeDao treeDao);
 
-        TreeDao GetTree(Guid treeId);
+        TreeDao GetTree(Guid treeId, bool includeDeleted = false);
 
         void UpdateTree(TreeDao treeDao);
     }
