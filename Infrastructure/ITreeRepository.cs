@@ -12,5 +12,9 @@ namespace Infrastructure
         UserDao FindUserByLogin(string login);
 
         List<VirtualTreeDao> GetTreesByParent(Guid? parent, Guid treeParentType, bool includeParent = false);
+
+        TreeDao CreateTree(TreeDao treeDao);
+
+        TreeDao GetTree(Guid treeId);
     }
 }

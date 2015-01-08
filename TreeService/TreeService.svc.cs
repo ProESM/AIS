@@ -46,5 +46,10 @@ namespace TreeService
         {
             return _domainTreeService.GetTrees(parent, treeParentType);
         }
+
+        public TreeDto CreateTree(TreeDto treeDto)
+        {
+            return _domainTreeService.CreateTree(treeDto);
+        }
     }
 }

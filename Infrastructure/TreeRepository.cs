@@ -33,11 +33,26 @@ namespace Infrastructure
         {
             using (var transaction = _session.BeginTransaction())
             {
-                var treeParentDaos = _session.Query<TreeParentDao>()
+                List<TreeParentDao> treeParentDaos;
+
+                if (includeParent)
+                {
+                    treeParentDaos = _session.Query<TreeParentDao>()
                     .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
                     .Where(tp => tp.Level == 1)
                     .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                    .OrderBy(tp => tp.Level)
                     .ToList();
+                }
+                else
+                {
+                    treeParentDaos = _session.Query<TreeParentDao>()
+                    .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
+                    .Where(tp => tp.Level <= 1)
+                    .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                    .OrderBy(tp => tp.Level)
+                    .ToList();
+                }
 
                 var virtualTreeDaos = new List<VirtualTreeDao>();
 
@@ -63,6 +78,26 @@ namespace Infrastructure
                 }                
 
                 return virtualTreeDaos;
+            }
+        }
+
+        public TreeDao CreateTree(TreeDao treeDao)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Save(treeDao);
+
+                transaction.Commit();
+
+                return treeDao;
+            }            
+        }
+
+        public TreeDao GetTree(Guid treeId)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                return _session.Get<TreeDao>(treeId);
             }
         }
     }

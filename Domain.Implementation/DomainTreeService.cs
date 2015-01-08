@@ -70,5 +70,35 @@ namespace Domain.Implementation
 
             return virtualTreeDtos;
         }
+
+        public TreeDto CreateTree(TreeDto treeDto)
+        {
+            TreeDao parentDao = null;
+            if (treeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)treeDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(treeDto.TypeId);
+            var stateDao = _treeRepository.GetTree(treeDto.StateId);
+
+            var treeDao = new TreeDao
+            {
+                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Parent = parentDao,
+                Name = treeDto.Name,
+                ShortName = treeDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now
+            };            
+
+            _treeRepository.CreateTree(treeDao);
+
+            treeDto.Id = treeDao.Id;
+            treeDto.CreateDateTime = treeDao.CreateDateTime;
+
+            return treeDto;
+        }
     }
 }

@@ -24,5 +24,7 @@ namespace TreeService
 
         [OperationContract]
         List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false);
+
+        TreeDto CreateTree(TreeDto treeDto);
     }
 }

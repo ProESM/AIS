@@ -83,5 +83,19 @@ namespace AISSPO.Controllers
 
             return Json(user);
         }
+
+        [System.Web.Http.HttpGet, System.Web.Http.ActionName("Check")]
+        public bool Check()
+        {
+            var authenticationUserDto = new AuthenticationUserDto
+            {
+                Login = "user",
+                Password = "123456"
+            };
+
+            var u = AuthenticateUser(authenticationUserDto);
+
+            return (u != null);
+        }
     }
 }
