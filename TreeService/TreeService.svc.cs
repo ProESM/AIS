@@ -44,12 +44,17 @@ namespace TreeService
 
         public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
         {
-            return _domainTreeService.GetTrees(parent, treeParentType);
+            return _domainTreeService.GetTrees(parent, treeParentType, includeParent);
         }
 
         public TreeDto CreateTree(TreeDto treeDto)
         {
             return _domainTreeService.CreateTree(treeDto);
+        }
+
+        public TreeDto GetTree(Guid treeId)
+        {
+            return _domainTreeService.GetTree(treeId);
         }
     }
 }

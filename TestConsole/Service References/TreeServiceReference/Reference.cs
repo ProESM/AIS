@@ -319,6 +319,12 @@ namespace TestConsole.TreeServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateTree", ReplyAction="http://tempuri.org/ITreeService/CreateTreeResponse")]
         System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> CreateTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTree", ReplyAction="http://tempuri.org/ITreeService/GetTreeResponse")]
+        TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTree", ReplyAction="http://tempuri.org/ITreeService/GetTreeResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -386,6 +392,14 @@ namespace TestConsole.TreeServiceReference {
         
         public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> CreateTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto) {
             return base.Channel.CreateTreeAsync(treeDto);
+        }
+        
+        public TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId) {
+            return base.Channel.GetTree(treeId);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId) {
+            return base.Channel.GetTreeAsync(treeId);
         }
     }
 }

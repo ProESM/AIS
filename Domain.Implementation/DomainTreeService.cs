@@ -64,7 +64,7 @@ namespace Domain.Implementation
 
         public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
         {
-            var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType);
+            var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType, includeParent);
 
             var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
 
@@ -91,7 +91,7 @@ namespace Domain.Implementation
                 Type = typeDao,
                 State = stateDao,
                 CreateDateTime = DateTime.Now
-            };            
+            };
 
             _treeRepository.CreateTree(treeDao);
 
@@ -100,5 +100,10 @@ namespace Domain.Implementation
 
             return treeDto;
         }
-    }
+
+        public TreeDto GetTree(Guid treeId)
+        {
+            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
+        }
+    }    
 }

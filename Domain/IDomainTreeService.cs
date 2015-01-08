@@ -21,6 +21,8 @@ namespace Domain
         List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false);
 
         TreeDto CreateTree(TreeDto treeDto);
+
+        TreeDto GetTree(Guid treeId);
     }
 
 }

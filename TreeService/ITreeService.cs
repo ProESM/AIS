@@ -27,5 +27,8 @@ namespace TreeService
 
         [OperationContract]
         TreeDto CreateTree(TreeDto treeDto);
+
+        [OperationContract]
+        TreeDto GetTree(Guid treeId);
     }
 }

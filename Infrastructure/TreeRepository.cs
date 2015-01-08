@@ -42,6 +42,7 @@ namespace Infrastructure
                     .Where(tp => tp.Level <= 1)
                     .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
                     .OrderBy(tp => tp.Level)
+                    .ThenBy(tp => tp.TreeChild.Name)
                     .ToList();
                 }
                 else
@@ -51,6 +52,7 @@ namespace Infrastructure
                     .Where(tp => tp.Level == 1)
                     .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
                     .OrderBy(tp => tp.Level)
+                    .ThenBy(tp => tp.TreeChild.Name)
                     .ToList();
                 }
 
@@ -97,7 +99,7 @@ namespace Infrastructure
         {
             using (var transaction = _session.BeginTransaction())
             {
-                return _session.Get<TreeDao>(treeId);
+                return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeId.ToString().ToUpper());
             }
         }
     }
