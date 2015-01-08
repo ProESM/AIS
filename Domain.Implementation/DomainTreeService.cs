@@ -105,5 +105,36 @@ namespace Domain.Implementation
         {
             return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
         }
+
+        public void UpdateTree(TreeDto treeDto)
+        {
+            var treeDao = _treeRepository.GetTree(treeDto.Id);
+            TreeDao parentDao = null;
+            if (treeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)treeDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(treeDto.TypeId);
+            var stateDao = _treeRepository.GetTree(treeDto.StateId);
+
+            treeDao.Parent = parentDao;
+            treeDao.Name = treeDto.Name;
+            treeDao.ShortName = treeDto.ShortName;
+            treeDao.Type = typeDao;
+            treeDao.State = stateDao;
+
+            _treeRepository.UpdateTree(treeDao);
+        }
+
+        public void DeleteTree(TreeDto treeDto)
+        {
+            var treeDao = _treeRepository.GetTree(treeDto.Id);
+
+            var stateDao = _treeRepository.GetTree(ObjectStates.osDeleted);
+            
+            treeDao.State = stateDao;
+
+            _treeRepository.UpdateTree(treeDao);
+        }
     }    
 }

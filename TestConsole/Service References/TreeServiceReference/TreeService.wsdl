@@ -44,6 +44,18 @@
   <wsdl:message name="ITreeService_GetTree_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTreeResponse" />
   </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTree" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_DeleteTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTree" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_DeleteTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTreeResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITreeService">
     <wsdl:operation name="FindUserByLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/FindUserByLogin" message="tns:ITreeService_FindUserByLogin_InputMessage" />
@@ -68,6 +80,14 @@
     <wsdl:operation name="GetTree">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetTree" message="tns:ITreeService_GetTree_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetTreeResponse" message="tns:ITreeService_GetTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateTree" message="tns:ITreeService_UpdateTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateTreeResponse" message="tns:ITreeService_UpdateTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/DeleteTree" message="tns:ITreeService_DeleteTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/DeleteTreeResponse" message="tns:ITreeService_DeleteTree_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITreeService" type="tns:ITreeService">
@@ -119,6 +139,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetTree">
       <soap:operation soapAction="http://tempuri.org/ITreeService/GetTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTree">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTree">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/DeleteTree" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

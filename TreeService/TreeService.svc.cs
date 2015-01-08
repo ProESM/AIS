@@ -56,5 +56,15 @@ namespace TreeService
         {
             return _domainTreeService.GetTree(treeId);
         }
+
+        public void UpdateTree(TreeDto treeDto)
+        {
+            _domainTreeService.UpdateTree(treeDto);
+        }
+
+        public void DeleteTree(TreeDto treeDto)
+        {
+            _domainTreeService.DeleteTree(treeDto);
+        }
     }
 }

@@ -30,5 +30,11 @@ namespace TreeService
 
         [OperationContract]
         TreeDto GetTree(Guid treeId);
+
+        [OperationContract]
+        void UpdateTree(TreeDto treeDto);
+
+        [OperationContract]
+        void DeleteTree(TreeDto treeDto);
     }
 }

@@ -325,6 +325,18 @@ namespace TestConsole.TreeServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTree", ReplyAction="http://tempuri.org/ITreeService/GetTreeResponse")]
         System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateTree", ReplyAction="http://tempuri.org/ITreeService/UpdateTreeResponse")]
+        void UpdateTree(TestConsole.TreeServiceReference.TreeDto treeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateTree", ReplyAction="http://tempuri.org/ITreeService/UpdateTreeResponse")]
+        System.Threading.Tasks.Task UpdateTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/DeleteTree", ReplyAction="http://tempuri.org/ITreeService/DeleteTreeResponse")]
+        void DeleteTree(TestConsole.TreeServiceReference.TreeDto treeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/DeleteTree", ReplyAction="http://tempuri.org/ITreeService/DeleteTreeResponse")]
+        System.Threading.Tasks.Task DeleteTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -400,6 +412,22 @@ namespace TestConsole.TreeServiceReference {
         
         public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId) {
             return base.Channel.GetTreeAsync(treeId);
+        }
+        
+        public void UpdateTree(TestConsole.TreeServiceReference.TreeDto treeDto) {
+            base.Channel.UpdateTree(treeDto);
+        }
+        
+        public System.Threading.Tasks.Task UpdateTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto) {
+            return base.Channel.UpdateTreeAsync(treeDto);
+        }
+        
+        public void DeleteTree(TestConsole.TreeServiceReference.TreeDto treeDto) {
+            base.Channel.DeleteTree(treeDto);
+        }
+        
+        public System.Threading.Tasks.Task DeleteTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto) {
+            return base.Channel.DeleteTreeAsync(treeDto);
         }
     }
 }

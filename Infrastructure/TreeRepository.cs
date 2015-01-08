@@ -102,5 +102,14 @@ namespace Infrastructure
                 return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeId.ToString().ToUpper());
             }
         }
+
+        public void UpdateTree(TreeDao treeDao)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.SaveOrUpdate(treeDao);
+                transaction.Commit();
+            }
+        }
     }
 }

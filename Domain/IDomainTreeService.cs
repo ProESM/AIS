@@ -23,6 +23,10 @@ namespace Domain
         TreeDto CreateTree(TreeDto treeDto);
 
         TreeDto GetTree(Guid treeId);
+
+        void UpdateTree(TreeDto treeDto);
+
+        void DeleteTree(TreeDto treeDto);
     }
 
 }
