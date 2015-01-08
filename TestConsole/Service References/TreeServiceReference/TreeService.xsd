@@ -50,6 +50,7 @@
         <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="parent" nillable="true" type="q4:guid" />
         <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="treeParentType" type="q5:guid" />
         <xs:element minOccurs="0" name="includeParent" type="xs:boolean" />
+        <xs:element minOccurs="0" name="includeDeleted" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -78,7 +79,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="treeId" type="q9:guid" />
-        <xs:element minOccurs="0" name="includeDeleted" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

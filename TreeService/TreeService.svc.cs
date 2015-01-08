@@ -42,9 +42,9 @@ namespace TreeService
             return _domainTreeService.GetSystemObjects();
         }
 
-        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
+        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
         {
-            return _domainTreeService.GetTrees(parent, treeParentType, includeParent);
+            return _domainTreeService.GetTrees(parent, treeParentType, includeParent, includeDeleted);
         }
 
         public TreeDto CreateTree(TreeDto treeDto)
@@ -52,9 +52,9 @@ namespace TreeService
             return _domainTreeService.CreateTree(treeDto);
         }
 
-        public TreeDto GetTree(Guid treeId, bool includeDeleted = false)
+        public TreeDto GetTree(Guid treeId)
         {
-            return _domainTreeService.GetTree(treeId, includeDeleted);
+            return _domainTreeService.GetTree(treeId);
         }
 
         public void UpdateTree(TreeDto treeDto)

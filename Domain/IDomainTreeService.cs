@@ -18,11 +18,11 @@ namespace Domain
 
         List<Guid> GetSystemObjects();
 
-        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false);
+        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
 
         TreeDto CreateTree(TreeDto treeDto);
 
-        TreeDto GetTree(Guid treeId, bool includeDeleted = false);
+        TreeDto GetTree(Guid treeId);
 
         void UpdateTree(TreeDto treeDto);
 

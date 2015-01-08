@@ -62,9 +62,9 @@ namespace Domain.Implementation
             return BaseDataHelper.GetSystemObjects();
         }
 
-        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
+        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
         {
-            var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType, includeParent);
+            var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType, includeParent, includeDeleted);
 
             var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
 
@@ -101,9 +101,9 @@ namespace Domain.Implementation
             return treeDto;
         }
 
-        public TreeDto GetTree(Guid treeId, bool includeDeleted = false)
+        public TreeDto GetTree(Guid treeId)
         {
-            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId, includeDeleted) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
+            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
         }
 
         public void UpdateTree(TreeDto treeDto)

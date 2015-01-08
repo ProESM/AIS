@@ -23,13 +23,13 @@ namespace TreeService
         List<Guid> GetSystemObjects();
 
         [OperationContract]
-        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false);
+        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
 
         [OperationContract]
         TreeDto CreateTree(TreeDto treeDto);
 
         [OperationContract]
-        TreeDto GetTree(Guid treeId, bool includeDeleted = false);
+        TreeDto GetTree(Guid treeId);
 
         [OperationContract]
         void UpdateTree(TreeDto treeDto);

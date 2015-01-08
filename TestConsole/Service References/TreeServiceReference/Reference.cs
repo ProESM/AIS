@@ -309,10 +309,10 @@ namespace TestConsole.TreeServiceReference {
         System.Threading.Tasks.Task<System.Guid[]> GetSystemObjectsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTrees", ReplyAction="http://tempuri.org/ITreeService/GetTreesResponse")]
-        TestConsole.TreeServiceReference.VirtualTreeDto[] GetTrees(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent);
+        TestConsole.TreeServiceReference.VirtualTreeDto[] GetTrees(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent, bool includeDeleted);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTrees", ReplyAction="http://tempuri.org/ITreeService/GetTreesResponse")]
-        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.VirtualTreeDto[]> GetTreesAsync(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent);
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.VirtualTreeDto[]> GetTreesAsync(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent, bool includeDeleted);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateTree", ReplyAction="http://tempuri.org/ITreeService/CreateTreeResponse")]
         TestConsole.TreeServiceReference.TreeDto CreateTree(TestConsole.TreeServiceReference.TreeDto treeDto);
@@ -321,10 +321,10 @@ namespace TestConsole.TreeServiceReference {
         System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> CreateTreeAsync(TestConsole.TreeServiceReference.TreeDto treeDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTree", ReplyAction="http://tempuri.org/ITreeService/GetTreeResponse")]
-        TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId, bool includeDeleted);
+        TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTree", ReplyAction="http://tempuri.org/ITreeService/GetTreeResponse")]
-        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId, bool includeDeleted);
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateTree", ReplyAction="http://tempuri.org/ITreeService/UpdateTreeResponse")]
         void UpdateTree(TestConsole.TreeServiceReference.TreeDto treeDto);
@@ -390,12 +390,12 @@ namespace TestConsole.TreeServiceReference {
             return base.Channel.GetSystemObjectsAsync();
         }
         
-        public TestConsole.TreeServiceReference.VirtualTreeDto[] GetTrees(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent) {
-            return base.Channel.GetTrees(parent, treeParentType, includeParent);
+        public TestConsole.TreeServiceReference.VirtualTreeDto[] GetTrees(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent, bool includeDeleted) {
+            return base.Channel.GetTrees(parent, treeParentType, includeParent, includeDeleted);
         }
         
-        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.VirtualTreeDto[]> GetTreesAsync(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent) {
-            return base.Channel.GetTreesAsync(parent, treeParentType, includeParent);
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.VirtualTreeDto[]> GetTreesAsync(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent, bool includeDeleted) {
+            return base.Channel.GetTreesAsync(parent, treeParentType, includeParent, includeDeleted);
         }
         
         public TestConsole.TreeServiceReference.TreeDto CreateTree(TestConsole.TreeServiceReference.TreeDto treeDto) {
@@ -406,12 +406,12 @@ namespace TestConsole.TreeServiceReference {
             return base.Channel.CreateTreeAsync(treeDto);
         }
         
-        public TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId, bool includeDeleted) {
-            return base.Channel.GetTree(treeId, includeDeleted);
+        public TestConsole.TreeServiceReference.TreeDto GetTree(System.Guid treeId) {
+            return base.Channel.GetTree(treeId);
         }
         
-        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId, bool includeDeleted) {
-            return base.Channel.GetTreeAsync(treeId, includeDeleted);
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.TreeDto> GetTreeAsync(System.Guid treeId) {
+            return base.Channel.GetTreeAsync(treeId);
         }
         
         public void UpdateTree(TestConsole.TreeServiceReference.TreeDto treeDto) {

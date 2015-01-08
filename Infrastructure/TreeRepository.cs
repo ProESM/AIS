@@ -30,7 +30,7 @@ namespace Infrastructure
             return userDao;            
         }
 
-        public List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
+        public List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
         {
             using (var transaction = _session.BeginTransaction())
             {
@@ -38,23 +38,52 @@ namespace Infrastructure
 
                 if (includeParent)
                 {
-                    treeParentDaos = _session.Query<TreeParentDao>()
-                    .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
-                    .Where(tp => tp.Level <= 1)
-                    .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
-                    .OrderBy(tp => tp.Level)
-                    .ThenBy(tp => tp.TreeChild.Name)
-                    .ToList();
+                    if (includeDeleted)
+                    {
+                        treeParentDaos = _session.Query<TreeParentDao>()
+                            .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
+                            .Where(tp => tp.Level <= 1)
+                            .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                            .OrderBy(tp => tp.Level)
+                            .ThenBy(tp => tp.TreeChild.Name)
+                            .ToList();
+                    }
+                    else
+                    {
+                        treeParentDaos = _session.Query<TreeParentDao>()
+                            .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
+                            .Where(tp => tp.Level <= 1)
+                            .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                            .Where(tp => tp.TreeChild.State._Id != ObjectStates.osDeleted.ToString().ToUpper())
+                            .OrderBy(tp => tp.Level)
+                            .ThenBy(tp => tp.TreeChild.Name)
+                            .ToList();   
+                    }                    
                 }
                 else
                 {
-                    treeParentDaos = _session.Query<TreeParentDao>()
-                    .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
-                    .Where(tp => tp.Level == 1)
-                    .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
-                    .OrderBy(tp => tp.Level)
-                    .ThenBy(tp => tp.TreeChild.Name)
-                    .ToList();
+                    if (includeDeleted)
+                    {
+                        treeParentDaos = _session.Query<TreeParentDao>()
+                            .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
+                            .Where(tp => tp.Level == 1)
+                            .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                            .OrderBy(tp => tp.Level)
+                            .ThenBy(tp => tp.TreeChild.Name)
+                            .ToList();
+                    }
+                    else
+                    {
+                        treeParentDaos = _session.Query<TreeParentDao>()
+                            .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
+                            .Where(tp => tp.Level == 1)
+                            .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                            .Where(tp => tp.TreeChild.State._Id != ObjectStates.osDeleted.ToString().ToUpper())
+                            .OrderBy(tp => tp.Level)
+                            .ThenBy(tp => tp.TreeChild.Name)
+                            .ToList();
+                    }
+                    
                 }
 
                 var virtualTreeDaos = new List<VirtualTreeDao>();
@@ -96,20 +125,11 @@ namespace Infrastructure
             }            
         }
 
-        public TreeDao GetTree(Guid treeId, bool includeDeleted = false)
+        public TreeDao GetTree(Guid treeId)
         {
             using (var transaction = _session.BeginTransaction())
             {
-                if (includeDeleted)
-                {
-                    return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeId.ToString().ToUpper());   
-                }
-                else
-                {
-                    return
-                        _session.Query<TreeDao>()
-                            .Where(t => t._Id == treeId.ToString().ToUpper()).FirstOrDefault(t => t.State._Id != ObjectStates.osDeleted.ToString().ToUpper());
-                }                
+                return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeId.ToString().ToUpper());   
             }
         }
 

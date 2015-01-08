@@ -11,11 +11,11 @@ namespace Infrastructure
     {
         UserDao FindUserByLogin(string login);
 
-        List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false);
+        List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
 
         TreeDao CreateTree(TreeDao treeDao);
 
-        TreeDao GetTree(Guid treeId, bool includeDeleted = false);
+        TreeDao GetTree(Guid treeId);
 
         void UpdateTree(TreeDao treeDao);
     }
