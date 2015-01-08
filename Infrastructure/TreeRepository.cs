@@ -29,7 +29,7 @@ namespace Infrastructure
             return userDao;            
         }
 
-        public List<VirtualTreeDao> GetTreesByParent(Guid? parent, Guid treeParentType, bool includeParent = false)
+        public List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
         {
             using (var transaction = _session.BeginTransaction())
             {
@@ -39,7 +39,7 @@ namespace Infrastructure
                 {
                     treeParentDaos = _session.Query<TreeParentDao>()
                     .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
-                    .Where(tp => tp.Level == 1)
+                    .Where(tp => tp.Level <= 1)
                     .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
                     .OrderBy(tp => tp.Level)
                     .ToList();
@@ -48,7 +48,7 @@ namespace Infrastructure
                 {
                     treeParentDaos = _session.Query<TreeParentDao>()
                     .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper())
-                    .Where(tp => tp.Level <= 1)
+                    .Where(tp => tp.Level == 1)
                     .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
                     .OrderBy(tp => tp.Level)
                     .ToList();

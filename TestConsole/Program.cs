@@ -21,7 +21,7 @@ namespace TestConsole
 
             //var treeList = treeServiceClient.GetTrees();
 
-            var vt = treeServiceClient.GetTrees(new Guid("F37FF71C-D144-4B67-A411-7216E2FBD328"),
+            var vt = treeServiceClient.GetTrees(new Guid("0322648B-488A-40C0-9CEE-B3A4F9B572EF"),
                 new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B"), false);
 
             var so = treeServiceClient.GetSystemObjects();

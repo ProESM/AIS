@@ -64,7 +64,7 @@ namespace Domain.Implementation
 
         public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false)
         {
-            var virtualTreeDaos = _treeRepository.GetTreesByParent(parent, treeParentType);
+            var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType);
 
             var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
 

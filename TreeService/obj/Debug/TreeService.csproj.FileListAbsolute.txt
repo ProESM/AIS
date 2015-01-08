@@ -1,4 +1,3 @@
-D:\git\AIS\TreeService\bin\hibernate.cfg.xml
 D:\git\AIS\TreeService\bin\TreeService.dll.config
 D:\git\AIS\TreeService\bin\TreeService.dll
 D:\git\AIS\TreeService\bin\TreeService.pdb
@@ -26,3 +25,4 @@ D:\git\AIS\TreeService\bin\Iesi.Collections.xml
 D:\git\AIS\TreeService\obj\Debug\TreeService.csprojResolveAssemblyReference.cache
 D:\git\AIS\TreeService\obj\Debug\TreeService.dll
 D:\git\AIS\TreeService\obj\Debug\TreeService.pdb
+D:\git\AIS\TreeService\bin\hibernate.cfg.xml

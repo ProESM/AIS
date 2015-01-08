@@ -32,6 +32,12 @@
   <wsdl:message name="ITreeService_GetTrees_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTreesResponse" />
   </wsdl:message>
+  <wsdl:message name="ITreeService_CreateTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTree" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTreeResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITreeService">
     <wsdl:operation name="FindUserByLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/FindUserByLogin" message="tns:ITreeService_FindUserByLogin_InputMessage" />
@@ -48,6 +54,10 @@
     <wsdl:operation name="GetTrees">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetTrees" message="tns:ITreeService_GetTrees_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetTreesResponse" message="tns:ITreeService_GetTrees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateTree" message="tns:ITreeService_CreateTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateTreeResponse" message="tns:ITreeService_CreateTree_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITreeService" type="tns:ITreeService">
@@ -81,6 +91,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetTrees">
       <soap:operation soapAction="http://tempuri.org/ITreeService/GetTrees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTree">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateTree" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
