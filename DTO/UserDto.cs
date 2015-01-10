@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace DTO
 {
     /// <summary>
-    /// Расширенный класс DTO объекта дерева s_tree.
+    /// Класс DTO для хранения информации о пользователях.
     /// </summary>
     [DataContract]
     [Serializable]
@@ -51,5 +51,19 @@ namespace DTO
         [DataMember]
         [JsonProperty(PropertyName = "Email")]
         public string Email { get; set; }
+        /// <summary>
+        /// Номер телефона
+        /// </summary>
+        [Display(Name = "Телефон")]
+        [DataMember]
+        [JsonProperty(PropertyName = "Phone")]
+        public string Phone { get; set; }
+        /// <summary>
+        /// Ссылка на человека, которому принадлежит данная учетная запись
+        /// </summary>
+        [Display(Name = "Id человека")]
+        [DataMember]
+        [JsonProperty(PropertyName = "PersonId")]
+        public Guid? PersonId { get; set; }
     } 
 }

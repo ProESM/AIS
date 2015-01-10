@@ -24,7 +24,17 @@ namespace Infrastructure.Entities
         public virtual string Salt { get; set; }
         [ManyToOne(0, ClassType = typeof(TreeDao), Column = "USER_GROUP_ID")]
         public virtual TreeDao UserGroup { get; set; }        
-        [Property(Name = "Email", Column = "EMAIL", Type = "String", Length = 50, NotNull = false)]
-        public virtual string Email { get; set; }        
+        [Property(Name = "Email", Column = "EMAIL", Type = "String", Length = 50, NotNull = true)]
+        public virtual string Email { get; set; }
+        [Property(Name = "Phone", Column = "PHONE", Type = "String", Length = 20, NotNull = false)]
+        public virtual string Phone { get; set; }
+
+        public virtual Guid? PersonId
+        {
+            get { return Person == null ? (Guid?)null : Person.Id; }
+        }
+
+        [ManyToOne(0, ClassType = typeof(PersonDao), Column = "PERSON_ID")]
+        public virtual PersonDao Person { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Base;
+using TestConsole.TreeServiceReference;
 
 namespace TestConsole
 {
@@ -23,8 +24,23 @@ namespace TestConsole
 
             //var treeList = treeServiceClient.GetTrees();
 
-            var vt = treeServiceClient.GetTrees(new Guid("20F9B9CE-8769-4569-AE71-1ECF18BE90B3"),
-                new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B"), false);
+            //var vt = treeServiceClient.GetTrees(new Guid("20F9B9CE-8769-4569-AE71-1ECF18BE90B3"),
+            //    new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B"), false);
+
+            var person = treeServiceClient.CreatePerson(new PersonDto
+            {
+                Id = Guid.NewGuid(),
+                ParentId = SystemObjects.AllPeople,
+                Name = "Тестовый пользователь системы",
+                TypeId = ObjectTypes.otPerson,
+                StateId = ObjectStates.osInDevelopment,
+                CreateDateTime = DateTime.Now,
+
+                Surname = "Тестовый",
+                FirstName = "Пользователь",
+                Patronymic = "Системы",
+                BirthDate = new DateTime(2015, 1, 1)
+            });
 
             var so = treeServiceClient.GetSystemObjects();
 

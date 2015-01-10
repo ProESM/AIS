@@ -69,19 +69,102 @@ namespace AISSPO.Controllers
         }
         
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("AuthenticateUser")]
-        public JsonResult<UserDto> AuthenticateUser(AuthenticationUserDto authenticationUser)
+        public JsonResult<PersonalUserDto> AuthenticateUser(AuthenticationUserDto authenticationUser)
         {            
             var user = _treeService.AuthenticateUser(authenticationUser.Login, authenticationUser.Password);
 
-            return Json(user);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var personalUserDto = new PersonalUserDto
+            {
+                Id = user.Id,
+                ParentId = user.ParentId,
+                Name = user.Name,
+                ShortName = user.ShortName,
+                TypeId = user.TypeId,
+                StateId = user.StateId,
+                StateName = _treeService.GetTree(user.StateId).Name,
+                CreateDateTime = user.CreateDateTime
+            };
+
+            if (user.PersonId != null)
+            {
+                var person = _treeService.GetPerson((Guid)user.PersonId);
+                personalUserDto.Surname = person.Surname;
+                personalUserDto.Name = person.Name;
+                personalUserDto.Patronymic = person.Patronymic;
+                personalUserDto.BirthDate = person.BirthDate;
+            }
+
+            return Json(personalUserDto);
         }
 
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("RegisterUser")]
-        public JsonResult<UserDto> RegisterUser(RegistrationUserDto registrationUser)
+        public JsonResult<PersonalUserDto> RegisterUser(RegistrationUserDto registrationUser)
         {
-            var user = _treeService.RegisterUser(registrationUser);
+            var userByLogin = _treeService.FindUserByLogin(registrationUser.Login);
+            var userByEmail = _treeService.FindUserByEmail(registrationUser.Email);
 
-            return Json(user);
+            if ((userByLogin == null) || (userByEmail == null))
+            {
+                return null;
+            }
+
+            var user = _treeService.RegisterUser(registrationUser);
+            
+            if (user == null)
+            {
+                return null;
+            }
+
+            var personalUserDto = new PersonalUserDto
+            {
+                Id = user.Id,
+                ParentId = user.ParentId,
+                Name = user.Name,
+                ShortName = user.ShortName,
+                TypeId = user.TypeId,
+                StateId = user.StateId,
+                StateName = _treeService.GetTree(user.StateId).Name,
+                CreateDateTime = user.CreateDateTime
+            };
+
+            if (user.PersonId != null)
+            {
+                var person = _treeService.GetPerson((Guid)user.PersonId);
+                personalUserDto.Surname = person.Surname;
+                personalUserDto.Name = person.Name;
+                personalUserDto.Patronymic = person.Patronymic;
+                personalUserDto.BirthDate = person.BirthDate;
+            }
+
+            return Json(personalUserDto);
+        }
+
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("RecoveryPassword")]
+        public JsonResult<RecoveryPasswordDto> RecoveryPassword(string email)
+        {
+            var user = _treeService.FindUserByEmail(email);
+
+            var newPassword = PasswordHelper.CreateRandomPassword(8);
+
+            var newSalt = CryptHelper.GenerateSalt(user.Login, newPassword);
+
+            var newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(newPassword) + newSalt);
+
+            user.Password = newMd5Password;
+            user.Salt = newSalt;
+
+            var recoveryPasswordDto = new RecoveryPasswordDto
+            {
+                Login = user.Login,
+                Password = newPassword
+            };
+
+            return Json(recoveryPasswordDto);
         }
 
         [System.Web.Http.HttpGet, System.Web.Http.ActionName("Check")]

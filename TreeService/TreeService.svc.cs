@@ -25,17 +25,7 @@ namespace TreeService
             _kernel.AddBindings();
 
             _domainTreeService = _kernel.Get<IDomainTreeService>();
-        }               
-
-        public UserDto FindUserByLogin(string login)
-        {
-            return _domainTreeService.FindUserByLogin(login);
-        }
-
-        public UserDto AuthenticateUser(string login, string password)
-        {
-            return _domainTreeService.AuthenticateUser(login, password);
-        }
+        }                      
 
         public List<Guid> GetSystemObjects()
         {
@@ -65,6 +55,41 @@ namespace TreeService
         public void DeleteTree(TreeDto treeDto)
         {
             _domainTreeService.DeleteTree(treeDto);
+        }
+
+        public UserDto CreateUser(UserDto userDto)
+        {
+            return _domainTreeService.CreateUser(userDto);
+        }
+
+        public UserDto GetUser(Guid userId)
+        {
+            return _domainTreeService.GetUser(userId);
+        }
+
+        public void UpdateUser(UserDto userDto)
+        {
+            _domainTreeService.UpdateUser(userDto);
+        }
+
+        public UserDto FindUserByLogin(string login)
+        {
+            return _domainTreeService.FindUserByLogin(login);
+        }
+
+        public UserDto AuthenticateUser(string login, string password)
+        {
+            return _domainTreeService.AuthenticateUser(login, password);
+        }
+
+        public PersonDto CreatePerson(PersonDto personDto)
+        {
+            return _domainTreeService.CreatePerson(personDto);
+        }
+
+        public PersonDto GetPerson(Guid personId)
+        {
+            return _domainTreeService.GetPerson(personId);
         }
     }
 }

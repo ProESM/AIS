@@ -10,12 +10,6 @@ namespace Domain
 {    
     public interface IDomainTreeService
     {
-        UserDto FindUserByLogin(string login);
-
-        UserDto AuthenticateUser(string login, string password);
-
-        UserDto RegisterUser(RegistrationUserDto userDto);
-
         List<Guid> GetSystemObjects();
 
         List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
@@ -27,6 +21,24 @@ namespace Domain
         void UpdateTree(TreeDto treeDto);
 
         void DeleteTree(TreeDto treeDto);
+
+        UserDto CreateUser(UserDto userDto);
+
+        UserDto GetUser(Guid userId);
+
+        void UpdateUser(UserDto userDto);
+
+        UserDto FindUserByLogin(string login);
+
+        UserDto FindUserByEmail(string email);
+
+        UserDto AuthenticateUser(string login, string password);
+
+        UserDto RegisterUser(RegistrationUserDto userDto);
+
+        PersonDto CreatePerson(PersonDto personDto);
+
+        PersonDto GetPerson(Guid personId);
     }
 
 }

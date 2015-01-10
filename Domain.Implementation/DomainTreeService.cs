@@ -20,6 +20,7 @@ namespace Domain.Implementation
 
         private readonly IDtoFetcher<TreeDao, TreeDto> _treeDtoFetcher;
         private readonly IDtoFetcher<UserDao, UserDto> _userDtoFetcher;
+        private readonly IDtoFetcher<PersonDao, PersonDto> _personDtoFetcher;
         private readonly IDtoFetcher<VirtualTreeDao, VirtualTreeDto> _virtualTreeDtoFetcher;
 
         public DomainTreeService()
@@ -30,33 +31,10 @@ namespace Domain.Implementation
             _treeRepository = _kernel.Get<ITreeRepository>();
             _treeDtoFetcher = new TreeDtoFetcher(_treeRepository);
             _userDtoFetcher = new UserDtoFetcher(_treeRepository);
+            _personDtoFetcher = new PersonDtoFetcher(_treeRepository);
             _virtualTreeDtoFetcher = new VirtualTreeDtoFetcher(_treeRepository);
         }
-
-        public UserDto FindUserByLogin(string login)
-        {
-            var userDaos = new List<UserDao> { _treeRepository.FindUserByLogin(login) }.AsQueryable();
-
-            return _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault(); //ToList();
-        }
-
-        public UserDto AuthenticateUser(string login, string password)
-        {
-            var userDto = FindUserByLogin(login);
-
-            return userDto == null
-                ? null
-                : (CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(password) + userDto.Salt) == userDto.Password
-                    ? userDto
-                    : null);
-        }
-
-        public UserDto RegisterUser(RegistrationUserDto registrationUser)
-        {
-            var userDto = FindUserByLogin("user");
-            return userDto;
-        }
-
+        
         public List<Guid> GetSystemObjects()
         {
             return BaseDataHelper.GetSystemObjects();
@@ -80,7 +58,7 @@ namespace Domain.Implementation
             }
 
             var typeDao = _treeRepository.GetTree(treeDto.TypeId);
-            var stateDao = _treeRepository.GetTree(treeDto.StateId);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osInDevelopment);
 
             var treeDao = new TreeDao
             {
@@ -93,7 +71,7 @@ namespace Domain.Implementation
                 CreateDateTime = DateTime.Now
             };
 
-            _treeRepository.CreateTree(treeDao);
+            treeDao = _treeRepository.CreateTree(treeDao);
 
             treeDto.Id = treeDao.Id;
             treeDto.CreateDateTime = treeDao.CreateDateTime;
@@ -103,7 +81,7 @@ namespace Domain.Implementation
 
         public TreeDto GetTree(Guid treeId)
         {
-            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
+            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public void UpdateTree(TreeDto treeDto)
@@ -135,6 +113,204 @@ namespace Domain.Implementation
             treeDao.State = stateDao;
 
             _treeRepository.UpdateTree(treeDao);
+        }
+
+        public UserDto CreateUser(UserDto userDto)
+        {
+            TreeDao parentDao = null;
+            if (userDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)userDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otUser);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osInDevelopment);
+
+            var newSalt = CryptHelper.GenerateSalt(userDto.Login, userDto.Password);
+
+            var newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(userDto.Password) + newSalt);
+
+            PersonDao personDao = null;
+            if (userDto.PersonId != null)
+            {
+                personDao = _treeRepository.GetPerson((Guid)userDto.PersonId);
+            }
+
+            var userDao = new UserDao
+            {
+                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Parent = parentDao,
+                Name = userDto.Name,
+                ShortName = userDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now,
+                Login = userDto.Login,
+                Password = newMd5Password,
+                Salt = newSalt,
+                UserGroup = _treeRepository.GetTree(userDto.UserGroupId),
+                Email = userDto.Email,
+                Phone = userDto.Phone,
+                Person = personDao
+            };
+
+            //var treeDao = _treeRepository.CreateTree(userDao);
+
+            //userDto.Id = treeDao.Id;
+            //userDto.CreateDateTime = treeDao.CreateDateTime;
+
+            return _userDtoFetcher.Fetch(new List<UserDao> { _treeRepository.CreateUser(userDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public UserDto GetUser(Guid userId)
+        {
+            return _userDtoFetcher.Fetch(new List<UserDao> { _treeRepository.GetUser(userId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public void UpdateUser(UserDto userDto)
+        {
+            var userDao = _treeRepository.GetUser(userDto.Id);
+
+            TreeDao parentDao = null;
+            if (userDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)userDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(userDto.TypeId);
+            var stateDao = _treeRepository.GetTree(userDto.StateId);
+
+            userDao.Parent = parentDao;
+            userDao.Name = userDto.Name;
+            userDao.ShortName = userDto.ShortName;
+            userDao.Type = typeDao;
+            userDao.State = stateDao;
+
+            var newSalt = CryptHelper.GenerateSalt(userDto.Login, userDto.Password);
+
+            var newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(userDto.Password) + newSalt);
+
+            userDao.Login = userDto.Login;
+            userDao.Password = newMd5Password;
+            userDao.Salt = newSalt;
+            userDao.UserGroup = _treeRepository.GetTree(userDto.UserGroupId);
+            userDao.Email = userDto.Email;
+            userDao.Phone = userDto.Phone;
+
+            PersonDao personDao = null;
+            if (userDto.PersonId != null)
+            {
+                personDao = _treeRepository.GetPerson((Guid)userDto.PersonId);
+            }
+            userDao.Person = personDao;
+
+            _treeRepository.UpdateUser(userDao);
+        }
+
+        public UserDto FindUserByLogin(string login)
+        {
+            var userDaos = new List<UserDao> { _treeRepository.FindUserByLogin(login) }.AsQueryable();
+
+            return !userDaos.Any() ? null : _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public UserDto FindUserByEmail(string email)
+        {
+            var userDaos = new List<UserDao> { _treeRepository.FindUserByEmail(email) }.AsQueryable();
+
+            return !userDaos.Any() ? null : _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public UserDto AuthenticateUser(string login, string password)
+        {
+            var userDto = FindUserByLogin(login);
+
+            return userDto == null
+                ? null
+                : (CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(password) + userDto.Salt) == userDto.Password
+                    ? userDto
+                    : null);
+        }
+
+        public UserDto RegisterUser(RegistrationUserDto registrationUser)
+        {
+            var personDao = _treeRepository.CreatePerson(new PersonDao
+            {
+                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Parent = _treeRepository.GetTree(SystemObjects.AllPeople),
+                Name = string.Format("{0} {1} {2}", registrationUser.Surname, registrationUser.FirstName, registrationUser.Patronymic),
+                Type = _treeRepository.GetTree(ObjectTypes.otPerson),
+                State = _treeRepository.GetTree(ObjectStates.osActive),
+                CreateDateTime = DateTime.Now,
+                Surname = registrationUser.Surname,
+                FirstName = registrationUser.FirstName,
+                Patronymic = registrationUser.Patronymic,
+                BirthDate = registrationUser.BirthDate
+            });
+
+            var newSalt = CryptHelper.GenerateSalt(registrationUser.Login, registrationUser.Password);
+
+            var newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(registrationUser.Password) + newSalt);
+
+            var userDao = _treeRepository.CreateUser(new UserDao
+            {
+                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Parent = _treeRepository.GetTree(SystemObjects.SystemUsers),
+                Name = string.Format("{0} {1} {2}", registrationUser.Surname, registrationUser.FirstName, registrationUser.Patronymic),
+                Type = _treeRepository.GetTree(ObjectTypes.otUser),
+                State = _treeRepository.GetTree(ObjectStates.osActive),
+                CreateDateTime = DateTime.Now,
+                Login = registrationUser.Login,
+                Password = newMd5Password,
+                Salt = newSalt,
+                UserGroup = _treeRepository.GetTree(UserGroups.usCommonUserGroup),
+                Email = registrationUser.Email,
+                Phone = registrationUser.Phone,
+                Person = personDao
+            });
+
+            return (personDao == null) && (userDao == null)
+                ? null
+                : _userDtoFetcher.Fetch(new List<UserDao> {userDao}.AsQueryable(), Page.All, FetchAim.Card)
+                    .FirstOrDefault();
+        }
+
+        public PersonDto CreatePerson(PersonDto personDto)
+        {
+            TreeDao parentDao = null;
+            if (personDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)personDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otPerson);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osInDevelopment);
+
+            var personDao = new PersonDao
+            {
+                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Parent = parentDao,
+                Name = personDto.Name,
+                ShortName = personDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now,
+                Surname = personDto.Surname,
+                FirstName = personDto.FirstName,
+                Patronymic = personDto.Patronymic,
+                BirthDate = personDto.BirthDate                
+            };
+
+            //var treeDao = _treeRepository.CreateTree(personDao);
+
+            //personDto.Id = treeDao.Id;
+            //personDto.CreateDateTime = treeDao.CreateDateTime;
+
+            return _personDtoFetcher.Fetch(new List<PersonDao> { _treeRepository.CreatePerson(personDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public PersonDto GetPerson(Guid personId)
+        {
+            return _personDtoFetcher.Fetch(new List<PersonDao> { _treeRepository.GetPerson(personId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
     }    
 }

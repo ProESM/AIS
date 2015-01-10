@@ -23,6 +23,10 @@ namespace Common.Base
             {
                 return true;
             }
+            if (typeof(UserGroups).GetFields().Select(fieldInfo => fieldInfo.GetValue(fieldInfo)).Any(fieldValue => (Guid)fieldValue == objectId))
+            {
+                return true;
+            }
             return false;
         }
 
@@ -33,6 +37,8 @@ namespace Common.Base
             systemObjects.AddRange(typeof (ObjectStates).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)));
 
             systemObjects.AddRange(typeof (ObjectTypes).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)));
+
+            systemObjects.AddRange(typeof(UserGroups).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)));            
 
             return systemObjects;
         }
@@ -69,7 +75,18 @@ namespace Common.Base
         /// Все пользователи системы
         /// </summary>
         [Display(Name = "Все пользователи системы")]
-        public static readonly Guid SystemUsers = new Guid("DB19CDE4-3B97-4422-B9FF-7F3F9E8DC179");
+        public static readonly Guid SystemUsers = new Guid("540BC313-F0A3-412C-857B-0157F23C601B");
+        /// <summary>
+        /// Все группы пользователей
+        /// </summary>
+        [Display(Name = "Все группы пользователей")]
+        public static readonly Guid UserGroups = new Guid("20F9B9CE-8769-4569-AE71-1ECF18BE90B3");
+        /// <summary>
+        /// Все люди (физические лица)
+        /// </summary>
+        [Display(Name = "Все люди (физические лица)")]
+        public static readonly Guid AllPeople = new Guid("E756FE32-EB84-4A79-BC3B-B73971F25BB4");
+        
     }
 
     /// <summary>
@@ -135,12 +152,36 @@ namespace Common.Base
         /// Пользователь
         /// </summary>
         [Display(Name = "Пользователь")]
-        public static readonly Guid otUser = new Guid("1FA126C9-1A28-42C2-B3C6-D7629511907F");
+        public static readonly Guid otUser = new Guid("A92B6B05-D6B7-47F6-880D-78C784D4FAD5");
         
         /// <summary>
         /// Группа пользователей
         /// </summary>
         [Display(Name = "Группа пользователей")]
-        public static readonly Guid otUserGroup = new Guid("E78FA512-E203-435B-BE3F-7B84DE2320C7");
-    }   
+        public static readonly Guid otUserGroup = new Guid("D43FAAA2-427C-412F-B92C-11B78EA7BE9B");
+
+        /// <summary>
+        /// Человек (физическое лицо)
+        /// </summary>
+        [Display(Name = "Человек (физическое лицо)")]
+        public static readonly Guid otPerson = new Guid("E815F4FF-0DE5-4D39-AFAA-95BC9D72B9C7");
+    }
+
+    /// <summary>
+    /// Группы пользователей
+    /// </summary>    
+    public static class UserGroups
+    {
+        /// <summary>
+        /// Системный архитектор
+        /// </summary>
+        [Display(Name = "Системный архитектор")]
+        public static readonly Guid usSystemArchitect = new Guid("85034FD6-4F23-4F0B-8FE4-56F4EFD17FB1");
+
+        /// <summary>
+        /// Общая группа пользователей
+        /// </summary>
+        [Display(Name = "Общая группа пользователей")]
+        public static readonly Guid usCommonUserGroup = new Guid("E1977546-F3C3-47CD-BD23-BC05EC3F58FC");
+    }
 }

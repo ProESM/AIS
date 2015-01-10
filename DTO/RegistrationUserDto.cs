@@ -40,6 +40,13 @@ namespace DTO
         [JsonProperty(PropertyName = "Email")]
         public string Email { get; set; }
         /// <summary>
+        /// Телефон
+        /// </summary>
+        [Display(Name = "Телефон")]
+        [DataMember]
+        [JsonProperty(PropertyName = "Phone")]
+        public string Phone { get; set; }
+        /// <summary>
         /// Фамилия пользователя
         /// </summary>
         [Display(Name = "Фамилия")]
@@ -51,8 +58,8 @@ namespace DTO
         /// </summary>
         [Display(Name = "Имя")]
         [DataMember]
-        [JsonProperty(PropertyName = "Name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "FirstName")]
+        public string FirstName { get; set; }
         /// <summary>
         /// Отчество пользователя
         /// </summary>
@@ -65,14 +72,7 @@ namespace DTO
         /// </summary>
         [Display(Name = "Дата рождения")]
         [DataMember]
-        [JsonProperty(PropertyName = "Birthdate")]
-        public DateTime Birthdate { get; set; }
-        /// <summary>
-        /// Телефон
-        /// </summary>
-        [Display(Name = "Телефон")]
-        [DataMember]
-        [JsonProperty(PropertyName = "Phone")]
-        public string Phone { get; set; }
+        [JsonProperty(PropertyName = "BirthDate")]
+        public DateTime BirthDate { get; set; }        
     }
 }

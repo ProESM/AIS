@@ -9,7 +9,7 @@ using Infrastructure.Entities;
 namespace Infrastructure.DtoFetchers
 {
     /// <summary>
-    /// Фетчер DTO объекта дерева s_tree.
+    /// Фетчер DTO пользователя.
     /// </summary>
     public class UserDtoFetcher : BaseDtoFetcher<UserDao, UserDto>
     {
@@ -43,6 +43,8 @@ namespace Infrastructure.DtoFetchers
                 .Map(d => d.Salt, e => e.Salt)
                 .Map(d => d.UserGroupId, e => e.UserGroup.Id)
                 .Map(d => d.Email, e => e.Email)
+                .Map(d => d.Phone, e => e.Phone)
+                .Map(d => d.PersonId, e => e.PersonId)
                 ;
 
             MapSpecificForList(map);
@@ -74,6 +76,8 @@ namespace Infrastructure.DtoFetchers
                .Map(d => d.Salt, e => e.Salt)
                .Map(d => d.UserGroupId, e => e.UserGroup.Id)
                .Map(d => d.Email, e => e.Email)
+               .Map(d => d.Phone, e => e.Phone)
+               .Map(d => d.PersonId, e => e.PersonId)
                ;
 
             MapSpecificForCard(map);

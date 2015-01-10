@@ -22,7 +22,8 @@ namespace Infrastructure
 
         static SessionManager()
         {
-            ConnectionString = @"Server=localhost;Database=D:\git\AIS\Database\DB_MAIN.FDB;Charset=UTF8;User=SYSDBA;Password=masterkey";
+            ConnectionString = @"Server=localhost;Database=D:\git\AIS\Database\DB_MAIN.FDB;Charset=UTF8;User=SYSDBA;Password=masterkey";            
+            //ConnectionString = @"Server=localhost;Database=C:\inetpub\wwwroot\AIS\Database\DB_MAIN.FDB;Charset=UTF8;User=SYSDBA;Password=masterkey";
         }
 
         private static ISessionFactory GetFactory<T>() where T : ICurrentSessionContext

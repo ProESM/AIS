@@ -62,8 +62,11 @@
   <ItemGroup>
     <Compile Include="AuthenticationUserDto.cs" />
     <Compile Include="BaseDto.cs" />
+    <Compile Include="PersonalUserDto.cs" />
+    <Compile Include="PersonDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseTreeDto.cs" />
+    <Compile Include="RecoveryPasswordDto.cs" />
     <Compile Include="RegistrationUserDto.cs" />
     <Compile Include="TreeDto.cs" />
     <Compile Include="UserDto.cs" />

@@ -63,6 +63,7 @@
     <Compile Include="BasicAuthenticationIdentity.cs" />
     <Compile Include="CryptHelper.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="PasswordHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExtensions.cs" />
   </ItemGroup>

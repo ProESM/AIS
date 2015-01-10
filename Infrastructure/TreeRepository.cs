@@ -22,13 +22,7 @@ namespace Infrastructure
         public IQueryable<T> Query<T>()
         {
             return _session.Query<T>();
-        }        
-
-        public UserDao FindUserByLogin(string login)
-        {            
-            var userDao = _session.Query<UserDao>().FirstOrDefault(u => u.Login == login);
-            return userDao;            
-        }
+        }                
 
         public List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
         {
@@ -121,7 +115,7 @@ namespace Infrastructure
 
                 transaction.Commit();
 
-                return treeDao;
+                return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeDao._Id.ToUpper());
             }            
         }
 
@@ -139,6 +133,67 @@ namespace Infrastructure
             {
                 _session.SaveOrUpdate(treeDao);
                 transaction.Commit();
+            }
+        }
+
+        public UserDao CreateUser(UserDao userDao)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Save(userDao);
+
+                transaction.Commit();
+
+                return _session.Query<UserDao>().FirstOrDefault(p => p._Id == userDao._Id.ToUpper());
+            }
+        }
+
+        public UserDao GetUser(Guid userId)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                return _session.Query<UserDao>().FirstOrDefault(u => u._Id == userId.ToString().ToUpper());
+            }
+        }
+
+        public void UpdateUser(UserDao userDao)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.SaveOrUpdate(userDao);
+                transaction.Commit();
+            }
+        }
+
+        public UserDao FindUserByLogin(string login)
+        {
+            var userDao = _session.Query<UserDao>().FirstOrDefault(u => u.Login == login);
+            return userDao;
+        }
+
+        public UserDao FindUserByEmail(string email)
+        {
+            var userDao = _session.Query<UserDao>().FirstOrDefault(u => u.Email == email);
+            return userDao;
+        }
+
+        public PersonDao CreatePerson(PersonDao personDao)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Save(personDao);
+
+                transaction.Commit();
+
+                return _session.Query<PersonDao>().FirstOrDefault(p => p._Id == personDao._Id.ToUpper());
+            }
+        }
+
+        public PersonDao GetPerson(Guid personId)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                return _session.Query<PersonDao>().FirstOrDefault(p => p._Id == personId.ToString().ToUpper());
             }
         }
     }

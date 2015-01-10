@@ -4,22 +4,10 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DTO" />
-      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DTO" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ITreeService_FindUserByLogin_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindUserByLogin" />
-  </wsdl:message>
-  <wsdl:message name="ITreeService_FindUserByLogin_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindUserByLoginResponse" />
-  </wsdl:message>
-  <wsdl:message name="ITreeService_AuthenticateUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:AuthenticateUser" />
-  </wsdl:message>
-  <wsdl:message name="ITreeService_AuthenticateUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AuthenticateUserResponse" />
-  </wsdl:message>
   <wsdl:message name="ITreeService_GetSystemObjects_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSystemObjects" />
   </wsdl:message>
@@ -56,15 +44,49 @@
   <wsdl:message name="ITreeService_DeleteTree_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteTreeResponse" />
   </wsdl:message>
+  <wsdl:message name="ITreeService_CreateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_FindUserByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindUserByLogin" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_FindUserByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindUserByLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_AuthenticateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_AuthenticateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreatePerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreatePerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPersonResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITreeService">
-    <wsdl:operation name="FindUserByLogin">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/FindUserByLogin" message="tns:ITreeService_FindUserByLogin_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/FindUserByLoginResponse" message="tns:ITreeService_FindUserByLogin_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AuthenticateUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/AuthenticateUser" message="tns:ITreeService_AuthenticateUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/AuthenticateUserResponse" message="tns:ITreeService_AuthenticateUser_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetSystemObjects">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetSystemObjects" message="tns:ITreeService_GetSystemObjects_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetSystemObjectsResponse" message="tns:ITreeService_GetSystemObjects_OutputMessage" />
@@ -89,27 +111,37 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/DeleteTree" message="tns:ITreeService_DeleteTree_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/DeleteTreeResponse" message="tns:ITreeService_DeleteTree_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateUser" message="tns:ITreeService_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateUserResponse" message="tns:ITreeService_CreateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetUser" message="tns:ITreeService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetUserResponse" message="tns:ITreeService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateUser" message="tns:ITreeService_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateUserResponse" message="tns:ITreeService_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/FindUserByLogin" message="tns:ITreeService_FindUserByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/FindUserByLoginResponse" message="tns:ITreeService_FindUserByLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/AuthenticateUser" message="tns:ITreeService_AuthenticateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/AuthenticateUserResponse" message="tns:ITreeService_AuthenticateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreatePerson" message="tns:ITreeService_CreatePerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreatePersonResponse" message="tns:ITreeService_CreatePerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetPerson" message="tns:ITreeService_GetPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetPersonResponse" message="tns:ITreeService_GetPerson_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITreeService" type="tns:ITreeService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="FindUserByLogin">
-      <soap:operation soapAction="http://tempuri.org/ITreeService/FindUserByLogin" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="AuthenticateUser">
-      <soap:operation soapAction="http://tempuri.org/ITreeService/AuthenticateUser" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetSystemObjects">
       <soap:operation soapAction="http://tempuri.org/ITreeService/GetSystemObjects" style="document" />
       <wsdl:input>
@@ -157,6 +189,69 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteTree">
       <soap:operation soapAction="http://tempuri.org/ITreeService/DeleteTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByLogin">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/FindUserByLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/AuthenticateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreatePerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetPerson" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

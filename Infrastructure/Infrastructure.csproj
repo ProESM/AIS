@@ -73,9 +73,11 @@
     <Compile Include="DtoFetchers\FetchDtoMap.cs" />
     <Compile Include="DtoFetchers\IDtoFetcher.cs" />
     <Compile Include="DtoFetchers\IFetchDtoMap.cs" />
+    <Compile Include="DtoFetchers\PersonDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\UserDtoFetcher.cs" />
     <Compile Include="DtoFetchers\VirtualTreeDtoFetcher.cs" />
+    <Compile Include="Entities\PersonDao.cs" />
     <Compile Include="Entities\TreeDao.cs" />
     <Compile Include="Entities\ITreeDao.cs" />
     <Compile Include="Entities\TreeParentDao.cs" />

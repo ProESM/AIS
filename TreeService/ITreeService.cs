@@ -14,12 +14,6 @@ namespace TreeService
     public interface ITreeService
     {
         [OperationContract]
-        UserDto FindUserByLogin(string login);
-
-        [OperationContract]
-        UserDto AuthenticateUser(string login, string password);
-
-        [OperationContract]
         List<Guid> GetSystemObjects();
 
         [OperationContract]
@@ -36,5 +30,26 @@ namespace TreeService
 
         [OperationContract]
         void DeleteTree(TreeDto treeDto);
+
+        [OperationContract]
+        UserDto CreateUser(UserDto userDto);
+
+        [OperationContract]
+        UserDto GetUser(Guid userId);
+
+        [OperationContract]
+        void UpdateUser(UserDto userDto);
+
+        [OperationContract]
+        UserDto FindUserByLogin(string login);
+
+        [OperationContract]
+        UserDto AuthenticateUser(string login, string password);
+
+        [OperationContract]
+        PersonDto CreatePerson(PersonDto personDto);
+
+        [OperationContract]
+        PersonDto GetPerson(Guid personId);
     }
 }

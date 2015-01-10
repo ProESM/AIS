@@ -9,8 +9,6 @@ namespace Infrastructure
 {
     public interface ITreeRepository : IRepository
     {
-        UserDao FindUserByLogin(string login);
-
         List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
 
         TreeDao CreateTree(TreeDao treeDao);
@@ -18,5 +16,19 @@ namespace Infrastructure
         TreeDao GetTree(Guid treeId);
 
         void UpdateTree(TreeDao treeDao);
+
+        UserDao CreateUser(UserDao userDao);
+
+        UserDao GetUser(Guid userId);
+
+        void UpdateUser(UserDao userDao);
+
+        UserDao FindUserByLogin(string login);
+
+        UserDao FindUserByEmail(string email);
+
+        PersonDao CreatePerson(PersonDao personDao);
+
+        PersonDao GetPerson(Guid personId);
     }
 }
