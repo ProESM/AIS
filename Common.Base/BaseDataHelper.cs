@@ -176,12 +176,12 @@ namespace Common.Base
         /// Системный архитектор
         /// </summary>
         [Display(Name = "Системный архитектор")]
-        public static readonly Guid usSystemArchitect = new Guid("85034FD6-4F23-4F0B-8FE4-56F4EFD17FB1");
+        public static readonly Guid ugArchitect = new Guid("85034FD6-4F23-4F0B-8FE4-56F4EFD17FB1");
 
         /// <summary>
         /// Общая группа пользователей
         /// </summary>
         [Display(Name = "Общая группа пользователей")]
-        public static readonly Guid usCommonUserGroup = new Guid("E1977546-F3C3-47CD-BD23-BC05EC3F58FC");
+        public static readonly Guid ugCommonUserGroup = new Guid("E1977546-F3C3-47CD-BD23-BC05EC3F58FC");
     }
 }

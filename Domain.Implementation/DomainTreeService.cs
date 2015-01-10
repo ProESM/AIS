@@ -185,9 +185,19 @@ namespace Domain.Implementation
             userDao.Type = typeDao;
             userDao.State = stateDao;
 
-            var newSalt = CryptHelper.GenerateSalt(userDto.Login, userDto.Password);
+            string newSalt;
+            string newMd5Password;
 
-            var newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(userDto.Password) + newSalt);
+            if (userDto.Password.Length == 0)
+            {
+                newMd5Password = userDao.Password;
+                newSalt = userDao.Salt;
+            }
+            else
+            {
+                newSalt = CryptHelper.GenerateSalt(userDto.Login, userDto.Password);
+                newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(userDto.Password) + newSalt);    
+            }
 
             userDao.Login = userDto.Login;
             userDao.Password = newMd5Password;
@@ -262,7 +272,7 @@ namespace Domain.Implementation
                 Login = registrationUser.Login,
                 Password = newMd5Password,
                 Salt = newSalt,
-                UserGroup = _treeRepository.GetTree(UserGroups.usCommonUserGroup),
+                UserGroup = _treeRepository.GetTree(UserGroups.ugCommonUserGroup),
                 Email = registrationUser.Email,
                 Phone = registrationUser.Phone,
                 Person = personDao
