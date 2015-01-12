@@ -34,7 +34,7 @@ namespace Infrastructure.Entities
             get { return Person == null ? (Guid?)null : Person.Id; }
         }
 
-        [ManyToOne(0, ClassType = typeof(PersonDao), Column = "PERSON_ID")]
+        [ManyToOne(0, ClassType = typeof(PersonDao), Column = "PERSON_ID", NotNull = false)]
         public virtual PersonDao Person { get; set; }
     }
 }

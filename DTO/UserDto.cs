@@ -56,14 +56,15 @@ namespace DTO
         /// </summary>
         [Display(Name = "Телефон")]
         [DataMember]
-        [JsonProperty(PropertyName = "Phone")]
+        [JsonProperty(PropertyName = "Phone")]        
         public string Phone { get; set; }
+
         /// <summary>
         /// Ссылка на человека, которому принадлежит данная учетная запись
         /// </summary>
         [Display(Name = "Id человека")]
         [DataMember]
         [JsonProperty(PropertyName = "PersonId")]
-        public Guid? PersonId { get; set; }
+        public Guid? PersonId { get; set; }        
     } 
 }

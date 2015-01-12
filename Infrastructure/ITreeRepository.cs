@@ -11,6 +11,10 @@ namespace Infrastructure
     {
         List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
 
+        List<VirtualTreeDao> GetTreeParents(Guid? parent, Guid child, Guid treeParentType, bool includeChild = false, bool includeDeleted = false);
+
+        List<VirtualTreeDao> SearchTreesByText(string searchText, Guid treeParentType, );
+
         TreeDao CreateTree(TreeDao treeDao);
 
         TreeDao GetTree(Guid treeId);

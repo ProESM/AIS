@@ -99,9 +99,97 @@ namespace Infrastructure
                         Type = treeParentDao.TreeChild.Type,
                         State = treeParentDao.TreeChild.State,
                         CreateDateTime = treeParentDao.TreeChild.CreateDateTime,
-                        HasChildren = (_treeParentDaos != null) && (_treeParentDaos.Count > 0)
+                        HasChildren = _treeParentDaos.Count > 0
                     });
                 }                
+
+                return virtualTreeDaos;
+            }
+        }
+
+        public List<VirtualTreeDao> GetTreeParents(Guid? parent, Guid child, Guid treeParentType,
+            bool includeChild = false, bool includeDeleted = false)
+        {
+            using (var transaction = _session.BeginTransaction())
+            {
+                List<TreeParentDao> treeParentDaos;
+
+                if (parent != null)
+                {
+                    var firstOrDefault = _session.Query<TreeParentDao>()
+                        .Where(tp => tp.TreeParent._Id == parent.ToString().ToUpper()).FirstOrDefault(tp => tp.TreeChild._Id == child.ToString().ToUpper());
+                    if (firstOrDefault != null)
+                    {
+                        var limitLevel = firstOrDefault.Level;
+
+                        if (includeChild)
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeChild._Id == child.ToString().ToUpper())
+                                .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                                .Where(tp => tp.Level <= limitLevel)
+                                .OrderByDescending(tp => tp.Level)
+                                .ToList();
+                        }
+                        else
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeChild._Id == child.ToString().ToUpper())
+                                .Where(tp => tp.TreeParent._Id == child.ToString().ToUpper())
+                                .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                                .Where(tp => tp.Level <= limitLevel)
+                                .OrderByDescending(tp => tp.Level)
+                                .ToList();
+                        }
+                    }
+                    else
+                    {
+                        treeParentDaos = new List<TreeParentDao>();
+                    }
+                }
+                else
+                {
+                    if (includeChild)
+                    {
+                        treeParentDaos = _session.Query<TreeParentDao>()
+                            .Where(tp => tp.TreeChild._Id == child.ToString().ToUpper())
+                            .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                            .OrderByDescending(tp => tp.Level)
+                            .ToList();
+                    }
+                    else
+                    {
+                        treeParentDaos = _session.Query<TreeParentDao>()
+                            .Where(tp => tp.TreeChild._Id == child.ToString().ToUpper())
+                            .Where(tp => tp.TreeParent._Id == child.ToString().ToUpper())
+                            .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                            .OrderByDescending(tp => tp.Level)
+                            .ToList();
+                    }
+                }                
+
+                var virtualTreeDaos = new List<VirtualTreeDao>();
+
+                foreach (var treeParentDao in treeParentDaos)
+                {
+                    var _treeParentDaos = _session.Query<TreeParentDao>()
+                    .Where(tp => tp.TreeParent._Id == treeParentDao.TreeChild._Id.ToUpper())
+                    .Where(tp => tp.Level == 1)
+                    .Where(tp => tp.TreeParentType._Id == treeParentType.ToString().ToUpper())
+                    .ToList();
+
+                    virtualTreeDaos.Add(new VirtualTreeDao
+                    {
+                        _Id = treeParentDao.TreeChild._Id,
+                        Parent = treeParentDao.TreeChild.Parent,
+                        Name = treeParentDao.TreeChild.Name,
+                        ShortName = treeParentDao.TreeChild.ShortName,
+                        Type = treeParentDao.TreeChild.Type,
+                        State = treeParentDao.TreeChild.State,
+                        CreateDateTime = treeParentDao.TreeChild.CreateDateTime,
+                        HasChildren = _treeParentDaos.Count > 0
+                    });
+                }
 
                 return virtualTreeDaos;
             }
