@@ -492,5 +492,42 @@ namespace Infrastructure
                 transaction.Commit();
             } 
         }
+
+        public ReportTypeGroupDao CreateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(reportTypeGroupDao);
+
+                transaction.Commit();
+
+                return _session.Query<ReportTypeGroupDao>().FirstOrDefault(p => p.Id.ToString() == reportTypeGroupDao.Id.ToString());
+            }
+        }
+
+        public ReportTypeGroupDao GetReportTypeGroup(Guid reportTypeGroupId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportTypeGroupDao>().FirstOrDefault(p => p.Id.ToString() == reportTypeGroupId.ToString());
+            }
+        }
+
+        public List<ReportTypeGroupDao> GetReportTypeGroups()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportTypeGroupDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.SaveOrUpdate(reportTypeGroupDao);
+                transaction.Commit();
+            }
+        }
     }
 }

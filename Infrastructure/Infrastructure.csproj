@@ -93,7 +93,7 @@
     <Compile Include="Entities\TreeTypeDao\DocumentTypeTreeTypeDao.cs" />
     <Compile Include="Entities\TreeTypeDao\FolderTreeTypeDao.cs" />
     <Compile Include="Entities\TreeTypeDao\JuridicalPersonTreeTypeDao.cs" />
-    <Compile Include="Entities\TreeTypeDao\ReportTypeGroupTreeTypeDao.cs" />
+    <Compile Include="Entities\ReportTypeGroupDao.cs" />
     <Compile Include="Entities\TreeTypeDao\StateTreeTypeDao.cs" />
     <Compile Include="Entities\TreeTypeDao\TypeTreeTypeDao.cs" />
     <Compile Include="Entities\UserDao.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Mappings\TreeTypeMap\DocumentTypeTreeTypeMap.cs" />
     <Compile Include="Mappings\TreeTypeMap\FolderTreeTypeMap.cs" />
     <Compile Include="Mappings\TreeTypeMap\JuridicalPersonTreeTypeMap.cs" />
-    <Compile Include="Mappings\TreeTypeMap\ReportTypeGroupTreeTypeMap.cs" />
+    <Compile Include="Mappings\ReportTypeGroupMap.cs" />
     <Compile Include="Mappings\TreeTypeMap\StateTreeTypeMap.cs" />
     <Compile Include="Mappings\TreeTypeMap\TypeTreeTypeMap.cs" />
     <Compile Include="Mappings\UserGroupMap.cs" />
