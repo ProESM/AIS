@@ -5,10 +5,13 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Web;
+using Common.Base;
 using Domain;
 using Domain.Implementation;
 using DTO;
 using Ninject;
+using Ninject.Activation;
 
 namespace TreeService
 {
@@ -25,16 +28,44 @@ namespace TreeService
             _kernel.AddBindings();
 
             _domainTreeService = _kernel.Get<IDomainTreeService>();
+            
+            var current = HttpContext.Current;
+
+            string authHeader = current.Request.Headers["Authorization"];
+            if (!string.IsNullOrEmpty(authHeader))
+            {
+                var userLogin = CryptHelper.GetUserFromHttpHeader(authHeader);
+                var user = _domainTreeService.FindUserByLogin(userLogin[0]);
+                if (user != null)
+                {
+                    SystemUser.Id = user.Id;
+                }
+            }            
         }                      
 
-        public List<Guid> GetSystemObjects()
+        public List<string> GetSystemObjects()
         {
-            return _domainTreeService.GetSystemObjects();
+            var systemObjectsGuids = _domainTreeService.GetSystemObjects();
+
+            return systemObjectsGuids.Select(systemObjectsGuid => systemObjectsGuid.ToString()).ToList();
+            //return _domainTreeService.GetSystemObjects();
         }
 
         public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
         {
             return _domainTreeService.GetTrees(parent, treeParentType, includeParent, includeDeleted);
+        }
+
+        public List<VirtualTreeDto> GetTreeParents(Guid? parent, Guid child, Guid treeParentType,
+            bool includeChild = false, bool includeDeleted = false)
+        {
+            return _domainTreeService.GetTreeParents(parent, child, treeParentType, includeChild, includeDeleted);
+        }
+
+        public List<VirtualTreeDto> SearchTreesByText(string searchText, Guid treeParentType, List<Guid> typeIds,
+            List<Guid> ignoreTypeIds, Guid? parent = null)
+        {
+            return _domainTreeService.SearchTreesByText(searchText, treeParentType, typeIds, ignoreTypeIds, parent);
         }
 
         public TreeDto CreateTree(TreeDto treeDto)
@@ -90,6 +121,11 @@ namespace TreeService
         public PersonDto GetPerson(Guid personId)
         {
             return _domainTreeService.GetPerson(personId);
+        }
+
+        public void UpdatePerson(PersonDto personDto)
+        {
+            _domainTreeService.UpdatePerson(personDto);
         }
     }
 }

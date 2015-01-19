@@ -200,11 +200,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\TreeServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,13 +226,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Service References\TreeServiceReference\TreeService.disco" />
-    <None Include="Service References\TreeServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\TreeServiceReference\configuration.svcinfo" />
-    <None Include="Service References\TreeServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -276,16 +264,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <None Include="Service References\TreeServiceReference\TreeService.wsdl" />
-    <None Include="Service References\TreeServiceReference\TreeService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TreeServiceReference\TreeService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TreeServiceReference\TreeService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,6 +277,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Base.Web\Common.Base.Web.csproj">
+      <Project>{f75d2ec7-b643-49d6-b605-17cc70fc0838}</Project>
+      <Name>Common.Base.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.Base\Common.Base.csproj">
       <Project>{520D2678-0DE4-406B-9C10-0A5DBB553C95}</Project>
       <Name>Common.Base</Name>
@@ -322,9 +304,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\TreeServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

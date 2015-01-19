@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate.Mapping;
 using NHibernate.Mapping;
 using NHibernate.Mapping.Attributes;
 
@@ -11,8 +12,9 @@ namespace Infrastructure.Entities
 {
     [DataContract]
     [HibernateMapping(0)]
-    [JoinedSubclass(1, Name = "L_USERS", Table = "L_USERS", NameType = typeof(UserDao), ExtendsType = typeof(TreeDao))]
-    [Key(2, Column = "ID")]
+    [JoinedSubclass(1, Name = "L_USERS", Table = "L_USERS", NameType = typeof(UserDao), ExtendsType = typeof(TreeDao), Lazy = true)]    
+    //[Subclass(1, DiscriminatorValue = "TYPE_ID", NameType = typeof(UserDao), ExtendsType = typeof(TreeDao), Lazy = true)]
+    [Key(2, Column = "ID")]    
     [Cache(3, Usage = CacheUsage.ReadWrite)]
     public class UserDao : TreeDao
     {
@@ -31,7 +33,10 @@ namespace Infrastructure.Entities
 
         public virtual Guid? PersonId
         {
-            get { return Person == null ? (Guid?)null : Person.Id; }
+            get
+            {
+                return Person == null ? (Guid?)null : Person.Id;
+            }
         }
 
         [ManyToOne(0, ClassType = typeof(PersonDao), Column = "PERSON_ID", NotNull = false)]

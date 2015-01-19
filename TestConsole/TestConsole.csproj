@@ -55,7 +55,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.PersonDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -87,6 +89,12 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Base\Common.Base.csproj">
+      <Project>{520d2678-0de4-406b-9c10-0a5dbb553c95}</Project>
+      <Name>Common.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Service References\TreeServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -103,12 +111,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.Base\Common.Base.csproj">
-      <Project>{520d2678-0de4-406b-9c10-0a5dbb553c95}</Project>
-      <Name>Common.Base</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

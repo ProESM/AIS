@@ -32,38 +32,74 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTreeParents">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="parent" nillable="true" type="q5:guid" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="child" type="q6:guid" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="treeParentType" type="q7:guid" />
+        <xs:element minOccurs="0" name="includeChild" type="xs:boolean" />
+        <xs:element minOccurs="0" name="includeDeleted" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTreeParentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetTreeParentsResult" nillable="true" type="q8:ArrayOfVirtualTreeDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchTreesByText">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="searchText" nillable="true" type="xs:string" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="treeParentType" type="q9:guid" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="typeIds" nillable="true" type="q10:ArrayOfguid" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ignoreTypeIds" nillable="true" type="q11:ArrayOfguid" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="parent" nillable="true" type="q12:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchTreesByTextResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="SearchTreesByTextResult" nillable="true" type="q13:ArrayOfVirtualTreeDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateTree">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="treeDto" nillable="true" type="q5:TreeDto" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="treeDto" nillable="true" type="q14:TreeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateTreeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="CreateTreeResult" nillable="true" type="q6:TreeDto" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="CreateTreeResult" nillable="true" type="q15:TreeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTree">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="treeId" type="q7:guid" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="treeId" type="q16:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTreeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetTreeResult" nillable="true" type="q8:TreeDto" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetTreeResult" nillable="true" type="q17:TreeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTree">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="treeDto" nillable="true" type="q9:TreeDto" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="treeDto" nillable="true" type="q18:TreeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -75,7 +111,7 @@
   <xs:element name="DeleteTree">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="treeDto" nillable="true" type="q10:TreeDto" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="treeDto" nillable="true" type="q19:TreeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -87,35 +123,35 @@
   <xs:element name="CreateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="userDto" nillable="true" type="q11:UserDto" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="userDto" nillable="true" type="q20:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="CreateUserResult" nillable="true" type="q12:UserDto" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="CreateUserResult" nillable="true" type="q21:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q13:guid" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q22:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetUserResult" nillable="true" type="q14:UserDto" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetUserResult" nillable="true" type="q23:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="userDto" nillable="true" type="q15:UserDto" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="userDto" nillable="true" type="q24:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -134,7 +170,7 @@
   <xs:element name="FindUserByLoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="FindUserByLoginResult" nillable="true" type="q16:UserDto" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="FindUserByLoginResult" nillable="true" type="q25:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -149,36 +185,48 @@
   <xs:element name="AuthenticateUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="AuthenticateUserResult" nillable="true" type="q17:UserDto" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="AuthenticateUserResult" nillable="true" type="q26:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreatePerson">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="personDto" nillable="true" type="q18:PersonDto" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="personDto" nillable="true" type="q27:PersonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreatePersonResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="CreatePersonResult" nillable="true" type="q19:PersonDto" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="CreatePersonResult" nillable="true" type="q28:PersonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPerson">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="personId" type="q20:guid" />
+        <xs:element xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="personId" type="q29:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPersonResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetPersonResult" nillable="true" type="q21:PersonDto" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetPersonResult" nillable="true" type="q30:PersonDto" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePerson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="personDto" nillable="true" type="q31:PersonDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePersonResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

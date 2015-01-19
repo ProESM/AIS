@@ -79,3 +79,5 @@ D:\git\AIS\AISSPO\bin\Domain.dll
 D:\git\AIS\AISSPO\bin\Domain.Implementation.dll
 D:\git\AIS\AISSPO\bin\Domain.Implementation.pdb
 D:\git\AIS\AISSPO\bin\Domain.pdb
+D:\git\AIS\AISSPO\bin\Common.Base.Web.dll
+D:\git\AIS\AISSPO\bin\Common.Base.Web.pdb

@@ -36,6 +36,9 @@
     <Reference Include="FirebirdSql.Data.FirebirdClient">
       <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.4.5.2.0\lib\net45\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -77,17 +80,45 @@
     <Compile Include="DtoFetchers\TreeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\UserDtoFetcher.cs" />
     <Compile Include="DtoFetchers\VirtualTreeDtoFetcher.cs" />
+    <Compile Include="Entities\DocumentDao.cs" />
+    <Compile Include="Mappings\DocumentMap.cs" />
     <Compile Include="Entities\PersonDao.cs" />
+    <Compile Include="Entities\ReportDao.cs" />
+    <Compile Include="Entities\ReportDataDao.cs" />
+    <Compile Include="Entities\ReportTypeDao.cs" />
     <Compile Include="Entities\TreeDao.cs" />
     <Compile Include="Entities\ITreeDao.cs" />
     <Compile Include="Entities\TreeParentDao.cs" />
+    <Compile Include="Entities\TreeTypeDao\ClassTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDao\DocumentTypeTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDao\FolderTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDao\JuridicalPersonTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDao\ReportTypeGroupTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDao\StateTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDao\TypeTreeTypeDao.cs" />
     <Compile Include="Entities\UserDao.cs" />
+    <Compile Include="Entities\UserGroupDao.cs" />
     <Compile Include="Entities\VirtualTreeDao.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="FetchAim.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ITreeRepository.cs" />
+    <Compile Include="Mappings\PersonMap.cs" />
+    <Compile Include="Mappings\ReportDataMap.cs" />
+    <Compile Include="Mappings\ReportMap.cs" />
+    <Compile Include="Mappings\TreeMap.cs" />
+    <Compile Include="Mappings\TreeParentMap.cs" />
+    <Compile Include="Mappings\TreeTypeMap\ClassTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMap\DocumentTypeTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMap\FolderTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMap\JuridicalPersonTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMap\ReportTypeGroupTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMap\StateTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMap\TypeTreeTypeMap.cs" />
+    <Compile Include="Mappings\UserGroupMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionManager.cs" />

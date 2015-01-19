@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5e6148e5-7643-423b-94ca-0e8aa0f0d3bc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="faedb2ec-a7ab-4b88-bc3e-5a96be7fb526" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:46271/TreeService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TreeService.xsd" MetadataType="Schema" ID="1db4fb8c-a405-435c-85f1-81f244308b72" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd0" />
-    <MetadataFile FileName="TreeService.disco" MetadataType="Disco" ID="f9825848-2d70-47c3-8ab2-a5d34b4ad625" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?disco" />
-    <MetadataFile FileName="TreeService1.xsd" MetadataType="Schema" ID="78567a72-3934-417b-97f3-d78738e4ed77" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd1" />
-    <MetadataFile FileName="TreeService.wsdl" MetadataType="Wsdl" ID="04d94b40-fd4f-48f1-bd91-a41e57260aa9" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?wsdl" />
-    <MetadataFile FileName="TreeService2.xsd" MetadataType="Schema" ID="67c1681b-a88c-42ea-9c6c-a0e4273a978a" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd2" />
-    <MetadataFile FileName="TreeService3.xsd" MetadataType="Schema" ID="912f5ba3-9a8b-407f-a749-9c3faeeea998" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd3" />
+    <MetadataFile FileName="TreeService.xsd" MetadataType="Schema" ID="26d0bebf-a57e-4b1d-93ab-4877eb398efc" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TreeService.disco" MetadataType="Disco" ID="cb422e67-2bb7-4138-ba6a-5a7fbaa321cd" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?disco" />
+    <MetadataFile FileName="TreeService1.xsd" MetadataType="Schema" ID="ef7caed8-ba44-40ea-b154-5f1271ec4830" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TreeService.wsdl" MetadataType="Wsdl" ID="17b4993a-212c-403b-92c8-36a51eb02e44" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?wsdl" />
+    <MetadataFile FileName="TreeService2.xsd" MetadataType="Schema" ID="ea547809-013c-45e7-993f-b814af78fac6" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TreeService3.xsd" MetadataType="Schema" ID="edad3514-b3ed-45b7-85d0-e3783de57955" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -20,6 +20,18 @@
   <wsdl:message name="ITreeService_GetTrees_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTreesResponse" />
   </wsdl:message>
+  <wsdl:message name="ITreeService_GetTreeParents_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreeParents" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetTreeParents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreeParentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_SearchTreesByText_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTreesByText" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_SearchTreesByText_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTreesByTextResponse" />
+  </wsdl:message>
   <wsdl:message name="ITreeService_CreateTree_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateTree" />
   </wsdl:message>
@@ -86,6 +98,12 @@
   <wsdl:message name="ITreeService_GetPerson_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPersonResponse" />
   </wsdl:message>
+  <wsdl:message name="ITreeService_UpdatePerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdatePerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePersonResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITreeService">
     <wsdl:operation name="GetSystemObjects">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetSystemObjects" message="tns:ITreeService_GetSystemObjects_InputMessage" />
@@ -94,6 +112,14 @@
     <wsdl:operation name="GetTrees">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetTrees" message="tns:ITreeService_GetTrees_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetTreesResponse" message="tns:ITreeService_GetTrees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTreeParents">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetTreeParents" message="tns:ITreeService_GetTreeParents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetTreeParentsResponse" message="tns:ITreeService_GetTreeParents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchTreesByText">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/SearchTreesByText" message="tns:ITreeService_SearchTreesByText_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/SearchTreesByTextResponse" message="tns:ITreeService_SearchTreesByText_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateTree">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateTree" message="tns:ITreeService_CreateTree_InputMessage" />
@@ -139,6 +165,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetPerson" message="tns:ITreeService_GetPerson_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetPersonResponse" message="tns:ITreeService_GetPerson_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdatePerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdatePerson" message="tns:ITreeService_UpdatePerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdatePersonResponse" message="tns:ITreeService_UpdatePerson_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITreeService" type="tns:ITreeService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -153,6 +183,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetTrees">
       <soap:operation soapAction="http://tempuri.org/ITreeService/GetTrees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTreeParents">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetTreeParents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTreesByText">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/SearchTreesByText" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -252,6 +300,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetPerson">
       <soap:operation soapAction="http://tempuri.org/ITreeService/GetPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdatePerson" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

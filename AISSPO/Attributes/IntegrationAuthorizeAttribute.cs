@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Domain;
+using Domain.Implementation;
+using Ninject;
 
 namespace AISSPO.Attributes
 {
@@ -13,6 +16,9 @@ namespace AISSPO.Attributes
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
     public class IntegrationAuthorizeAttribute : AuthorizeAttribute
     {
+        private IKernel _kernel;
+        private IDomainTreeService _domainTreeService;
+
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             // проверяем, авторизован ли пользователь
@@ -42,9 +48,12 @@ namespace AISSPO.Attributes
                     // или отсутствует куки с именем 'cookieName'
                     httpContext.Request.Cookies["aisUserId"] == null)
                 {
-                    var treeServiceClient = new TreeServiceReference.TreeServiceClient();
+                    _kernel = new StandardKernel();
+                    _kernel.AddBindings();
 
-                    var userDTO = treeServiceClient.FindUserByLogin(httpContext.User.Identity.Name);
+                    _domainTreeService = _kernel.Get<IDomainTreeService>();
+
+                    var userDTO = _domainTreeService.FindUserByLogin(httpContext.User.Identity.Name);
 
                     var cookie = new HttpCookie("aisUserId")
                     {

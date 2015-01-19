@@ -13,9 +13,9 @@ namespace Common.Base
         {
             using (MD5 md5Hash = MD5.Create())
             {
-                var ds = DateTime.Now.ToString();
+                var b64 = Convert.ToBase64String(new UTF8Encoding().GetBytes(userName + password));
 
-                var s = GetMd5Hash(md5Hash, userName+password+ds);
+                var s = GetMd5Hash(md5Hash, userName + password + b64);
 
                 return s.Length >= saltLength ? s.Substring(0, saltLength) : s;
             }
@@ -67,6 +67,25 @@ namespace Common.Base
             {
                 return false;
             }
+        }
+
+        public static string[] GetUserFromHttpHeader(string header)
+        {
+            var authStr = header.Trim();
+            if (authStr.IndexOf("Basic", 0) != 0)
+            {
+                return null;
+            }            
+
+            authStr = authStr.Trim();
+
+            string encodedCredentials = authStr.Substring(6);
+
+            byte[] decodedBytes =
+            Convert.FromBase64String(encodedCredentials);
+            string s = new UTF8Encoding().GetString(decodedBytes);
+
+            return s.Split(new char[] { ':' });
         }
     }
 }

@@ -49,6 +49,27 @@ namespace Domain.Implementation
             return virtualTreeDtos;
         }
 
+        public List<VirtualTreeDto> GetTreeParents(Guid? parent, Guid child, Guid treeParentType,
+            bool includeChild = false, bool includeDeleted = false)
+        {
+            var virtualTreeDaos = _treeRepository.GetTreeParents(parent, child, treeParentType, includeChild, includeDeleted);
+
+            var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+
+            return virtualTreeDtos;
+        }
+
+        public List<VirtualTreeDto> SearchTreesByText(string searchText, Guid treeParentType, List<Guid> typeIds,
+            List<Guid> ignoreTypeIds, Guid? parent = null)
+        {
+            var virtualTreeDaos = _treeRepository.SearchTreesByText(searchText, treeParentType, typeIds, ignoreTypeIds, parent);
+
+            var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+
+            return virtualTreeDtos;
+            
+        }
+
         public TreeDto CreateTree(TreeDto treeDto)
         {
             TreeDao parentDao = null;
@@ -62,14 +83,14 @@ namespace Domain.Implementation
 
             var treeDao = new TreeDao
             {
-                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Id = Guid.NewGuid(),
                 Parent = parentDao,
                 Name = treeDto.Name,
                 ShortName = treeDto.ShortName,
                 Type = typeDao,
                 State = stateDao,
                 CreateDateTime = DateTime.Now
-            };
+            };            
 
             treeDao = _treeRepository.CreateTree(treeDao);
 
@@ -81,6 +102,7 @@ namespace Domain.Implementation
 
         public TreeDto GetTree(Guid treeId)
         {
+            var treeDao = _treeRepository.GetTree(treeId);
             return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
@@ -138,7 +160,7 @@ namespace Domain.Implementation
 
             var userDao = new UserDao
             {
-                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Id = Guid.NewGuid(),
                 Parent = parentDao,
                 Name = userDto.Name,
                 ShortName = userDto.ShortName,
@@ -197,7 +219,7 @@ namespace Domain.Implementation
             {
                 newSalt = CryptHelper.GenerateSalt(userDto.Login, userDto.Password);
                 newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(userDto.Password) + newSalt);    
-            }
+            }            
 
             userDao.Login = userDto.Login;
             userDao.Password = newMd5Password;
@@ -217,7 +239,7 @@ namespace Domain.Implementation
         }
 
         public UserDto FindUserByLogin(string login)
-        {
+        {            
             var userDaos = new List<UserDao> { _treeRepository.FindUserByLogin(login) }.AsQueryable();
 
             return !userDaos.Any() ? null : _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault();
@@ -245,10 +267,10 @@ namespace Domain.Implementation
         {
             var personDao = _treeRepository.CreatePerson(new PersonDao
             {
-                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Id = Guid.NewGuid(),
                 Parent = _treeRepository.GetTree(SystemObjects.AllPeople),
                 Name = string.Format("{0} {1} {2}", registrationUser.Surname, registrationUser.FirstName, registrationUser.Patronymic),
-                Type = _treeRepository.GetTree(ObjectTypes.otPerson),
+                Type = _treeRepository.GetTree(ObjectTypes.otIndividualPerson),
                 State = _treeRepository.GetTree(ObjectStates.osActive),
                 CreateDateTime = DateTime.Now,
                 Surname = registrationUser.Surname,
@@ -263,7 +285,7 @@ namespace Domain.Implementation
 
             var userDao = _treeRepository.CreateUser(new UserDao
             {
-                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Id = Guid.NewGuid(),
                 Parent = _treeRepository.GetTree(SystemObjects.SystemUsers),
                 Name = string.Format("{0} {1} {2}", registrationUser.Surname, registrationUser.FirstName, registrationUser.Patronymic),
                 Type = _treeRepository.GetTree(ObjectTypes.otUser),
@@ -292,12 +314,12 @@ namespace Domain.Implementation
                 parentDao = _treeRepository.GetTree((Guid)personDto.ParentId);
             }
 
-            var typeDao = _treeRepository.GetTree(ObjectTypes.otPerson);
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otIndividualPerson);
             var stateDao = _treeRepository.GetTree(ObjectStates.osInDevelopment);
 
             var personDao = new PersonDao
             {
-                _Id = Guid.NewGuid().ToString().ToUpper(),
+                Id = Guid.NewGuid(),
                 Parent = parentDao,
                 Name = personDto.Name,
                 ShortName = personDto.ShortName,
@@ -321,6 +343,32 @@ namespace Domain.Implementation
         public PersonDto GetPerson(Guid personId)
         {
             return _personDtoFetcher.Fetch(new List<PersonDao> { _treeRepository.GetPerson(personId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public void UpdatePerson(PersonDto personDto)
+        {
+            var personDao = _treeRepository.GetPerson(personDto.Id);
+
+            TreeDao parentDao = null;
+            if (personDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)personDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(personDto.TypeId);
+            var stateDao = _treeRepository.GetTree(personDto.StateId);
+
+            personDao.Parent = parentDao;
+            personDao.Name = personDto.Name;
+            personDao.ShortName = personDto.ShortName;
+            personDao.Type = typeDao;
+            personDao.State = stateDao;
+
+            personDao.Surname = personDto.Surname;
+            personDao.FirstName = personDto.FirstName;
+            personDao.Patronymic = personDto.Patronymic;
+            personDao.BirthDate = personDto.BirthDate;
+
+            _treeRepository.UpdatePerson(personDao);
         }
     }    
 }

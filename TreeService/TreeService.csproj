@@ -70,7 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TreeService.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TreeService.svc.cs">
@@ -84,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\AIS_TreeService.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -92,6 +95,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Base.Web\Common.Base.Web.csproj">
+      <Project>{f75d2ec7-b643-49d6-b605-17cc70fc0838}</Project>
+      <Name>Common.Base.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Base\Common.Base.csproj">
+      <Project>{520D2678-0DE4-406B-9C10-0A5DBB553C95}</Project>
+      <Name>Common.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain.Implementation\Domain.Implementation.csproj">
       <Project>{BA44ED6E-4724-49FB-9B30-C9449633B95B}</Project>
       <Name>Domain.Implementation</Name>

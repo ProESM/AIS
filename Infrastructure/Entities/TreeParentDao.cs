@@ -11,18 +11,22 @@ namespace Infrastructure.Entities
 {
     [DataContract]
     [HibernateMapping(0)]
-    [Class(1, Table = "L_TREE_PARENTS")]
+    [Class(1, Table = "L_TREE_PARENTS", Polymorphism = PolymorphismType.Explicit)]
     [Cache(2, Usage = CacheUsage.ReadWrite)]
     public class TreeParentDao : IEntity
     {
         [Id(-2, Name = "_Id", Type = "String", Length = 36)]
         [Column(-1, Name = "ID")]
-        public virtual string _Id { get; set; }
+        public virtual string _Id
+        {
+            //get; set;
+            get { return Id.ToString(); }
+        }
         public virtual Guid Id
         {
-            get { return new Guid(_Id); }
-            set { _Id = value.ToString(); }
-        }
+            //get { return new Guid(_Id); }
+            //set { _Id = value.ToString(); }
+            get; set; }
 
         public virtual Guid? TreeParentId
         {

@@ -25,4 +25,9 @@ D:\git\AIS\TreeService\bin\Iesi.Collections.xml
 D:\git\AIS\TreeService\obj\Debug\TreeService.csprojResolveAssemblyReference.cache
 D:\git\AIS\TreeService\obj\Debug\TreeService.dll
 D:\git\AIS\TreeService\obj\Debug\TreeService.pdb
+D:\git\AIS\TreeService\bin\Common.Base.Web.dll
+D:\git\AIS\TreeService\bin\Common.Base.Web.pdb
+D:\git\AIS\TreeService\bin\FluentNHibernate.dll
+D:\git\AIS\TreeService\bin\FluentNHibernate.pdb
+D:\git\AIS\TreeService\bin\FluentNHibernate.xml
 D:\git\AIS\TreeService\bin\hibernate.cfg.xml

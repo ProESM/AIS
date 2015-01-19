@@ -5,9 +5,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using Infrastructure.Entities;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Context;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 using NHibernate.Mapping.Attributes;
 
 namespace Infrastructure
@@ -38,7 +43,7 @@ namespace Infrastructure
             //    CurrentSessionContext<T>().
             //    BuildSessionFactory();
 
-            mappingAssembly = Assembly.GetExecutingAssembly();
+            /*mappingAssembly = Assembly.GetExecutingAssembly();
 
             //configResourceName = "WebMr3.Models.hibernate.cfg.xml";
             configResourceName = "Infrastructure.hibernate.cfg.xml";
@@ -51,7 +56,7 @@ namespace Infrastructure
 
             cfg.Properties["connection.connection_string"] = ConnectionString;
 
-            cfg.CurrentSessionContext<T>();
+            cfg.CurrentSessionContext<T>();*/
 
             //cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionProvider,
             //    typeof (NHibernate.Connection.DriverConnectionProvider).AssemblyQualifiedName);
@@ -72,7 +77,7 @@ namespace Infrastructure
             //    "true 1, false 0, yes 1, no 0");            
 
 
-            HbmSerializer.Default.Validate = true;
+            /*HbmSerializer.Default.Validate = true;*/
 
             //cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionProvider,
             //    "NHibernate.Connection.DriverConnectionProvider");            
@@ -81,11 +86,11 @@ namespace Infrastructure
             //cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionDriver, "NHibernate.Driver.FirebirdClientDriver");
             //cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionString, ConnectionString);                        
 
-            HbmSerializer.Default.HbmAssembly = mappingAssembly.GetName().Name;//FullName;
-            HbmSerializer.Default.HbmNamespace = typeof(TreeRepository).Namespace;
+            /*HbmSerializer.Default.HbmAssembly = mappingAssembly.GetName().Name;//FullName;
+            HbmSerializer.Default.HbmNamespace = typeof(TreeRepository).Namespace;*/
 
 #if DEBUG
-            cfg.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");
+            /*cfg.SetProperty(NHibernate.Cfg.Environment.ShowSql, "true");*/
 #else
             //cfg.SetProperty(NHibernate.Cfg.Environment.ShowSql, "false");
 #endif
@@ -96,12 +101,28 @@ namespace Infrastructure
             //        mappingAssembly).CopyTo(f);
             //}
 
-            cfg.AddInputStream(
-                HbmSerializer.Default.Serialize(mappingAssembly));
+            /*cfg.AddInputStream(
+                HbmSerializer.Default.Serialize(mappingAssembly));*/
 
             //new NHibernate.Tool.hbm2ddl.SchemaExport(cfg).Create(true, true);
 
-            return cfg.BuildSessionFactory();
+            var cfg = new FirebirdConfiguration().
+                ConnectionString(ConnectionString).
+                AdoNetBatchSize(100).
+                Dialect(typeof(FirebirdDialect).FullName);
+
+#if DEBUG
+            cfg.ShowSql();
+#else
+            //cfg.SetProperty(NHibernate.Cfg.Environment.ShowSql, "false");
+#endif
+
+            return Fluently.Configure().Database(cfg).                
+                Mappings(m => m.FluentMappings.AddFromAssembly(typeof(UserDao).Assembly)).
+                CurrentSessionContext<T>().
+                BuildSessionFactory();
+
+            /*return cfg.BuildSessionFactory();*/
         }
 
         public static ISession CurrentSession

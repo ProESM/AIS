@@ -14,10 +14,34 @@ namespace TreeService
     public interface ITreeService
     {
         [OperationContract]
-        List<Guid> GetSystemObjects();
+        List<string> GetSystemObjects();
 
         [OperationContract]
         List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
+
+        /// <summary>
+        /// Получаем список родительских объектов для указанного дочернего объекта
+        /// </summary>
+        /// <param name="parent">Родительский объект, в пределах которого будут отобраны остальные родительские объекты</param>
+        /// <param name="child">Дочерний объект, для которого будут получены родительские объекты</param>
+        /// <param name="treeParentType">Тип виртуального дерева, в пределах которого будут отобраны родительские объекты</param>
+        /// <param name="includeChild">Флаг - включать ли в результаты сам дочерний объект</param>
+        /// <param name="includeDeleted">Флаг - включать ли в результаты удаленные объекты</param>
+        /// <returns>Список родительских объектов</returns>
+        [OperationContract]
+        List<VirtualTreeDto> GetTreeParents(Guid? parent, Guid child, Guid treeParentType, bool includeChild = false, bool includeDeleted = false);
+
+        /// <summary>
+        /// Функция поиска объектов по заданному критерию поиска
+        /// </summary>
+        /// <param name="searchText">Критерий поиска (строка, вхождение которой в наименование объектов будет производиться)</param>
+        /// <param name="treeParentType">Тип виртуального дерева, в пределах которого будет производиться поиск</param>
+        /// <param name="typeIds">Типы объектов, которые попадут в область поиска</param>
+        /// <param name="ignoreTypeIds">Типы объектов, которые будут проигнорированы в процессе поиска</param>
+        /// <param name="parent">Родительский узел, в пределах которого будет производиться поиск</param>
+        /// <returns>Возвращает список объектов, удовлетворяющих критериям поиска</returns>
+        [OperationContract]
+        List<VirtualTreeDto> SearchTreesByText(string searchText, Guid treeParentType, List<Guid> typeIds, List<Guid> ignoreTypeIds, Guid? parent = null);
 
         [OperationContract]
         TreeDto CreateTree(TreeDto treeDto);
@@ -51,5 +75,8 @@ namespace TreeService
 
         [OperationContract]
         PersonDto GetPerson(Guid personId);
+
+        [OperationContract]
+        void UpdatePerson(PersonDto personDto);
     }
 }
