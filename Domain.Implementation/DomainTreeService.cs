@@ -6,13 +6,16 @@ using System.ServiceModel;
 using System.Text;
 using Common.Base;
 using DTO;
+using DTO.TreeTypeDtos;
 using Infrastructure;
 using Infrastructure.DtoFetchers;
+using Infrastructure.DtoFetchers.TreeTypeDtoFetchers;
 using Infrastructure.Entities;
+using Infrastructure.Entities.TreeTypeDaos;
 using Ninject;
 
 namespace Domain.Implementation
-{    
+{
     public class DomainTreeService : IDomainTreeService
     {
         private IKernel _kernel;
@@ -22,6 +25,11 @@ namespace Domain.Implementation
         private readonly IDtoFetcher<UserDao, UserDto> _userDtoFetcher;
         private readonly IDtoFetcher<PersonDao, PersonDto> _personDtoFetcher;
         private readonly IDtoFetcher<VirtualTreeDao, VirtualTreeDto> _virtualTreeDtoFetcher;
+        private readonly IDtoFetcher<ReportTypeGroupDao, ReportTypeGroupDto> _reportTypeGroupDtoFetcher;
+        private readonly IDtoFetcher<ReportTypeDao, ReportTypeDto> _reportTypeDtoFetcher;
+        private readonly IDtoFetcher<DocumentTypeDao, DocumentTypeDto> _documentTypeDtoFetcher;
+        
+
 
         public DomainTreeService()
         {
@@ -33,8 +41,11 @@ namespace Domain.Implementation
             _userDtoFetcher = new UserDtoFetcher(_treeRepository);
             _personDtoFetcher = new PersonDtoFetcher(_treeRepository);
             _virtualTreeDtoFetcher = new VirtualTreeDtoFetcher(_treeRepository);
+            _reportTypeGroupDtoFetcher = new ReportTypeGroupDtoFetcher(_treeRepository);
+            _reportTypeDtoFetcher = new ReportTypeDtoFetcher(_treeRepository);
+            _documentTypeDtoFetcher = new DocumentTypeDtoFetcher(_treeRepository);
         }
-        
+
         public List<Guid> GetSystemObjects()
         {
             return BaseDataHelper.GetSystemObjects();
@@ -67,7 +78,7 @@ namespace Domain.Implementation
             var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
 
             return virtualTreeDtos;
-            
+
         }
 
         public TreeDto CreateTree(TreeDto treeDto)
@@ -90,7 +101,7 @@ namespace Domain.Implementation
                 Type = typeDao,
                 State = stateDao,
                 CreateDateTime = DateTime.Now
-            };            
+            };
 
             treeDao = _treeRepository.CreateTree(treeDao);
 
@@ -131,7 +142,7 @@ namespace Domain.Implementation
             var treeDao = _treeRepository.GetTree(treeDto.Id);
 
             var stateDao = _treeRepository.GetTree(ObjectStates.osDeleted);
-            
+
             treeDao.State = stateDao;
 
             _treeRepository.UpdateTree(treeDao);
@@ -210,7 +221,7 @@ namespace Domain.Implementation
             string newSalt;
             string newMd5Password;
 
-            if (userDto.Password.Length == 0)
+            if ((userDto.Password.Length == 0) && (userDto.Password.Length == 0))
             {
                 newMd5Password = userDao.Password;
                 newSalt = userDao.Salt;
@@ -218,8 +229,8 @@ namespace Domain.Implementation
             else
             {
                 newSalt = CryptHelper.GenerateSalt(userDto.Login, userDto.Password);
-                newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(userDto.Password) + newSalt);    
-            }            
+                newMd5Password = CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(userDto.Password) + newSalt);
+            }
 
             userDao.Login = userDto.Login;
             userDao.Password = newMd5Password;
@@ -239,15 +250,27 @@ namespace Domain.Implementation
         }
 
         public UserDto FindUserByLogin(string login)
-        {            
-            var userDaos = new List<UserDao> { _treeRepository.FindUserByLogin(login) }.AsQueryable();
+        {
+            var userDao = _treeRepository.FindUserByLogin(login);
+
+            if (userDao == null)
+            {
+                return null;
+            }
+            var userDaos = new List<UserDao> { userDao }.AsQueryable();
 
             return !userDaos.Any() ? null : _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public UserDto FindUserByEmail(string email)
         {
-            var userDaos = new List<UserDao> { _treeRepository.FindUserByEmail(email) }.AsQueryable();
+            var userDao = _treeRepository.FindUserByEmail(email);
+
+            if (userDao == null)
+            {
+                return null;
+            }
+            var userDaos = new List<UserDao> { userDao }.AsQueryable();
 
             return !userDaos.Any() ? null : _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault();
         }
@@ -302,7 +325,7 @@ namespace Domain.Implementation
 
             return (personDao == null) && (userDao == null)
                 ? null
-                : _userDtoFetcher.Fetch(new List<UserDao> {userDao}.AsQueryable(), Page.All, FetchAim.Card)
+                : _userDtoFetcher.Fetch(new List<UserDao> { userDao }.AsQueryable(), Page.All, FetchAim.Card)
                     .FirstOrDefault();
         }
 
@@ -329,7 +352,7 @@ namespace Domain.Implementation
                 Surname = personDto.Surname,
                 FirstName = personDto.FirstName,
                 Patronymic = personDto.Patronymic,
-                BirthDate = personDto.BirthDate                
+                BirthDate = personDto.BirthDate
             };
 
             //var treeDao = _treeRepository.CreateTree(personDao);
@@ -370,5 +393,205 @@ namespace Domain.Implementation
 
             _treeRepository.UpdatePerson(personDao);
         }
-    }    
+
+        public DocumentTypeDto CreateDocumentType(DocumentTypeDto documentTypeDto)
+        {
+            TreeDao parentDao = null;
+            if (documentTypeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)documentTypeDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otDocumentType);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            var documentTypeDao = new DocumentTypeDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = documentTypeDto.Name,
+                ShortName = documentTypeDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now
+            };
+
+            return _documentTypeDtoFetcher.Fetch(new List<DocumentTypeDao> { _treeRepository.CreateDocumentType(documentTypeDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public DocumentTypeDto GetDocumentType(Guid documentTypeId)
+        {
+            return _documentTypeDtoFetcher.Fetch(new List<DocumentTypeDao> { _treeRepository.GetDocumentType(documentTypeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<DocumentTypeDto> GetDocumentTypes()
+        {
+            return _documentTypeDtoFetcher.Fetch(_treeRepository.GetDocumentTypes().AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
+        public void UpdateDocumentType(DocumentTypeDto documentTypeDto)
+        {
+            var documentTypeDao = _treeRepository.GetDocumentType(documentTypeDto.Id);
+
+            TreeDao parentDao = null;
+            if (documentTypeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)documentTypeDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(documentTypeDto.TypeId);
+            var stateDao = _treeRepository.GetTree(documentTypeDto.StateId);
+
+            documentTypeDao.Parent = parentDao;
+            documentTypeDao.Name = documentTypeDto.Name;
+            documentTypeDao.ShortName = documentTypeDto.ShortName;
+            documentTypeDao.Type = typeDao;
+            documentTypeDao.State = stateDao;
+
+            _treeRepository.UpdateDocumentType(documentTypeDao);
+        }
+
+        public ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto)
+        {
+            TreeDao parentDao = null;
+            if (reportTypeGroupDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)reportTypeGroupDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otReportTypeGroup);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            var reportTypeGroup = new ReportTypeGroupDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = reportTypeGroupDto.Name,
+                ShortName = reportTypeGroupDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now
+            };
+
+            return _reportTypeGroupDtoFetcher.Fetch(new List<ReportTypeGroupDao> { _treeRepository.CreateReportTypeGroup(reportTypeGroup) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public ReportTypeGroupDto GetReportTypeGroup(Guid reportTypeGroupId)
+        {
+            return _reportTypeGroupDtoFetcher.Fetch(new List<ReportTypeGroupDao> { _treeRepository.GetReportTypeGroup(reportTypeGroupId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<ReportTypeGroupDto> GetReportTypeGroups()
+        {
+            var reportTypeGroupDaos = _treeRepository.GetReportTypeGroups();
+
+            var reportTypeGroupDtos = _reportTypeGroupDtoFetcher.Fetch(reportTypeGroupDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+
+            return reportTypeGroupDtos;
+        }
+
+        public void UpdateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto)
+        {
+            var reportTypeGroupDao = _treeRepository.GetReportTypeGroup(reportTypeGroupDto.Id);
+
+            TreeDao parentDao = null;
+            if (reportTypeGroupDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)reportTypeGroupDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(reportTypeGroupDto.TypeId);
+            var stateDao = _treeRepository.GetTree(reportTypeGroupDto.StateId);
+
+            reportTypeGroupDao.Parent = parentDao;
+            reportTypeGroupDao.Name = reportTypeGroupDto.Name;
+            reportTypeGroupDao.ShortName = reportTypeGroupDto.ShortName;
+            reportTypeGroupDao.Type = typeDao;
+            reportTypeGroupDao.State = stateDao;
+
+            _treeRepository.UpdateReportTypeGroup(reportTypeGroupDao);
+        }
+
+        public ReportTypeDto CreateReportType(ReportTypeDto reportTypeDto)
+        {
+            TreeDao parentDao = null;
+            if (reportTypeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)reportTypeDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otReportType);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+            var groupDao = _treeRepository.GetReportTypeGroup(reportTypeDto.GroupId);
+
+            var reportType = new ReportTypeDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = reportTypeDto.Name,
+                ShortName = reportTypeDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now,
+                Group = groupDao
+            };
+
+            return _reportTypeDtoFetcher.Fetch(new List<ReportTypeDao> { _treeRepository.CreateReportType(reportType) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public ReportTypeDto GetReportType(Guid reportTypeId)
+        {
+            return _reportTypeDtoFetcher.Fetch(new List<ReportTypeDao> { _treeRepository.GetReportType(reportTypeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<ReportTypeDto> GetReportTypes()
+        {
+            var reportTypeDaos = _treeRepository.GetReportTypes();
+
+            var reportTypeDtos = _reportTypeDtoFetcher.Fetch(reportTypeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+
+            return reportTypeDtos;
+        }
+
+        public void UpdateReportType(ReportTypeDto reportTypeDto)
+        {
+            var reportTypeDao = _treeRepository.GetReportType(reportTypeDto.Id);
+
+            TreeDao parentDao = null;
+            if (reportTypeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)reportTypeDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(reportTypeDto.TypeId);
+            var stateDao = _treeRepository.GetTree(reportTypeDto.StateId);
+            var groupDao = _treeRepository.GetReportTypeGroup(reportTypeDto.GroupId);
+
+            reportTypeDao.Parent = parentDao;
+            reportTypeDao.Name = reportTypeDto.Name;
+            reportTypeDao.ShortName = reportTypeDto.ShortName;
+            reportTypeDao.Type = typeDao;
+            reportTypeDao.State = stateDao;
+            reportTypeDao.Group = groupDao;
+
+            _treeRepository.UpdateReportType(reportTypeDao);
+        }
+
+        public ReportDto CreateReport(ReportDto reportDto)
+        {
+            return null;
+        }
+
+        public ReportDto GetReport(Guid reportId)
+        {
+            return null;
+        }
+
+        public List<ReportDto> GetReports()
+        {
+            return null;
+        }
+
+        public void UpdateReport(ReportDto reportDto)
+        {
+            
+        }
+    }   
 }

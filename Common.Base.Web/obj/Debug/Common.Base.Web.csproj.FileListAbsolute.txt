@@ -26,3 +26,16 @@ D:\git\AIS\Common.Base.Web\bin\Debug\FluentNHibernate.dll
 D:\git\AIS\Common.Base.Web\bin\Debug\FluentNHibernate.pdb
 D:\git\AIS\Common.Base.Web\bin\Debug\FluentNHibernate.xml
 D:\git\AIS\Common.Base.Web\bin\Debug\hibernate.cfg.xml
+D:\git\AIS\Common.Base.Web\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.Helpers.dll
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.Mvc.dll
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.Razor.dll
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.WebPages.dll
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.WebPages.Razor.dll
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.Helpers.xml
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.Mvc.xml
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.Razor.xml
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.WebPages.xml
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\git\AIS\Common.Base.Web\bin\Debug\System.Web.WebPages.Razor.xml

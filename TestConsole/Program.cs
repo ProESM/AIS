@@ -23,17 +23,19 @@ namespace TestConsole
             treeServiceClient.ClientCredentials.UserName.UserName = "user";
             treeServiceClient.ClientCredentials.UserName.Password = "123456";
 
-            var strees = treeServiceClient.SearchTreesByText("Настрой", SystemObjects.Root, new Guid[] { }, new Guid[] { }, SystemObjects.Root);
 
-            var trees = treeServiceClient.GetTrees(new Guid("20f9b9ce-8769-4569-ae71-1ecf18be90b3"),
-                new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B"), true, false);
+            var rtg = treeServiceClient.GetReportTypeGroups();
+            //var strees = treeServiceClient.SearchTreesByText("Настрой", SystemObjects.Root, new Guid[] { }, new Guid[] { }, SystemObjects.Root);
 
-            var tree = treeServiceClient.GetTree(new Guid("A15D22B8-B18D-48FD-8964-DC91E4F7652B"));
-            var tree_user = treeServiceClient.GetTree(new Guid("5F9F9CD3-CF2F-4CC4-B4E5-87D78F5F0090"));
-            var tree_person = treeServiceClient.GetTree(new Guid("47C67417-B8AB-4397-A0E9-8AE717C37942"));
+            //var trees = treeServiceClient.GetTrees(new Guid("20f9b9ce-8769-4569-ae71-1ecf18be90b3"),
+            //    new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B"), true, false);
 
-            var user = treeServiceClient.GetUser(new Guid("2B0FFAA3-913B-4120-982E-736EE0AF0F39"));
-            var person = treeServiceClient.GetPerson(new Guid("3A76B25C-D007-4B18-A125-03863D9C7810"));
+            //var tree = treeServiceClient.GetTree(new Guid("A15D22B8-B18D-48FD-8964-DC91E4F7652B"));
+            //var tree_user = treeServiceClient.GetTree(new Guid("5F9F9CD3-CF2F-4CC4-B4E5-87D78F5F0090"));
+            //var tree_person = treeServiceClient.GetTree(new Guid("47C67417-B8AB-4397-A0E9-8AE717C37942"));
+
+            //var user = treeServiceClient.GetUser(new Guid("2B0FFAA3-913B-4120-982E-736EE0AF0F39"));
+            //var person = treeServiceClient.GetPerson(new Guid("3A76B25C-D007-4B18-A125-03863D9C7810"));
             
 
             //var person2 = treeServiceClient.GetPerson(new Guid("A15D22B8-B18D-48FD-8964-DC91E4F7652B"));

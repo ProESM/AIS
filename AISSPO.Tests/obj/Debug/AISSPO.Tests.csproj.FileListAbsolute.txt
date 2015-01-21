@@ -68,3 +68,6 @@ D:\git\AIS\AISSPO.Tests\bin\Debug\Domain.pdb
 D:\git\AIS\AISSPO.Tests\bin\Debug\DTO.pdb
 D:\git\AIS\AISSPO.Tests\bin\Debug\Domain.Implementation.pdb
 D:\git\AIS\AISSPO.Tests\bin\Debug\Infrastructure.pdb
+D:\git\AIS\AISSPO.Tests\bin\Debug\FluentNHibernate.dll
+D:\git\AIS\AISSPO.Tests\bin\Debug\FluentNHibernate.pdb
+D:\git\AIS\AISSPO.Tests\bin\Debug\FluentNHibernate.xml

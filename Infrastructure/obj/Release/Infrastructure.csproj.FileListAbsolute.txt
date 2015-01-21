@@ -26,3 +26,6 @@ D:\git\AIS\Infrastructure\bin\Release\Ninject.xml
 D:\git\AIS\Infrastructure\obj\Release\Infrastructure.csprojResolveAssemblyReference.cache
 D:\git\AIS\Infrastructure\obj\Release\Infrastructure.dll
 D:\git\AIS\Infrastructure\obj\Release\Infrastructure.pdb
+D:\git\AIS\Infrastructure\bin\Release\FluentNHibernate.dll
+D:\git\AIS\Infrastructure\bin\Release\FluentNHibernate.pdb
+D:\git\AIS\Infrastructure\bin\Release\FluentNHibernate.xml

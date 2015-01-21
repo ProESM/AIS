@@ -42,7 +42,7 @@ namespace DTO
         /// </summary>
         [Display(Name = "Наименование группы пользователя")]
         [DataMember]
-        [JsonProperty(PropertyName = "Login")]
+        [JsonProperty(PropertyName = "UserGroupName")]
         public string UserGroupName { get; set; } 
         /// <summary>
         /// Адрес электронной почты

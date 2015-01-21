@@ -74,4 +74,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PersonDto" nillable="true" type="tns:PersonDto" />
+  <xs:complexType name="ReportTypeGroupDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseTreeDto">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ReportTypeGroupDto" nillable="true" type="tns:ReportTypeGroupDto" />
+  <xs:complexType name="ArrayOfReportTypeGroupDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReportTypeGroupDto" nillable="true" type="tns:ReportTypeGroupDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReportTypeGroupDto" nillable="true" type="tns:ArrayOfReportTypeGroupDto" />
 </xs:schema>

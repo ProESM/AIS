@@ -11,7 +11,7 @@
   <xs:element name="GetSystemObjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetSystemObjectsResult" nillable="true" type="q1:ArrayOfguid" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetSystemObjectsResult" nillable="true" type="q1:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -225,6 +225,58 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePersonResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateReportTypeGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="reportTypeGroupDto" nillable="true" type="q32:ReportTypeGroupDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateReportTypeGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="CreateReportTypeGroupResult" nillable="true" type="q33:ReportTypeGroupDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReportTypeGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="reportTypeGroupId" type="q34:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReportTypeGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetReportTypeGroupResult" nillable="true" type="q35:ReportTypeGroupDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReportTypeGroups">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReportTypeGroupsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="GetReportTypeGroupsResult" nillable="true" type="q36:ArrayOfReportTypeGroupDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateReportTypeGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/DTO" minOccurs="0" name="reportTypeGroupDto" nillable="true" type="q37:ReportTypeGroupDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateReportTypeGroupResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

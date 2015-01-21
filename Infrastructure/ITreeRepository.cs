@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Entities;
+using Infrastructure.Entities.TreeTypeDaos;
 
 namespace Infrastructure
 {
@@ -54,5 +55,45 @@ namespace Infrastructure
         PersonDao GetPerson(Guid personId);
 
         void UpdatePerson(PersonDao personDao);
+
+        DocumentTypeDao CreateDocumentType(DocumentTypeDao documentTypeDao);
+
+        DocumentTypeDao GetDocumentType(Guid documentTypeId);
+
+        List<DocumentTypeDao> GetDocumentTypes();
+
+        void UpdateDocumentType(DocumentTypeDao documentTypeDao);
+
+        DocumentDao CreateDocument(DocumentDao documentDao);
+
+        DocumentDao GetDocument(Guid documentId);
+
+        List<DocumentDao> GetDocuments();
+
+        void UpdateDocument(DocumentDao documentDao);
+        
+        ReportTypeGroupDao CreateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao);
+
+        ReportTypeGroupDao GetReportTypeGroup(Guid reportTypeGroupId);
+
+        List<ReportTypeGroupDao> GetReportTypeGroups();
+
+        void UpdateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao);
+
+        ReportTypeDao CreateReportType(ReportTypeDao reportTypeDao);
+
+        ReportTypeDao GetReportType(Guid reportTypeId);
+
+        List<ReportTypeDao> GetReportTypes();
+
+        void UpdateReportType(ReportTypeDao reportTypeDao);
+
+        ReportDao CreateReport(ReportDao reportDao);
+
+        ReportDao GetReport(Guid reportId);
+
+        List<ReportDao> GetReports();
+
+        void UpdateReport(ReportDao reportDao);
     }
 }

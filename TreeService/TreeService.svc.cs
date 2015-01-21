@@ -10,6 +10,7 @@ using Common.Base;
 using Domain;
 using Domain.Implementation;
 using DTO;
+using DTO.TreeTypeDtos;
 using Ninject;
 using Ninject.Activation;
 
@@ -126,6 +127,66 @@ namespace TreeService
         public void UpdatePerson(PersonDto personDto)
         {
             _domainTreeService.UpdatePerson(personDto);
+        }
+
+        public DocumentTypeDto CreateDocumentType(DocumentTypeDto documentTypeDto)
+        {
+            return _domainTreeService.CreateDocumentType(documentTypeDto);
+        }
+
+        public DocumentTypeDto GetDocumentType(Guid documentTypeId)
+        {
+            return _domainTreeService.GetDocumentType(documentTypeId);
+        }
+
+        public List<DocumentTypeDto> GetDocumentTypes()
+        {
+            return _domainTreeService.GetDocumentTypes();
+        }
+
+        public void UpdateDocumentType(DocumentTypeDto documentTypeDto)
+        {
+            _domainTreeService.UpdateDocumentType(documentTypeDto);
+        }
+
+        public ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto)
+        {
+            return _domainTreeService.CreateReportTypeGroup(reportTypeGroupDto);
+        }
+
+        public ReportTypeGroupDto GetReportTypeGroup(Guid reportTypeGroupId)
+        {
+            return _domainTreeService.GetReportTypeGroup(reportTypeGroupId);
+        }
+
+        public List<ReportTypeGroupDto> GetReportTypeGroups()
+        {
+            return _domainTreeService.GetReportTypeGroups();
+        }
+
+        public void UpdateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto)
+        {
+            _domainTreeService.UpdateReportTypeGroup(reportTypeGroupDto);
+        }
+
+        public ReportTypeDto CreateReportType(ReportTypeDto reportTypeDto)
+        {
+            return _domainTreeService.CreateReportType(reportTypeDto);
+        }
+
+        public ReportTypeDto GetReportType(Guid reportTypeId)
+        {
+            return _domainTreeService.GetReportType(reportTypeId);
+        }
+
+        public List<ReportTypeDto> GetReportTypes()
+        {
+            return _domainTreeService.GetReportTypes();
+        }
+
+        public void UpdateReportType(ReportTypeDto reportTypeDto)
+        {
+            _domainTreeService.UpdateReportType(reportTypeDto);
         }
     }
 }

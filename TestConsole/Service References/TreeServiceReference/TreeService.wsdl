@@ -104,6 +104,30 @@
   <wsdl:message name="ITreeService_UpdatePerson_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePersonResponse" />
   </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReportTypeGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReportTypeGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReportTypeGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReportTypeGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroups" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReportTypeGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReportTypeGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReportTypeGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReportTypeGroupResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITreeService">
     <wsdl:operation name="GetSystemObjects">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetSystemObjects" message="tns:ITreeService_GetSystemObjects_InputMessage" />
@@ -168,6 +192,22 @@
     <wsdl:operation name="UpdatePerson">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdatePerson" message="tns:ITreeService_UpdatePerson_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdatePersonResponse" message="tns:ITreeService_UpdatePerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReportTypeGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateReportTypeGroup" message="tns:ITreeService_CreateReportTypeGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateReportTypeGroupResponse" message="tns:ITreeService_CreateReportTypeGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroup" message="tns:ITreeService_GetReportTypeGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroupResponse" message="tns:ITreeService_GetReportTypeGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroups" message="tns:ITreeService_GetReportTypeGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroupsResponse" message="tns:ITreeService_GetReportTypeGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReportTypeGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateReportTypeGroup" message="tns:ITreeService_UpdateReportTypeGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateReportTypeGroupResponse" message="tns:ITreeService_UpdateReportTypeGroup_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITreeService" type="tns:ITreeService">
@@ -309,6 +349,42 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePerson">
       <soap:operation soapAction="http://tempuri.org/ITreeService/UpdatePerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReportTypeGroup">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateReportTypeGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroup">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReportTypeGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroups">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReportTypeGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReportTypeGroup">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateReportTypeGroup" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

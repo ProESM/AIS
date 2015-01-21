@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using DTO;
+using DTO.TreeTypeDtos;
 
 namespace TreeService
 {
@@ -78,5 +79,41 @@ namespace TreeService
 
         [OperationContract]
         void UpdatePerson(PersonDto personDto);
+
+        [OperationContract]
+        DocumentTypeDto CreateDocumentType(DocumentTypeDto documentTypeDto);
+
+        [OperationContract]
+        DocumentTypeDto GetDocumentType(Guid documentTypeId);
+
+        [OperationContract]
+        List<DocumentTypeDto> GetDocumentTypes();
+
+        [OperationContract]
+        void UpdateDocumentType(DocumentTypeDto documentTypeDto);
+
+        [OperationContract]
+        ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto);
+
+        [OperationContract]
+        ReportTypeGroupDto GetReportTypeGroup(Guid reportTypeGroupId);
+
+        [OperationContract]
+        List<ReportTypeGroupDto> GetReportTypeGroups();
+
+        [OperationContract]
+        void UpdateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto);
+
+        [OperationContract]
+        ReportTypeDto CreateReportType(ReportTypeDto reportTypeDto);
+
+        [OperationContract]
+        ReportTypeDto GetReportType(Guid reportTypeId);
+
+        [OperationContract]
+        List<ReportTypeDto> GetReportTypes();
+
+        [OperationContract]
+        void UpdateReportType(ReportTypeDto reportTypeDto);
     }
 }

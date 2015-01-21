@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Common.Base;
 using FluentNHibernate.Conventions;
 using Infrastructure.Entities;
+using Infrastructure.Entities.TreeTypeDaos;
 using Infrastructure.Extensions;
 using NHibernate;
 using NHibernate.Criterion;
@@ -249,48 +250,6 @@ namespace Infrastructure
                                     .Add(Restrictions.Not(Restrictions.In("lt.Type.Id", ignoreTypeIds)));
                         }                        
                     }
-
-                    
-
-                    //.Where(t => (t.Type.Id.IsIn(typeIds) || !typeIds.Any()))
-                    //        //.Where(t => (!t.Type.Id.IsIn(ignoreTypeIds) || !ignoreTypeIds.Any()))     
-                    
-
-                    //var subCriteria = DetachedCriteria.For<TreeParentDao>();
-                    //subCriteria.SetProjection(Projections.Property("TreeChild"))
-                        //.Add(Restrictions.Eq("TreeParentTypeId", treeParentType));
-                        ;
-
-                    //var criteria = _session.CreateCriteria(typeof(TreeDao))
-                        //.Add(Restrictions.Like("Name", searchText, MatchMode.Anywhere))
-                        //.Add(Subqueries.PropertyIn("_Id", subCriteria));
-
-                    //treeDaos = criteria.List<TreeDao>().ToList();
-
-//                    var someComplexQuery = @"select 
-//                                                distinct
-//                                                lt.* 
-//                                             from
-//                                                l_tree lt
-//                                             join l_tree_parents ltp on ltp.tree_child_id=lt.id and ltp.tree_parent_id=:treeParentType
-//                                             where
-//                                                lt.name containing :searchText
-//                                            ";}
-
-//                    treeDaos = _session.CreateSQLQuery(someComplexQuery)
-//                        .SetParameter("treeParentType", treeParentType.ToString(), NHibernateUtil.String)
-//                        .SetParameter("searchText", searchText, NHibernateUtil.String)
-//                        .SetResultTransformer(Transformers.AliasToBean(typeof(TreeDao)))
-//                        .List<TreeDao>().ToList();
-
-                    //treeParentDaos = _session.QueryOver<TreeParentDao>()
-                    //    .Where(tp => tp.TreeParentType._Id == treeParentType.ToString())
-                    //    .Where(tp => tp.Level == 0)
-                    //    .JoinQueryOver(t => t.TreeChild)
-                    //        .Where(t => t.Name.IsLike(searchText, MatchMode.Anywhere))
-                    //        //.Where(t => (t.Type.Id.IsIn(typeIds) || !typeIds.Any()))
-                    //        //.Where(t => (!t.Type.Id.IsIn(ignoreTypeIds) || !ignoreTypeIds.Any()))                        
-                    //    .List().ToList();
                 }
                 else
                 {
@@ -337,25 +296,6 @@ namespace Infrastructure
                                     .Add(Restrictions.Not(Restrictions.In("lt.Type.Id", ignoreTypeIds)));
                         }
                     }
-
-                    //criteria = _session.CreateCriteria<TreeParentDao>("ltp")
-                    //    .Add(Restrictions.Eq("TreeChild.Id", parent))
-                    //    .Add(Restrictions.Eq("TreeParentType.Id", treeParentType))
-                    //    .CreateCriteria("ltp.TreeChild", "lt", JoinType.InnerJoin)
-                    //    .Add(Restrictions.Like("lt.Name", searchText, MatchMode.Anywhere));
-                    
-                    //treeParentDaos = _session.QueryOver<TreeParentDao>()
-                    //    .Where(tp => tp.TreeParentType._Id == treeParentType.ToString())
-                    //    .Where(tp => tp.TreeParent._Id == parent.ToString())
-                    //    .JoinQueryOver(t => t.TreeChild)
-                    //        .Where(t => t.Name.Contains(searchText))
-                    //    .List().ToList();
-                    //treeParentDaos = _session.QueryOver<TreeParentDao>()
-                    //    .Where(tp => tp.TreeParentType._Id == treeParentType.ToString())
-                    //    .Where(tp => tp.TreeParent._Id == parent.ToString())
-                    //    .JoinQueryOver(t => t.TreeChild)
-                    //        .Where(t => t.Name.Contains(searchText))
-                    //    .List<TreeDao>().ToList();
                 }
 
                 var treeDaos = criteria.List<TreeParentDao>().Select(ltp => ltp.TreeChild).Distinct().ToList();
@@ -402,8 +342,7 @@ namespace Infrastructure
         public TreeDao GetTree(Guid treeId)
         {
             using (var transaction = _session.StartTransaction())
-            {
-                //return _session.Query<TreeDao>().FirstOrDefault(t => t._Id == treeId.ToString());   
+            {                
                 return _session.Query<TreeDao>().FirstOrDefault(t => t.Id.ToString() == treeId.ToString());
             }
         }
@@ -493,6 +432,80 @@ namespace Infrastructure
             } 
         }
 
+        public DocumentTypeDao CreateDocumentType(DocumentTypeDao documentTypeDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(documentTypeDao);
+
+                transaction.Commit();
+
+                return _session.Query<DocumentTypeDao>().FirstOrDefault(p => p.Id.ToString() == documentTypeDao.Id.ToString());
+            }
+        }
+
+        public DocumentTypeDao GetDocumentType(Guid documentTypeId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<DocumentTypeDao>().FirstOrDefault(p => p.Id.ToString() == documentTypeId.ToString());
+            }
+        }
+
+        public List<DocumentTypeDao> GetDocumentTypes()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<DocumentTypeDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateDocumentType(DocumentTypeDao documentTypeDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.SaveOrUpdate(documentTypeDao);
+                transaction.Commit();
+            }
+        }
+
+        public DocumentDao CreateDocument(DocumentDao documentDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(documentDao);
+
+                transaction.Commit();
+
+                return _session.Query<DocumentDao>().FirstOrDefault(p => p.Id.ToString() == documentDao.Id.ToString());
+            }
+        }
+
+        public DocumentDao GetDocument(Guid documentId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<DocumentDao>().FirstOrDefault(p => p.Id.ToString() == documentId.ToString());
+            }
+        }
+
+        public List<DocumentDao> GetDocuments()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<DocumentDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateDocument(DocumentDao documentDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.SaveOrUpdate(documentDao);
+                transaction.Commit();
+            }
+        }
+
         public ReportTypeGroupDao CreateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao)
         {
             using (var transaction = _session.StartTransaction())
@@ -526,6 +539,80 @@ namespace Infrastructure
             using (var transaction = _session.StartTransaction())
             {
                 _session.SaveOrUpdate(reportTypeGroupDao);
+                transaction.Commit();
+            }
+        }
+
+        public ReportTypeDao CreateReportType(ReportTypeDao reportTypeDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(reportTypeDao);
+
+                transaction.Commit();
+
+                return _session.Query<ReportTypeDao>().FirstOrDefault(p => p.Id.ToString() == reportTypeDao.Id.ToString());
+            }
+        }
+
+        public ReportTypeDao GetReportType(Guid reportTypeId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportTypeDao>().FirstOrDefault(p => p.Id.ToString() == reportTypeId.ToString());
+            }
+        }
+
+        public List<ReportTypeDao> GetReportTypes()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportTypeDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateReportType(ReportTypeDao reportTypeDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.SaveOrUpdate(reportTypeDao);
+                transaction.Commit();
+            }
+        }
+
+        public ReportDao CreateReport(ReportDao reportDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(reportDao);
+
+                transaction.Commit();
+
+                return _session.Query<ReportDao>().FirstOrDefault(p => p.Id.ToString() == reportDao.Id.ToString());
+            }
+        }
+
+        public ReportDao GetReport(Guid reportId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportDao>().FirstOrDefault(p => p.Id.ToString() == reportId.ToString());
+            }
+        }
+
+        public List<ReportDao> GetReports()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateReport(ReportDao reportDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.SaveOrUpdate(reportDao);
                 transaction.Commit();
             }
         }

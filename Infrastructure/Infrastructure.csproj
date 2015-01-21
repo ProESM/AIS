@@ -50,7 +50,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.4.0.2.4000\lib\net40\NHibernate.dll</HintPath>
@@ -77,7 +77,10 @@
     <Compile Include="DtoFetchers\IDtoFetcher.cs" />
     <Compile Include="DtoFetchers\IFetchDtoMap.cs" />
     <Compile Include="DtoFetchers\PersonDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\ReportTypeDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\TreeTypeDtoFetchers\ReportTypeGroupDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\TreeTypeDtoFetchers\DocumentTypeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\UserDtoFetcher.cs" />
     <Compile Include="DtoFetchers\VirtualTreeDtoFetcher.cs" />
     <Compile Include="Entities\DocumentDao.cs" />
@@ -89,13 +92,13 @@
     <Compile Include="Entities\TreeDao.cs" />
     <Compile Include="Entities\ITreeDao.cs" />
     <Compile Include="Entities\TreeParentDao.cs" />
-    <Compile Include="Entities\TreeTypeDao\ClassTreeTypeDao.cs" />
-    <Compile Include="Entities\TreeTypeDao\DocumentTypeTreeTypeDao.cs" />
-    <Compile Include="Entities\TreeTypeDao\FolderTreeTypeDao.cs" />
-    <Compile Include="Entities\TreeTypeDao\JuridicalPersonTreeTypeDao.cs" />
-    <Compile Include="Entities\ReportTypeGroupDao.cs" />
-    <Compile Include="Entities\TreeTypeDao\StateTreeTypeDao.cs" />
-    <Compile Include="Entities\TreeTypeDao\TypeTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\ClassTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\DocumentTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\FolderTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\JuridicalPersonDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\ReportTypeGroupDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\StateTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\TypeTreeTypeDao.cs" />
     <Compile Include="Entities\UserDao.cs" />
     <Compile Include="Entities\UserGroupDao.cs" />
     <Compile Include="Entities\VirtualTreeDao.cs" />
@@ -110,13 +113,13 @@
     <Compile Include="Mappings\ReportMap.cs" />
     <Compile Include="Mappings\TreeMap.cs" />
     <Compile Include="Mappings\TreeParentMap.cs" />
-    <Compile Include="Mappings\TreeTypeMap\ClassTreeTypeMap.cs" />
-    <Compile Include="Mappings\TreeTypeMap\DocumentTypeTreeTypeMap.cs" />
-    <Compile Include="Mappings\TreeTypeMap\FolderTreeTypeMap.cs" />
-    <Compile Include="Mappings\TreeTypeMap\JuridicalPersonTreeTypeMap.cs" />
-    <Compile Include="Mappings\ReportTypeGroupMap.cs" />
-    <Compile Include="Mappings\TreeTypeMap\StateTreeTypeMap.cs" />
-    <Compile Include="Mappings\TreeTypeMap\TypeTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\ClassTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\DocumentTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\FolderTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\JuridicalPersonMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\ReportTypeGroupMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\StateTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\TypeTreeTypeMap.cs" />
     <Compile Include="Mappings\UserGroupMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Page.cs" />

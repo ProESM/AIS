@@ -43,6 +43,7 @@ namespace TestConsole.TreeServiceReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.BaseTreeDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.UserDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.PersonDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportTypeGroupDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.TreeDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.VirtualTreeDto))]
     public partial class BaseDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -76,6 +77,7 @@ namespace TestConsole.TreeServiceReference {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.UserDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.PersonDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportTypeGroupDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.TreeDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.VirtualTreeDto))]
     public partial class BaseTreeDto : TestConsole.TreeServiceReference.BaseDto {
@@ -385,6 +387,13 @@ namespace TestConsole.TreeServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReportTypeGroupDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
+    [System.SerializableAttribute()]
+    public partial class ReportTypeGroupDto : TestConsole.TreeServiceReference.BaseTreeDto {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TreeDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.VirtualTreeDto))]
@@ -396,10 +405,10 @@ namespace TestConsole.TreeServiceReference {
     public interface ITreeService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetSystemObjects", ReplyAction="http://tempuri.org/ITreeService/GetSystemObjectsResponse")]
-        System.Guid[] GetSystemObjects();
+        string[] GetSystemObjects();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetSystemObjects", ReplyAction="http://tempuri.org/ITreeService/GetSystemObjectsResponse")]
-        System.Threading.Tasks.Task<System.Guid[]> GetSystemObjectsAsync();
+        System.Threading.Tasks.Task<string[]> GetSystemObjectsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetTrees", ReplyAction="http://tempuri.org/ITreeService/GetTreesResponse")]
         TestConsole.TreeServiceReference.VirtualTreeDto[] GetTrees(System.Nullable<System.Guid> parent, System.Guid treeParentType, bool includeParent, bool includeDeleted);
@@ -490,6 +499,30 @@ namespace TestConsole.TreeServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdatePerson", ReplyAction="http://tempuri.org/ITreeService/UpdatePersonResponse")]
         System.Threading.Tasks.Task UpdatePersonAsync(TestConsole.TreeServiceReference.PersonDto personDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/CreateReportTypeGroupResponse")]
+        TestConsole.TreeServiceReference.ReportTypeGroupDto CreateReportTypeGroup(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/CreateReportTypeGroupResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeGroupDto> CreateReportTypeGroupAsync(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/GetReportTypeGroupResponse")]
+        TestConsole.TreeServiceReference.ReportTypeGroupDto GetReportTypeGroup(System.Guid reportTypeGroupId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/GetReportTypeGroupResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeGroupDto> GetReportTypeGroupAsync(System.Guid reportTypeGroupId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportTypeGroups", ReplyAction="http://tempuri.org/ITreeService/GetReportTypeGroupsResponse")]
+        TestConsole.TreeServiceReference.ReportTypeGroupDto[] GetReportTypeGroups();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportTypeGroups", ReplyAction="http://tempuri.org/ITreeService/GetReportTypeGroupsResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeGroupDto[]> GetReportTypeGroupsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/UpdateReportTypeGroupResponse")]
+        void UpdateReportTypeGroup(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/UpdateReportTypeGroupResponse")]
+        System.Threading.Tasks.Task UpdateReportTypeGroupAsync(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -519,11 +552,11 @@ namespace TestConsole.TreeServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public System.Guid[] GetSystemObjects() {
+        public string[] GetSystemObjects() {
             return base.Channel.GetSystemObjects();
         }
         
-        public System.Threading.Tasks.Task<System.Guid[]> GetSystemObjectsAsync() {
+        public System.Threading.Tasks.Task<string[]> GetSystemObjectsAsync() {
             return base.Channel.GetSystemObjectsAsync();
         }
         
@@ -645,6 +678,38 @@ namespace TestConsole.TreeServiceReference {
         
         public System.Threading.Tasks.Task UpdatePersonAsync(TestConsole.TreeServiceReference.PersonDto personDto) {
             return base.Channel.UpdatePersonAsync(personDto);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportTypeGroupDto CreateReportTypeGroup(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto) {
+            return base.Channel.CreateReportTypeGroup(reportTypeGroupDto);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeGroupDto> CreateReportTypeGroupAsync(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto) {
+            return base.Channel.CreateReportTypeGroupAsync(reportTypeGroupDto);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportTypeGroupDto GetReportTypeGroup(System.Guid reportTypeGroupId) {
+            return base.Channel.GetReportTypeGroup(reportTypeGroupId);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeGroupDto> GetReportTypeGroupAsync(System.Guid reportTypeGroupId) {
+            return base.Channel.GetReportTypeGroupAsync(reportTypeGroupId);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportTypeGroupDto[] GetReportTypeGroups() {
+            return base.Channel.GetReportTypeGroups();
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeGroupDto[]> GetReportTypeGroupsAsync() {
+            return base.Channel.GetReportTypeGroupsAsync();
+        }
+        
+        public void UpdateReportTypeGroup(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto) {
+            base.Channel.UpdateReportTypeGroup(reportTypeGroupDto);
+        }
+        
+        public System.Threading.Tasks.Task UpdateReportTypeGroupAsync(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto) {
+            return base.Channel.UpdateReportTypeGroupAsync(reportTypeGroupDto);
         }
     }
 }

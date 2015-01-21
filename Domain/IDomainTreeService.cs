@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using DTO;
+using DTO.TreeTypeDtos;
 
 namespace Domain
 {    
@@ -63,6 +64,46 @@ namespace Domain
         PersonDto GetPerson(Guid personId);
 
         void UpdatePerson(PersonDto personDto);
+
+        DocumentTypeDto CreateDocumentType(DocumentTypeDto documentTypeDto);
+
+        DocumentTypeDto GetDocumentType(Guid documentTypeId);
+
+        List<DocumentTypeDto> GetDocumentTypes();
+
+        void UpdateDocumentType(DocumentTypeDto documentTypeDto);
+
+        //DocumentDto CreateDocument(DocumentDto documentDto);
+
+        //DocumentDto GetDocument(Guid documentId);
+
+        //List<DocumentDto> GetDocuments();
+
+        //void UpdateDocument(DocumentDto documentDto);
+
+        ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto);
+
+        ReportTypeGroupDto GetReportTypeGroup(Guid reportTypeGroupId);
+
+        List<ReportTypeGroupDto> GetReportTypeGroups();
+
+        void UpdateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto);
+
+        ReportTypeDto CreateReportType(ReportTypeDto reportTypeDto);
+
+        ReportTypeDto GetReportType(Guid reportTypeId);
+
+        List<ReportTypeDto> GetReportTypes();
+
+        void UpdateReportType(ReportTypeDto reportTypeDto);
+
+        ReportDto CreateReport(ReportDto reportDto);
+
+        ReportDto GetReport(Guid reportId);
+
+        List<ReportDto> GetReports();
+
+        void UpdateReport(ReportDto reportDto);        
     }
 
 }

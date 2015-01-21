@@ -38,12 +38,19 @@ namespace DTO
         [JsonProperty(PropertyName = "Salt")]
         public string Salt { get; set; }
         /// <summary>
-        /// Группа пользователей, к которой относится пользователь
+        /// Id группы пользователя, к которой относится пользователь
         /// </summary>
-        [Display(Name = "Группа пользователей")]
+        [Display(Name = "Id группы пользователя")]
         [DataMember]
         [JsonProperty(PropertyName = "UserGroupId")]
         public Guid UserGroupId { get; set; }
+        /// <summary>
+        /// Группа пользователя, к которой относится пользователь
+        /// </summary>
+        [Display(Name = "Группа пользователя")]
+        [DataMember]
+        [JsonProperty(PropertyName = "UserGroupName")]
+        public string UserGroupName { get; set; }
         /// <summary>
         /// Адрес электронной почты
         /// </summary>

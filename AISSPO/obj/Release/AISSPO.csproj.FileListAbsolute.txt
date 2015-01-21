@@ -79,3 +79,8 @@ D:\git\AIS\AISSPO\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\git\AIS\AISSPO\obj\Release\AISSPO.csprojResolveAssemblyReference.cache
 D:\git\AIS\AISSPO\obj\Release\AISSPO.dll
 D:\git\AIS\AISSPO\obj\Release\AISSPO.pdb
+D:\git\AIS\AISSPO\bin\Common.Base.Web.dll
+D:\git\AIS\AISSPO\bin\FluentNHibernate.dll
+D:\git\AIS\AISSPO\bin\Common.Base.Web.pdb
+D:\git\AIS\AISSPO\bin\FluentNHibernate.pdb
+D:\git\AIS\AISSPO\bin\FluentNHibernate.xml
