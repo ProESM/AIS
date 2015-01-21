@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DtoFetchers\BaseDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\DocumentDtoFetcher.cs" />
     <Compile Include="DtoFetchers\FetchDtoMap.cs" />
     <Compile Include="DtoFetchers\IDtoFetcher.cs" />
     <Compile Include="DtoFetchers\IFetchDtoMap.cs" />

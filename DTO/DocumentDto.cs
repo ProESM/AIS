@@ -62,13 +62,23 @@ namespace DTO
         /// <summary>
         /// Id пользователя документа
         /// </summary>
-        [Display(Name = "Id состояния документа")]
+        [Display(Name = "Id пользователя документа")]
         [DataMember]
-        [JsonProperty(PropertyName = "DocumentStateId")]
+        [JsonProperty(PropertyName = "DocumentUserId")]
         public Guid DocumentUserId { get; set; }
-        
-        //public UserDao DocumentUser { get; set; }
-
+        /// <summary>
+        /// Имя пользователя документа
+        /// </summary>
+        [Display(Name = "Имя пользователя документа")]
+        [DataMember]
+        [JsonProperty(PropertyName = "DocumentUserName")]
+        public string DocumentUserName { get; set; }
+        /// <summary>
+        /// Примечания
+        /// </summary>
+        [Display(Name = "Примечания")]
+        [DataMember]
+        [JsonProperty(PropertyName = "Notes")]
         public string Notes { get; set; }
     }
 }

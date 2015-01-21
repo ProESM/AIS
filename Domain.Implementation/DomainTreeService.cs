@@ -28,8 +28,7 @@ namespace Domain.Implementation
         private readonly IDtoFetcher<ReportTypeGroupDao, ReportTypeGroupDto> _reportTypeGroupDtoFetcher;
         private readonly IDtoFetcher<ReportTypeDao, ReportTypeDto> _reportTypeDtoFetcher;
         private readonly IDtoFetcher<DocumentTypeDao, DocumentTypeDto> _documentTypeDtoFetcher;
-        
-
+        private readonly IDtoFetcher<DocumentDao, DocumentDto> _documentDtoFetcher;
 
         public DomainTreeService()
         {
@@ -44,6 +43,7 @@ namespace Domain.Implementation
             _reportTypeGroupDtoFetcher = new ReportTypeGroupDtoFetcher(_treeRepository);
             _reportTypeDtoFetcher = new ReportTypeDtoFetcher(_treeRepository);
             _documentTypeDtoFetcher = new DocumentTypeDtoFetcher(_treeRepository);
+            _documentDtoFetcher = new DocumentDtoFetcher(_treeRepository);
         }
 
         public List<Guid> GetSystemObjects()
@@ -55,9 +55,7 @@ namespace Domain.Implementation
         {
             var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType, includeParent, includeDeleted);
 
-            var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
-
-            return virtualTreeDtos;
+            return virtualTreeDaos == null ? null : _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public List<VirtualTreeDto> GetTreeParents(Guid? parent, Guid child, Guid treeParentType,
@@ -65,9 +63,7 @@ namespace Domain.Implementation
         {
             var virtualTreeDaos = _treeRepository.GetTreeParents(parent, child, treeParentType, includeChild, includeDeleted);
 
-            var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
-
-            return virtualTreeDtos;
+            return virtualTreeDaos == null ? null : _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public List<VirtualTreeDto> SearchTreesByText(string searchText, Guid treeParentType, List<Guid> typeIds,
@@ -75,10 +71,7 @@ namespace Domain.Implementation
         {
             var virtualTreeDaos = _treeRepository.SearchTreesByText(searchText, treeParentType, typeIds, ignoreTypeIds, parent);
 
-            var virtualTreeDtos = _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
-
-            return virtualTreeDtos;
-
+            return virtualTreeDaos == null ? null : _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public TreeDto CreateTree(TreeDto treeDto)
@@ -114,7 +107,8 @@ namespace Domain.Implementation
         public TreeDto GetTree(Guid treeId)
         {
             var treeDao = _treeRepository.GetTree(treeId);
-            return _treeDtoFetcher.Fetch(new List<TreeDao> { _treeRepository.GetTree(treeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+
+            return treeDao == null ? null : _treeDtoFetcher.Fetch(new List<TreeDao> { treeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public void UpdateTree(TreeDto treeDto)
@@ -197,7 +191,8 @@ namespace Domain.Implementation
 
         public UserDto GetUser(Guid userId)
         {
-            return _userDtoFetcher.Fetch(new List<UserDao> { _treeRepository.GetUser(userId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+            var userDao = _treeRepository.GetUser(userId);
+            return userDao == null ? null : _userDtoFetcher.Fetch(new List<UserDao> { userDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public void UpdateUser(UserDto userDto)
@@ -253,26 +248,14 @@ namespace Domain.Implementation
         {
             var userDao = _treeRepository.FindUserByLogin(login);
 
-            if (userDao == null)
-            {
-                return null;
-            }
-            var userDaos = new List<UserDao> { userDao }.AsQueryable();
-
-            return !userDaos.Any() ? null : _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault();
+            return userDao == null ? null : _userDtoFetcher.Fetch(new List<UserDao> { userDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public UserDto FindUserByEmail(string email)
         {
             var userDao = _treeRepository.FindUserByEmail(email);
 
-            if (userDao == null)
-            {
-                return null;
-            }
-            var userDaos = new List<UserDao> { userDao }.AsQueryable();
-
-            return !userDaos.Any() ? null : _userDtoFetcher.Fetch(userDaos, Page.All, FetchAim.Card).FirstOrDefault();
+            return userDao == null ? null : _userDtoFetcher.Fetch(new List<UserDao> { userDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public UserDto AuthenticateUser(string login, string password)
@@ -365,7 +348,9 @@ namespace Domain.Implementation
 
         public PersonDto GetPerson(Guid personId)
         {
-            return _personDtoFetcher.Fetch(new List<PersonDao> { _treeRepository.GetPerson(personId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+            var personDao = _treeRepository.GetPerson(personId);
+
+            return personDao == null ? null : _personDtoFetcher.Fetch(new List<PersonDao> { personDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public void UpdatePerson(PersonDto personDto)
@@ -421,12 +406,16 @@ namespace Domain.Implementation
 
         public DocumentTypeDto GetDocumentType(Guid documentTypeId)
         {
-            return _documentTypeDtoFetcher.Fetch(new List<DocumentTypeDao> { _treeRepository.GetDocumentType(documentTypeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+            var documentTypeDao = _treeRepository.GetDocumentType(documentTypeId);
+
+            return documentTypeDao == null ? null : _documentTypeDtoFetcher.Fetch(new List<DocumentTypeDao> { documentTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
         }
 
         public List<DocumentTypeDto> GetDocumentTypes()
         {
-            return _documentTypeDtoFetcher.Fetch(_treeRepository.GetDocumentTypes().AsQueryable(), Page.All, FetchAim.Card).ToList();
+            var documentTypes = _treeRepository.GetDocumentTypes();
+
+            return documentTypes == null ? null : _documentTypeDtoFetcher.Fetch(documentTypes.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public void UpdateDocumentType(DocumentTypeDto documentTypeDto)
@@ -448,6 +437,95 @@ namespace Domain.Implementation
             documentTypeDao.State = stateDao;
 
             _treeRepository.UpdateDocumentType(documentTypeDao);
+        }
+
+        public DocumentDto CreateDocument(DocumentDto documentDto)
+        {
+            TreeDao parentDao = null;
+            if (documentDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)documentDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            DocumentDao documentParentDao = null;
+            if (documentDto.DocumentParentId != null)
+            {
+                documentParentDao = _treeRepository.GetDocument((Guid)documentDto.DocumentParentId);
+            }
+
+            var documentTypeDao = _treeRepository.GetDocumentType(documentDto.DocumentTypeId);
+            var documentStateDao = _treeRepository.GetTree(documentDto.DocumentStateId);
+            var documentUserDao = _treeRepository.GetUser(documentDto.DocumentUserId);
+
+            var documentDao = new DocumentDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = documentDto.Name,
+                ShortName = documentDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now,
+                DocumentParent = documentParentDao ?? null,
+                DocumentType = documentTypeDao,
+                DocumentState = documentStateDao,
+                DocumentUser = documentUserDao,
+                Notes = documentDto.Notes
+            };
+
+            return _documentDtoFetcher.Fetch(new List<DocumentDao> { _treeRepository.CreateDocument(documentDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public DocumentDto GetDocument(Guid documentId)
+        {
+            var documentDao = _treeRepository.GetDocument(documentId);
+
+            return documentDao == null ? null : _documentDtoFetcher.Fetch(new List<DocumentDao> { documentDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<DocumentDto> GetDocuments()
+        {
+            var documentDaos = _treeRepository.GetDocuments();
+
+            return documentDaos == null ? null : _documentDtoFetcher.Fetch(documentDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
+        public void UpdateDocument(DocumentDto documentDto)
+        {
+            var documentDao = _treeRepository.GetDocument(documentDto.Id);
+
+            TreeDao parentDao = null;
+            if (documentDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)documentDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            DocumentDao documentParentDao = null;
+            if (documentDto.DocumentParentId != null)
+            {
+                documentParentDao = _treeRepository.GetDocument((Guid)documentDto.DocumentParentId);
+            }
+
+            var documentTypeDao = _treeRepository.GetDocumentType(documentDto.DocumentTypeId);
+            var documentStateDao = _treeRepository.GetTree(documentDto.DocumentStateId);
+            var documentUserDao = _treeRepository.GetUser(documentDto.DocumentUserId);
+
+            documentDao.Parent = parentDao;
+            documentDao.Name = documentDto.Name;
+            documentDao.ShortName = documentDto.ShortName;            
+            documentDao.DocumentParent = documentParentDao ?? null;
+            documentDao.DocumentType = documentTypeDao;
+            documentDao.DocumentState = documentStateDao;
+            documentDao.DocumentUser = documentUserDao;
+            documentDao.Notes = documentDto.Notes;
+
+            _treeRepository.UpdateDocument(documentDao);
         }
 
         public ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto)
@@ -477,16 +555,16 @@ namespace Domain.Implementation
 
         public ReportTypeGroupDto GetReportTypeGroup(Guid reportTypeGroupId)
         {
-            return _reportTypeGroupDtoFetcher.Fetch(new List<ReportTypeGroupDao> { _treeRepository.GetReportTypeGroup(reportTypeGroupId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+            var reportTypeGroupDao = _treeRepository.GetReportTypeGroup(reportTypeGroupId);
+
+            return reportTypeGroupDao == null ? null : _reportTypeGroupDtoFetcher.Fetch(new List<ReportTypeGroupDao> { reportTypeGroupDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public List<ReportTypeGroupDto> GetReportTypeGroups()
         {
             var reportTypeGroupDaos = _treeRepository.GetReportTypeGroups();
 
-            var reportTypeGroupDtos = _reportTypeGroupDtoFetcher.Fetch(reportTypeGroupDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
-
-            return reportTypeGroupDtos;
+            return reportTypeGroupDaos == null ? null : _reportTypeGroupDtoFetcher.Fetch(reportTypeGroupDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public void UpdateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto)
@@ -539,16 +617,16 @@ namespace Domain.Implementation
 
         public ReportTypeDto GetReportType(Guid reportTypeId)
         {
-            return _reportTypeDtoFetcher.Fetch(new List<ReportTypeDao> { _treeRepository.GetReportType(reportTypeId) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+            var reportTypeDao = _treeRepository.GetReportType(reportTypeId);
+
+            return reportTypeDao == null ? null : _reportTypeDtoFetcher.Fetch(new List<ReportTypeDao> { reportTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
         }
 
         public List<ReportTypeDto> GetReportTypes()
         {
             var reportTypeDaos = _treeRepository.GetReportTypes();
 
-            var reportTypeDtos = _reportTypeDtoFetcher.Fetch(reportTypeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
-
-            return reportTypeDtos;
+            return reportTypeDaos == null ? null : _reportTypeDtoFetcher.Fetch(reportTypeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public void UpdateReportType(ReportTypeDto reportTypeDto)

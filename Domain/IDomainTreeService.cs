@@ -73,13 +73,13 @@ namespace Domain
 
         void UpdateDocumentType(DocumentTypeDto documentTypeDto);
 
-        //DocumentDto CreateDocument(DocumentDto documentDto);
+        DocumentDto CreateDocument(DocumentDto documentDto);
 
-        //DocumentDto GetDocument(Guid documentId);
+        DocumentDto GetDocument(Guid documentId);
 
-        //List<DocumentDto> GetDocuments();
+        List<DocumentDto> GetDocuments();
 
-        //void UpdateDocument(DocumentDto documentDto);
+        void UpdateDocument(DocumentDto documentDto);
 
         ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.Entities.TreeTypeDaos;
 
 namespace Infrastructure.Entities
 {
@@ -20,7 +21,7 @@ namespace Infrastructure.Entities
             get { return DocumentType.Id; }
         }
 
-        public virtual TreeDao DocumentType { get; set; }
+        public virtual DocumentTypeDao DocumentType { get; set; }
 
         public virtual Guid DocumentStateId
         {
