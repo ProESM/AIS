@@ -1,0 +1,16 @@
+D:\git\AIS\Common.Base\bin\Release\Common.Base.dll.config
+D:\git\AIS\Common.Base\bin\Release\Common.Base.dll
+D:\git\AIS\Common.Base\bin\Release\Common.Base.pdb
+D:\git\AIS\Common.Base\bin\Release\FirebirdSql.Data.FirebirdClient.dll
+D:\git\AIS\Common.Base\bin\Release\Iesi.Collections.dll
+D:\git\AIS\Common.Base\bin\Release\Newtonsoft.Json.dll
+D:\git\AIS\Common.Base\bin\Release\NHibernate.dll
+D:\git\AIS\Common.Base\bin\Release\NHibernate.Mapping.Attributes.dll
+D:\git\AIS\Common.Base\bin\Release\Ninject.dll
+D:\git\AIS\Common.Base\bin\Release\FirebirdSql.Data.FirebirdClient.pdb
+D:\git\AIS\Common.Base\bin\Release\Iesi.Collections.xml
+D:\git\AIS\Common.Base\bin\Release\Newtonsoft.Json.xml
+D:\git\AIS\Common.Base\bin\Release\NHibernate.xml
+D:\git\AIS\Common.Base\bin\Release\Ninject.xml
+D:\git\AIS\Common.Base\obj\Release\Common.Base.dll
+D:\git\AIS\Common.Base\obj\Release\Common.Base.pdb
