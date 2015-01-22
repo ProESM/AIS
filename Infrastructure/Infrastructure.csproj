@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{943D9AFF-5CA8-4038-B056-CFB92950CA12}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infrastructure</RootNamespace>
+    <AssemblyName>Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient">
+      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.4.5.2.0\lib\net45\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.2.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Mapping.Attributes">
+      <HintPath>..\packages\NHibernate.Mapping.Attributes.3.2.0.0\lib\NHibernate.Mapping.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DtoFetchers\BaseDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\DocumentDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\FetchDtoMap.cs" />
+    <Compile Include="DtoFetchers\IDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\IFetchDtoMap.cs" />
+    <Compile Include="DtoFetchers\PersonDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\ReportTypeDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\TreeTypeDtoFetchers\ReportTypeGroupDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\TreeDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\TreeTypeDtoFetchers\DocumentTypeDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\UserDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\VirtualTreeDtoFetcher.cs" />
+    <Compile Include="Entities\DocumentDao.cs" />
+    <Compile Include="Mappings\DocumentMap.cs" />
+    <Compile Include="Entities\PersonDao.cs" />
+    <Compile Include="Entities\ReportDao.cs" />
+    <Compile Include="Entities\ReportDataDao.cs" />
+    <Compile Include="Entities\ReportTypeDao.cs" />
+    <Compile Include="Entities\TreeDao.cs" />
+    <Compile Include="Entities\ITreeDao.cs" />
+    <Compile Include="Entities\TreeParentDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\ClassTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\DocumentTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\FolderTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\JuridicalPersonDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\ReportTypeGroupDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\StateTreeTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\TypeTreeTypeDao.cs" />
+    <Compile Include="Entities\UserDao.cs" />
+    <Compile Include="Entities\UserGroupDao.cs" />
+    <Compile Include="Entities\VirtualTreeDao.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
+    <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="Extensions\SessionExtensions.cs" />
+    <Compile Include="FetchAim.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="ITreeRepository.cs" />
+    <Compile Include="Mappings\PersonMap.cs" />
+    <Compile Include="Mappings\ReportDataMap.cs" />
+    <Compile Include="Mappings\ReportMap.cs" />
+    <Compile Include="Mappings\TreeMap.cs" />
+    <Compile Include="Mappings\TreeParentMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\ClassTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\DocumentTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\FolderTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\JuridicalPersonMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\ReportTypeGroupMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\StateTreeTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\TypeTreeTypeMap.cs" />
+    <Compile Include="Mappings\UserGroupMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionManager.cs" />
+    <Compile Include="TreeRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Base\Common.Base.csproj">
+      <Project>{520D2678-0DE4-406B-9C10-0A5DBB553C95}</Project>
+      <Name>Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{71B0D882-7F72-45EA-BDDE-DDBA5CB737C9}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
