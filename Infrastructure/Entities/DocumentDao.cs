@@ -14,6 +14,11 @@ namespace Infrastructure.Entities
             get { return DocumentParent == null ? (Guid?) null : DocumentParent.Id; }
         }
 
+        public virtual string DocumentParentName
+        {
+            get { return DocumentParent == null ? string.Empty : DocumentParent.Name; }
+        }
+
         public virtual DocumentDao DocumentParent { get; set; }
 
         public virtual Guid DocumentTypeId

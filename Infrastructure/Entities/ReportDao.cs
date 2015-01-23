@@ -20,16 +20,17 @@ namespace Infrastructure.Entities
         /// </summary>
         public virtual TreeDao ReportType { get; set; }
         /// <summary>
-        /// Id организации-владельца отчёта
+        /// Id адресата отчета
         /// </summary>
-        public virtual Guid ReportEnterpriseId
+        public virtual Guid RecipientId
         {
-            get { return ReportEnterprise.Id; }
+            get { return Recipient.Id; }
         }
         /// <summary>
-        /// Организация-владелец отчёта
+        /// Адресат отчета - это огранизация, подразделение или конкретный сотрудник, для
+        /// которого предназначен документ (к заполнению, ознакомлению и т.п.)
         /// </summary>
-        public virtual TreeDao ReportEnterprise { get; set; }
+        public virtual TreeDao Recipient { get; set; }
         /// <summary>
         /// Дата начала заполнения отчёта
         /// </summary>

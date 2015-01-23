@@ -56,6 +56,7 @@
           <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="UserGroupId" type="ser:guid" />
+          <xs:element minOccurs="0" name="UserGroupName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -74,6 +75,30 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PersonDto" nillable="true" type="tns:PersonDto" />
+  <xs:complexType name="DocumentDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseTreeDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DocumentParentId" nillable="true" type="ser:guid" />
+          <xs:element minOccurs="0" name="DocumentParentName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DocumentStateId" type="ser:guid" />
+          <xs:element minOccurs="0" name="DocumentStateName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DocumentTypeId" type="ser:guid" />
+          <xs:element minOccurs="0" name="DocumentTypeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DocumentUserId" type="ser:guid" />
+          <xs:element minOccurs="0" name="DocumentUserName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DocumentDto" nillable="true" type="tns:DocumentDto" />
+  <xs:complexType name="ArrayOfDocumentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentDto" nillable="true" type="tns:DocumentDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentDto" nillable="true" type="tns:ArrayOfDocumentDto" />
   <xs:complexType name="ReportTypeGroupDto">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseTreeDto">
@@ -88,4 +113,42 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfReportTypeGroupDto" nillable="true" type="tns:ArrayOfReportTypeGroupDto" />
+  <xs:complexType name="ReportTypeDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseTreeDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GroupId" type="ser:guid" />
+          <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ReportTypeDto" nillable="true" type="tns:ReportTypeDto" />
+  <xs:complexType name="ArrayOfReportTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReportTypeDto" nillable="true" type="tns:ReportTypeDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReportTypeDto" nillable="true" type="tns:ArrayOfReportTypeDto" />
+  <xs:complexType name="ReportDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DocumentDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ExpiryFillingDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FillingDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RecipientId" type="ser:guid" />
+          <xs:element minOccurs="0" name="RecipientName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReportTypeId" type="ser:guid" />
+          <xs:element minOccurs="0" name="ReportTypeName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ReportDto" nillable="true" type="tns:ReportDto" />
+  <xs:complexType name="ArrayOfReportDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReportDto" nillable="true" type="tns:ReportDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReportDto" nillable="true" type="tns:ArrayOfReportDto" />
 </xs:schema>

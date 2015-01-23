@@ -43,8 +43,13 @@ namespace TestConsole.TreeServiceReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.BaseTreeDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.UserDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.PersonDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.DocumentDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportTypeGroupDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportTypeDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.TreeDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.DocumentTypeDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.JuridicalPersonDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.VirtualTreeDto))]
     public partial class BaseDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -77,8 +82,13 @@ namespace TestConsole.TreeServiceReference {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.UserDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.PersonDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.DocumentDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportTypeGroupDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportTypeDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.TreeDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.DocumentTypeDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.JuridicalPersonDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.VirtualTreeDto))]
     public partial class BaseTreeDto : TestConsole.TreeServiceReference.BaseDto {
         
@@ -222,6 +232,9 @@ namespace TestConsole.TreeServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid UserGroupIdField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserGroupNameField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Email {
             get {
@@ -312,6 +325,19 @@ namespace TestConsole.TreeServiceReference {
                 }
             }
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserGroupName {
+            get {
+                return this.UserGroupNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserGroupNameField, value) != true)) {
+                    this.UserGroupNameField = value;
+                    this.RaisePropertyChanged("UserGroupName");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -387,6 +413,261 @@ namespace TestConsole.TreeServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DocumentDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.ReportDto))]
+    public partial class DocumentDto : TestConsole.TreeServiceReference.BaseTreeDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> DocumentParentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DocumentParentNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid DocumentStateIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DocumentStateNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid DocumentTypeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DocumentTypeNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid DocumentUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DocumentUserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NotesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> DocumentParentId {
+            get {
+                return this.DocumentParentIdField;
+            }
+            set {
+                if ((this.DocumentParentIdField.Equals(value) != true)) {
+                    this.DocumentParentIdField = value;
+                    this.RaisePropertyChanged("DocumentParentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentParentName {
+            get {
+                return this.DocumentParentNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentParentNameField, value) != true)) {
+                    this.DocumentParentNameField = value;
+                    this.RaisePropertyChanged("DocumentParentName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid DocumentStateId {
+            get {
+                return this.DocumentStateIdField;
+            }
+            set {
+                if ((this.DocumentStateIdField.Equals(value) != true)) {
+                    this.DocumentStateIdField = value;
+                    this.RaisePropertyChanged("DocumentStateId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentStateName {
+            get {
+                return this.DocumentStateNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentStateNameField, value) != true)) {
+                    this.DocumentStateNameField = value;
+                    this.RaisePropertyChanged("DocumentStateName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid DocumentTypeId {
+            get {
+                return this.DocumentTypeIdField;
+            }
+            set {
+                if ((this.DocumentTypeIdField.Equals(value) != true)) {
+                    this.DocumentTypeIdField = value;
+                    this.RaisePropertyChanged("DocumentTypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentTypeName {
+            get {
+                return this.DocumentTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentTypeNameField, value) != true)) {
+                    this.DocumentTypeNameField = value;
+                    this.RaisePropertyChanged("DocumentTypeName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid DocumentUserId {
+            get {
+                return this.DocumentUserIdField;
+            }
+            set {
+                if ((this.DocumentUserIdField.Equals(value) != true)) {
+                    this.DocumentUserIdField = value;
+                    this.RaisePropertyChanged("DocumentUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentUserName {
+            get {
+                return this.DocumentUserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentUserNameField, value) != true)) {
+                    this.DocumentUserNameField = value;
+                    this.RaisePropertyChanged("DocumentUserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Notes {
+            get {
+                return this.NotesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotesField, value) != true)) {
+                    this.NotesField = value;
+                    this.RaisePropertyChanged("Notes");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReportDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
+    [System.SerializableAttribute()]
+    public partial class ReportDto : TestConsole.TreeServiceReference.DocumentDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ExpiryFillingDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime FillingDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid RecipientIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RecipientNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ReportTypeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportTypeNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ExpiryFillingDate {
+            get {
+                return this.ExpiryFillingDateField;
+            }
+            set {
+                if ((this.ExpiryFillingDateField.Equals(value) != true)) {
+                    this.ExpiryFillingDateField = value;
+                    this.RaisePropertyChanged("ExpiryFillingDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FillingDate {
+            get {
+                return this.FillingDateField;
+            }
+            set {
+                if ((this.FillingDateField.Equals(value) != true)) {
+                    this.FillingDateField = value;
+                    this.RaisePropertyChanged("FillingDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid RecipientId {
+            get {
+                return this.RecipientIdField;
+            }
+            set {
+                if ((this.RecipientIdField.Equals(value) != true)) {
+                    this.RecipientIdField = value;
+                    this.RaisePropertyChanged("RecipientId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RecipientName {
+            get {
+                return this.RecipientNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RecipientNameField, value) != true)) {
+                    this.RecipientNameField = value;
+                    this.RaisePropertyChanged("RecipientName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ReportTypeId {
+            get {
+                return this.ReportTypeIdField;
+            }
+            set {
+                if ((this.ReportTypeIdField.Equals(value) != true)) {
+                    this.ReportTypeIdField = value;
+                    this.RaisePropertyChanged("ReportTypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportTypeName {
+            get {
+                return this.ReportTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportTypeNameField, value) != true)) {
+                    this.ReportTypeNameField = value;
+                    this.RaisePropertyChanged("ReportTypeName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ReportTypeGroupDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
     [System.SerializableAttribute()]
     public partial class ReportTypeGroupDto : TestConsole.TreeServiceReference.BaseTreeDto {
@@ -394,10 +675,65 @@ namespace TestConsole.TreeServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReportTypeDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
+    [System.SerializableAttribute()]
+    public partial class ReportTypeDto : TestConsole.TreeServiceReference.BaseTreeDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid GroupIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GroupNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid GroupId {
+            get {
+                return this.GroupIdField;
+            }
+            set {
+                if ((this.GroupIdField.Equals(value) != true)) {
+                    this.GroupIdField = value;
+                    this.RaisePropertyChanged("GroupId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GroupName {
+            get {
+                return this.GroupNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupNameField, value) != true)) {
+                    this.GroupNameField = value;
+                    this.RaisePropertyChanged("GroupName");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TreeDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.DocumentTypeDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.JuridicalPersonDto))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestConsole.TreeServiceReference.VirtualTreeDto))]
     public partial class TreeDto : TestConsole.TreeServiceReference.BaseTreeDto {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DocumentTypeDto", Namespace="http://schemas.datacontract.org/2004/07/DTO.TreeTypeDtos")]
+    [System.SerializableAttribute()]
+    public partial class DocumentTypeDto : TestConsole.TreeServiceReference.TreeDto {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="JuridicalPersonDto", Namespace="http://schemas.datacontract.org/2004/07/DTO.TreeTypeDtos")]
+    [System.SerializableAttribute()]
+    public partial class JuridicalPersonDto : TestConsole.TreeServiceReference.TreeDto {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -500,6 +836,54 @@ namespace TestConsole.TreeServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdatePerson", ReplyAction="http://tempuri.org/ITreeService/UpdatePersonResponse")]
         System.Threading.Tasks.Task UpdatePersonAsync(TestConsole.TreeServiceReference.PersonDto personDto);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateDocumentType", ReplyAction="http://tempuri.org/ITreeService/CreateDocumentTypeResponse")]
+        TestConsole.TreeServiceReference.DocumentTypeDto CreateDocumentType(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateDocumentType", ReplyAction="http://tempuri.org/ITreeService/CreateDocumentTypeResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentTypeDto> CreateDocumentTypeAsync(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocumentType", ReplyAction="http://tempuri.org/ITreeService/GetDocumentTypeResponse")]
+        TestConsole.TreeServiceReference.DocumentTypeDto GetDocumentType(System.Guid documentTypeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocumentType", ReplyAction="http://tempuri.org/ITreeService/GetDocumentTypeResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentTypeDto> GetDocumentTypeAsync(System.Guid documentTypeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocumentTypes", ReplyAction="http://tempuri.org/ITreeService/GetDocumentTypesResponse")]
+        TestConsole.TreeServiceReference.DocumentTypeDto[] GetDocumentTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocumentTypes", ReplyAction="http://tempuri.org/ITreeService/GetDocumentTypesResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentTypeDto[]> GetDocumentTypesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateDocumentType", ReplyAction="http://tempuri.org/ITreeService/UpdateDocumentTypeResponse")]
+        void UpdateDocumentType(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateDocumentType", ReplyAction="http://tempuri.org/ITreeService/UpdateDocumentTypeResponse")]
+        System.Threading.Tasks.Task UpdateDocumentTypeAsync(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateDocument", ReplyAction="http://tempuri.org/ITreeService/CreateDocumentResponse")]
+        TestConsole.TreeServiceReference.DocumentDto CreateDocument(TestConsole.TreeServiceReference.DocumentDto documentDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateDocument", ReplyAction="http://tempuri.org/ITreeService/CreateDocumentResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentDto> CreateDocumentAsync(TestConsole.TreeServiceReference.DocumentDto documentDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocument", ReplyAction="http://tempuri.org/ITreeService/GetDocumentResponse")]
+        TestConsole.TreeServiceReference.DocumentDto GetDocument(System.Guid documentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocument", ReplyAction="http://tempuri.org/ITreeService/GetDocumentResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentDto> GetDocumentAsync(System.Guid documentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocuments", ReplyAction="http://tempuri.org/ITreeService/GetDocumentsResponse")]
+        TestConsole.TreeServiceReference.DocumentDto[] GetDocuments();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetDocuments", ReplyAction="http://tempuri.org/ITreeService/GetDocumentsResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentDto[]> GetDocumentsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateDocument", ReplyAction="http://tempuri.org/ITreeService/UpdateDocumentResponse")]
+        void UpdateDocument(TestConsole.TreeServiceReference.DocumentDto documentDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateDocument", ReplyAction="http://tempuri.org/ITreeService/UpdateDocumentResponse")]
+        System.Threading.Tasks.Task UpdateDocumentAsync(TestConsole.TreeServiceReference.DocumentDto documentDto);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/CreateReportTypeGroupResponse")]
         TestConsole.TreeServiceReference.ReportTypeGroupDto CreateReportTypeGroup(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto);
         
@@ -523,6 +907,78 @@ namespace TestConsole.TreeServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateReportTypeGroup", ReplyAction="http://tempuri.org/ITreeService/UpdateReportTypeGroupResponse")]
         System.Threading.Tasks.Task UpdateReportTypeGroupAsync(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateReportType", ReplyAction="http://tempuri.org/ITreeService/CreateReportTypeResponse")]
+        TestConsole.TreeServiceReference.ReportTypeDto CreateReportType(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateReportType", ReplyAction="http://tempuri.org/ITreeService/CreateReportTypeResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeDto> CreateReportTypeAsync(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportType", ReplyAction="http://tempuri.org/ITreeService/GetReportTypeResponse")]
+        TestConsole.TreeServiceReference.ReportTypeDto GetReportType(System.Guid reportTypeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportType", ReplyAction="http://tempuri.org/ITreeService/GetReportTypeResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeDto> GetReportTypeAsync(System.Guid reportTypeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportTypes", ReplyAction="http://tempuri.org/ITreeService/GetReportTypesResponse")]
+        TestConsole.TreeServiceReference.ReportTypeDto[] GetReportTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReportTypes", ReplyAction="http://tempuri.org/ITreeService/GetReportTypesResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeDto[]> GetReportTypesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateReportType", ReplyAction="http://tempuri.org/ITreeService/UpdateReportTypeResponse")]
+        void UpdateReportType(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateReportType", ReplyAction="http://tempuri.org/ITreeService/UpdateReportTypeResponse")]
+        System.Threading.Tasks.Task UpdateReportTypeAsync(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateReport", ReplyAction="http://tempuri.org/ITreeService/CreateReportResponse")]
+        TestConsole.TreeServiceReference.ReportDto CreateReport(TestConsole.TreeServiceReference.ReportDto reportDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateReport", ReplyAction="http://tempuri.org/ITreeService/CreateReportResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportDto> CreateReportAsync(TestConsole.TreeServiceReference.ReportDto reportDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReport", ReplyAction="http://tempuri.org/ITreeService/GetReportResponse")]
+        TestConsole.TreeServiceReference.ReportDto GetReport(System.Guid reportId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReport", ReplyAction="http://tempuri.org/ITreeService/GetReportResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportDto> GetReportAsync(System.Guid reportId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReports", ReplyAction="http://tempuri.org/ITreeService/GetReportsResponse")]
+        TestConsole.TreeServiceReference.ReportDto[] GetReports();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetReports", ReplyAction="http://tempuri.org/ITreeService/GetReportsResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportDto[]> GetReportsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateReport", ReplyAction="http://tempuri.org/ITreeService/UpdateReportResponse")]
+        void UpdateReport(TestConsole.TreeServiceReference.ReportDto reportDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateReport", ReplyAction="http://tempuri.org/ITreeService/UpdateReportResponse")]
+        System.Threading.Tasks.Task UpdateReportAsync(TestConsole.TreeServiceReference.ReportDto reportDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateJuridicalPerson", ReplyAction="http://tempuri.org/ITreeService/CreateJuridicalPersonResponse")]
+        TestConsole.TreeServiceReference.JuridicalPersonDto CreateJuridicalPerson(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/CreateJuridicalPerson", ReplyAction="http://tempuri.org/ITreeService/CreateJuridicalPersonResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.JuridicalPersonDto> CreateJuridicalPersonAsync(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetJuridicalPerson", ReplyAction="http://tempuri.org/ITreeService/GetJuridicalPersonResponse")]
+        TestConsole.TreeServiceReference.JuridicalPersonDto GetJuridicalPerson(System.Guid juridicalPersonId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetJuridicalPerson", ReplyAction="http://tempuri.org/ITreeService/GetJuridicalPersonResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.JuridicalPersonDto> GetJuridicalPersonAsync(System.Guid juridicalPersonId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetJuridicalPersons", ReplyAction="http://tempuri.org/ITreeService/GetJuridicalPersonsResponse")]
+        TestConsole.TreeServiceReference.JuridicalPersonDto[] GetJuridicalPersons();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/GetJuridicalPersons", ReplyAction="http://tempuri.org/ITreeService/GetJuridicalPersonsResponse")]
+        System.Threading.Tasks.Task<TestConsole.TreeServiceReference.JuridicalPersonDto[]> GetJuridicalPersonsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateJuridicalPerson", ReplyAction="http://tempuri.org/ITreeService/UpdateJuridicalPersonResponse")]
+        void UpdateJuridicalPerson(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITreeService/UpdateJuridicalPerson", ReplyAction="http://tempuri.org/ITreeService/UpdateJuridicalPersonResponse")]
+        System.Threading.Tasks.Task UpdateJuridicalPersonAsync(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -680,6 +1136,70 @@ namespace TestConsole.TreeServiceReference {
             return base.Channel.UpdatePersonAsync(personDto);
         }
         
+        public TestConsole.TreeServiceReference.DocumentTypeDto CreateDocumentType(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto) {
+            return base.Channel.CreateDocumentType(documentTypeDto);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentTypeDto> CreateDocumentTypeAsync(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto) {
+            return base.Channel.CreateDocumentTypeAsync(documentTypeDto);
+        }
+        
+        public TestConsole.TreeServiceReference.DocumentTypeDto GetDocumentType(System.Guid documentTypeId) {
+            return base.Channel.GetDocumentType(documentTypeId);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentTypeDto> GetDocumentTypeAsync(System.Guid documentTypeId) {
+            return base.Channel.GetDocumentTypeAsync(documentTypeId);
+        }
+        
+        public TestConsole.TreeServiceReference.DocumentTypeDto[] GetDocumentTypes() {
+            return base.Channel.GetDocumentTypes();
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentTypeDto[]> GetDocumentTypesAsync() {
+            return base.Channel.GetDocumentTypesAsync();
+        }
+        
+        public void UpdateDocumentType(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto) {
+            base.Channel.UpdateDocumentType(documentTypeDto);
+        }
+        
+        public System.Threading.Tasks.Task UpdateDocumentTypeAsync(TestConsole.TreeServiceReference.DocumentTypeDto documentTypeDto) {
+            return base.Channel.UpdateDocumentTypeAsync(documentTypeDto);
+        }
+        
+        public TestConsole.TreeServiceReference.DocumentDto CreateDocument(TestConsole.TreeServiceReference.DocumentDto documentDto) {
+            return base.Channel.CreateDocument(documentDto);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentDto> CreateDocumentAsync(TestConsole.TreeServiceReference.DocumentDto documentDto) {
+            return base.Channel.CreateDocumentAsync(documentDto);
+        }
+        
+        public TestConsole.TreeServiceReference.DocumentDto GetDocument(System.Guid documentId) {
+            return base.Channel.GetDocument(documentId);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentDto> GetDocumentAsync(System.Guid documentId) {
+            return base.Channel.GetDocumentAsync(documentId);
+        }
+        
+        public TestConsole.TreeServiceReference.DocumentDto[] GetDocuments() {
+            return base.Channel.GetDocuments();
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.DocumentDto[]> GetDocumentsAsync() {
+            return base.Channel.GetDocumentsAsync();
+        }
+        
+        public void UpdateDocument(TestConsole.TreeServiceReference.DocumentDto documentDto) {
+            base.Channel.UpdateDocument(documentDto);
+        }
+        
+        public System.Threading.Tasks.Task UpdateDocumentAsync(TestConsole.TreeServiceReference.DocumentDto documentDto) {
+            return base.Channel.UpdateDocumentAsync(documentDto);
+        }
+        
         public TestConsole.TreeServiceReference.ReportTypeGroupDto CreateReportTypeGroup(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto) {
             return base.Channel.CreateReportTypeGroup(reportTypeGroupDto);
         }
@@ -710,6 +1230,102 @@ namespace TestConsole.TreeServiceReference {
         
         public System.Threading.Tasks.Task UpdateReportTypeGroupAsync(TestConsole.TreeServiceReference.ReportTypeGroupDto reportTypeGroupDto) {
             return base.Channel.UpdateReportTypeGroupAsync(reportTypeGroupDto);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportTypeDto CreateReportType(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto) {
+            return base.Channel.CreateReportType(reportTypeDto);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeDto> CreateReportTypeAsync(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto) {
+            return base.Channel.CreateReportTypeAsync(reportTypeDto);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportTypeDto GetReportType(System.Guid reportTypeId) {
+            return base.Channel.GetReportType(reportTypeId);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeDto> GetReportTypeAsync(System.Guid reportTypeId) {
+            return base.Channel.GetReportTypeAsync(reportTypeId);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportTypeDto[] GetReportTypes() {
+            return base.Channel.GetReportTypes();
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportTypeDto[]> GetReportTypesAsync() {
+            return base.Channel.GetReportTypesAsync();
+        }
+        
+        public void UpdateReportType(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto) {
+            base.Channel.UpdateReportType(reportTypeDto);
+        }
+        
+        public System.Threading.Tasks.Task UpdateReportTypeAsync(TestConsole.TreeServiceReference.ReportTypeDto reportTypeDto) {
+            return base.Channel.UpdateReportTypeAsync(reportTypeDto);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportDto CreateReport(TestConsole.TreeServiceReference.ReportDto reportDto) {
+            return base.Channel.CreateReport(reportDto);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportDto> CreateReportAsync(TestConsole.TreeServiceReference.ReportDto reportDto) {
+            return base.Channel.CreateReportAsync(reportDto);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportDto GetReport(System.Guid reportId) {
+            return base.Channel.GetReport(reportId);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportDto> GetReportAsync(System.Guid reportId) {
+            return base.Channel.GetReportAsync(reportId);
+        }
+        
+        public TestConsole.TreeServiceReference.ReportDto[] GetReports() {
+            return base.Channel.GetReports();
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.ReportDto[]> GetReportsAsync() {
+            return base.Channel.GetReportsAsync();
+        }
+        
+        public void UpdateReport(TestConsole.TreeServiceReference.ReportDto reportDto) {
+            base.Channel.UpdateReport(reportDto);
+        }
+        
+        public System.Threading.Tasks.Task UpdateReportAsync(TestConsole.TreeServiceReference.ReportDto reportDto) {
+            return base.Channel.UpdateReportAsync(reportDto);
+        }
+        
+        public TestConsole.TreeServiceReference.JuridicalPersonDto CreateJuridicalPerson(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto) {
+            return base.Channel.CreateJuridicalPerson(juridicalPersonDto);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.JuridicalPersonDto> CreateJuridicalPersonAsync(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto) {
+            return base.Channel.CreateJuridicalPersonAsync(juridicalPersonDto);
+        }
+        
+        public TestConsole.TreeServiceReference.JuridicalPersonDto GetJuridicalPerson(System.Guid juridicalPersonId) {
+            return base.Channel.GetJuridicalPerson(juridicalPersonId);
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.JuridicalPersonDto> GetJuridicalPersonAsync(System.Guid juridicalPersonId) {
+            return base.Channel.GetJuridicalPersonAsync(juridicalPersonId);
+        }
+        
+        public TestConsole.TreeServiceReference.JuridicalPersonDto[] GetJuridicalPersons() {
+            return base.Channel.GetJuridicalPersons();
+        }
+        
+        public System.Threading.Tasks.Task<TestConsole.TreeServiceReference.JuridicalPersonDto[]> GetJuridicalPersonsAsync() {
+            return base.Channel.GetJuridicalPersonsAsync();
+        }
+        
+        public void UpdateJuridicalPerson(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto) {
+            base.Channel.UpdateJuridicalPerson(juridicalPersonDto);
+        }
+        
+        public System.Threading.Tasks.Task UpdateJuridicalPersonAsync(TestConsole.TreeServiceReference.JuridicalPersonDto juridicalPersonDto) {
+            return base.Channel.UpdateJuridicalPersonAsync(juridicalPersonDto);
         }
     }
 }

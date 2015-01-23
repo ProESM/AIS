@@ -497,6 +497,17 @@ namespace Infrastructure
             }
         }
 
+        public DocumentDao GetLastDocumentChange(Guid documentId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<DocumentDao>()
+                    .Where(p => p.DocumentParentId.ToString() == documentId.ToString())
+                    .Where(p => p.DocumentType.ParentId == SystemObjects.AllReportChangeTypes)
+                    .OrderByDescending(p => p.CreateDateTime).FirstOrDefault();
+            }
+        }
+
         public void UpdateDocument(DocumentDao documentDao)
         {
             using (var transaction = _session.StartTransaction())
@@ -504,7 +515,7 @@ namespace Infrastructure
                 _session.SaveOrUpdate(documentDao);
                 transaction.Commit();
             }
-        }
+        }       
 
         public ReportTypeGroupDao CreateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao)
         {
@@ -613,6 +624,43 @@ namespace Infrastructure
             using (var transaction = _session.StartTransaction())
             {
                 _session.SaveOrUpdate(reportDao);
+                transaction.Commit();
+            }
+        }
+
+        public JuridicalPersonDao CreateJuridicalPerson(JuridicalPersonDao juridicalPersonDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(juridicalPersonDao);
+
+                transaction.Commit();
+
+                return _session.Query<JuridicalPersonDao>().FirstOrDefault(p => p.Id.ToString() == juridicalPersonDao.Id.ToString());
+            }
+        }
+
+        public JuridicalPersonDao GetJuridicalPerson(Guid juridicalPersonId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<JuridicalPersonDao>().FirstOrDefault(p => p.Id.ToString() == juridicalPersonId.ToString());
+            }
+        }
+
+        public List<JuridicalPersonDao> GetJuridicalPersons()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<JuridicalPersonDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateJuridicalPerson(JuridicalPersonDao juridicalPersonDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.SaveOrUpdate(juridicalPersonDao);
                 transaction.Commit();
             }
         }

@@ -8,3 +8,5 @@ D:\git\AIS\TestConsole\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
 D:\git\AIS\TestConsole\bin\Debug\Common.Base.pdb
 D:\git\AIS\TestConsole\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
 D:\git\AIS\TestConsole\obj\Debug\TestConsole.csprojResolveAssemblyReference.cache
+D:\git\AIS\TestConsole\bin\Debug\Newtonsoft.Json.dll
+D:\git\AIS\TestConsole\bin\Debug\Newtonsoft.Json.xml

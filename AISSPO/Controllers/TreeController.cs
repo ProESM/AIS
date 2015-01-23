@@ -12,6 +12,7 @@ using Common.Base.Web.Formatters;
 using Domain;
 using Domain.Implementation;
 using DTO;
+using DTO.TreeTypeDtos;
 using DTO.Web;
 using Ninject;
 
@@ -224,7 +225,7 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReportTypeGroups")]
-        public IEnumerable<ReportTypeGroupDto> GetReportTypeGroups()
+        public List<ReportTypeGroupDto> GetReportTypeGroups()
         {
             return _treeService.GetReportTypeGroups();
         }
@@ -302,6 +303,139 @@ namespace AISSPO.Controllers
             reportTypeDto.StateId = ObjectStates.osDeleted;
             _treeService.UpdateReportType(reportTypeDto);
             return _treeService.GetReportType(reportTypeDto.Id);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("CreateJuridicalPerson")]
+        public JuridicalPersonDto CreateJuridicalPerson(WebCreateJuridicalPersonDto webJuridicalPersonDto)
+        {
+            var juridicalPersonDto = new JuridicalPersonDto
+            {
+                Id = Guid.NewGuid(),
+                ParentId = SystemObjects.AllCommonJuridicalPersons,
+                Name = webJuridicalPersonDto.Name,
+                ShortName = "",
+                TypeId = ObjectTypes.otJuridicalPerson,
+                StateId = ObjectStates.osActive,
+                CreateDateTime = DateTime.Now
+            };
+
+            return _treeService.CreateJuridicalPerson(juridicalPersonDto);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetJuridicalPerson")]
+        public JuridicalPersonDto GetJuridicalPerson(Guid id)
+        {
+            return _treeService.GetJuridicalPerson(id);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetJuridicalPersons")]
+        public List<JuridicalPersonDto> GetJuridicalPersons()
+        {
+            return _treeService.GetJuridicalPersons();
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("CreateReport")]
+        public ReportDto CreateReport(WebCreateReportDto webReportDto)
+        {
+            var reportDto = new ReportDto
+            {
+                Id = Guid.NewGuid(),
+                ParentId = SystemObjects.AllReports,
+                Name = webReportDto.Name,
+                ShortName = "",
+                TypeId = ObjectTypes.otDocument,
+                StateId = ObjectStates.osActive,
+                CreateDateTime = DateTime.Now,
+
+                DocumentParentId = null,
+                DocumentTypeId = DocumentTypes.dtReport,
+                DocumentStateId = ReportStates.rsCreated,
+                DocumentUserId = SystemUser.Id,
+                Notes = webReportDto.Notes,
+
+                ReportTypeId = webReportDto.ReportTypeId,
+                RecipientId = webReportDto.RecipientId,
+                FillingDate = webReportDto.FillingDate,
+                ExpiryFillingDate = webReportDto.ExpiryFillingDate
+            };            
+
+            return _treeService.CreateReport(reportDto);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("UpdateReport")]
+        public WebReportDto GetReport(Guid id)
+        {
+            var reportDto = _treeService.GetReport(id);
+
+            var lastDocumentChangeDto = _treeService.GetLastDocumentChange(id);
+
+            var r = new WebReportDto
+            {
+                Id = reportDto.Id,
+                ParentId = reportDto.ParentId,
+                Name = reportDto.Name,
+                ShortName = reportDto.ShortName,
+                TypeId = reportDto.TypeId,
+                StateId = reportDto.StateId,
+                CreateDateTime = reportDto.CreateDateTime,
+
+                DocumentParentId = reportDto.DocumentParentId,
+                DocumentParentName = reportDto.DocumentParentName,
+                DocumentTypeId = reportDto.DocumentTypeId,
+                DocumentTypeName = reportDto.DocumentTypeName,
+                DocumentStateId = reportDto.DocumentStateId,
+                DocumentStateName = reportDto.DocumentStateName,
+                DocumentUserId = reportDto.DocumentUserId,
+                DocumentUserName = reportDto.DocumentUserName,
+                Notes = reportDto.Notes,
+
+                ReportTypeId = reportDto.ReportTypeId,
+                ReportTypeName = reportDto.ReportTypeName,
+                RecipientId = reportDto.RecipientId,
+                RecipientName = reportDto.RecipientName,
+                FillingDate = reportDto.FillingDate,
+                ExpiryFillingDate = reportDto.ExpiryFillingDate,
+
+                LastChangeUserId = lastDocumentChangeDto.DocumentUserId,
+                LastChangeUserName = lastDocumentChangeDto.DocumentUserName,
+                LastChangeDateTime = lastDocumentChangeDto.CreateDateTime
+            };
+
+            return r;
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("UpdateReport")]
+        public ReportDto UpdateReport(WebUpdateReportDto webReportDto)
+        {
+            var reportDto = _treeService.GetReport(webReportDto.Id);
+
+            reportDto.Name = webReportDto.Name;
+
+            reportDto.DocumentStateId = webReportDto.DocumentStateId;
+            reportDto.Notes = webReportDto.Notes;
+
+            reportDto.ReportTypeId = webReportDto.ReportTypeId;
+            reportDto.RecipientId = webReportDto.RecipientId;
+            reportDto.FillingDate = webReportDto.FillingDate;
+            reportDto.ExpiryFillingDate = webReportDto.ExpiryFillingDate;
+
+            _treeService.UpdateReport(reportDto);
+
+            return _treeService.GetReport(reportDto.Id);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("DeleteReport")]
+        public ReportDto DeleteReport(Guid id)
+        {            
+            _treeService.DeleteReport(id);
+            return _treeService.GetReport(id);
         }
     }
 }

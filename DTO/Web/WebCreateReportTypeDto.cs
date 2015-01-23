@@ -29,6 +29,6 @@ namespace DTO.Web
         [Display(Name = "Id группы типа отчетов")]
         [DataMember]
         [JsonProperty(PropertyName = "GroupId")]
-        public Guid GroupId { get; set; }        
+        public Guid GroupId { get; set; }
     }
 }

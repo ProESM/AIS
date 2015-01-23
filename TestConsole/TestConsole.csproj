@@ -63,7 +63,22 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.DocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.DocumentTypeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.JuridicalPersonDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.PersonDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.ReportDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.ReportTypeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.ReportTypeGroupDto.datasource">
@@ -89,6 +104,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TreeServiceReference\TreeService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TreeServiceReference\TreeService4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

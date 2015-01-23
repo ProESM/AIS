@@ -23,8 +23,15 @@ namespace TestConsole
             treeServiceClient.ClientCredentials.UserName.UserName = "user";
             treeServiceClient.ClientCredentials.UserName.Password = "123456";
 
+            var r = treeServiceClient.GetReport(new Guid("84f4dd1c-fadb-4add-a355-a42900a252b0"));
 
-            var rtg = treeServiceClient.GetReportTypeGroups();
+            r.Name = "Тестовый отчет";
+            r.DocumentStateId = ReportStates.rsCreated;
+
+            treeServiceClient.UpdateReport(r);
+            
+            var so = treeServiceClient.GetSystemObjects();
+
             //var strees = treeServiceClient.SearchTreesByText("Настрой", SystemObjects.Root, new Guid[] { }, new Guid[] { }, SystemObjects.Root);
 
             //var trees = treeServiceClient.GetTrees(new Guid("20f9b9ce-8769-4569-ae71-1ecf18be90b3"),
@@ -62,7 +69,7 @@ namespace TestConsole
             //    BirthDate = new DateTime(2015, 1, 1)
             //});
 
-            var so = treeServiceClient.GetSystemObjects();
+            
 
             Console.ReadLine();
         }

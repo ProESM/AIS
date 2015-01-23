@@ -24,6 +24,7 @@
   <Metadata>
     <MetadataFile FileName="TreeService.xsd" MetadataType="Schema" ID="26d0bebf-a57e-4b1d-93ab-4877eb398efc" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd0" />
     <MetadataFile FileName="TreeService.disco" MetadataType="Disco" ID="cb422e67-2bb7-4138-ba6a-5a7fbaa321cd" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?disco" />
+    <MetadataFile FileName="TreeService4.xsd" MetadataType="Schema" ID="6328ed49-9807-4049-9080-fb7fa5236c33" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd4" />
     <MetadataFile FileName="TreeService1.xsd" MetadataType="Schema" ID="ef7caed8-ba44-40ea-b154-5f1271ec4830" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd1" />
     <MetadataFile FileName="TreeService.wsdl" MetadataType="Wsdl" ID="17b4993a-212c-403b-92c8-36a51eb02e44" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?wsdl" />
     <MetadataFile FileName="TreeService2.xsd" MetadataType="Schema" ID="ea547809-013c-45e7-993f-b814af78fac6" SourceId="1" SourceUrl="http://localhost:46271/TreeService.svc?xsd=xsd2" />

@@ -22,8 +22,8 @@ namespace Infrastructure.Mappings
                 j.KeyColumn("ID");
                 j.References(x => x.ReportType)
                     .Column("TYPE_ID");
-                j.References(x => x.ReportEnterprise)
-                    .Column("ENTERPRISE_ID");
+                j.References(x => x.Recipient)
+                    .Column("RECIPIENT_ID");
                 j.Map(x => x.FillingDate)
                     .Column("FILLING_DATE")
                     .Nullable();

@@ -74,10 +74,15 @@
     <Compile Include="ReportTypeGroupDto.cs" />
     <Compile Include="TreeDto.cs" />
     <Compile Include="TreeTypeDtos\DocumentTypeDto.cs" />
+    <Compile Include="TreeTypeDtos\JuridicalPersonDto.cs" />
     <Compile Include="UserDto.cs" />
     <Compile Include="VirtualTreeDto.cs" />
     <Compile Include="Web\EmailDto.cs" />
+    <Compile Include="Web\WebCreateReportDto.cs" />
     <Compile Include="Web\WebCreateReportTypeDto.cs" />
+    <Compile Include="Web\WebCreateJuridicalPersonDto.cs" />
+    <Compile Include="Web\WebReportDto.cs" />
+    <Compile Include="Web\WebUpdateReportDto.cs" />
     <Compile Include="Web\WebUpdateReportTypeDto.cs" />
   </ItemGroup>
   <ItemGroup>

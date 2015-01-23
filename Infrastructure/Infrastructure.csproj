@@ -77,7 +77,9 @@
     <Compile Include="DtoFetchers\FetchDtoMap.cs" />
     <Compile Include="DtoFetchers\IDtoFetcher.cs" />
     <Compile Include="DtoFetchers\IFetchDtoMap.cs" />
+    <Compile Include="DtoFetchers\JuridicalPersonDtoFetcher.cs" />
     <Compile Include="DtoFetchers\PersonDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\ReportDtoFetcher.cs" />
     <Compile Include="DtoFetchers\ReportTypeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeTypeDtoFetchers\ReportTypeGroupDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeDtoFetcher.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Mappings\PersonMap.cs" />
     <Compile Include="Mappings\ReportDataMap.cs" />
     <Compile Include="Mappings\ReportMap.cs" />
+    <Compile Include="Mappings\ReportTypeMap.cs" />
     <Compile Include="Mappings\TreeMap.cs" />
     <Compile Include="Mappings\TreeParentMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\ClassTreeTypeMap.cs" />

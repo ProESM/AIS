@@ -29,6 +29,8 @@ namespace Domain.Implementation
         private readonly IDtoFetcher<ReportTypeDao, ReportTypeDto> _reportTypeDtoFetcher;
         private readonly IDtoFetcher<DocumentTypeDao, DocumentTypeDto> _documentTypeDtoFetcher;
         private readonly IDtoFetcher<DocumentDao, DocumentDto> _documentDtoFetcher;
+        private readonly IDtoFetcher<ReportDao, ReportDto> _reportDtoFetcher;
+        private readonly IDtoFetcher<JuridicalPersonDao, JuridicalPersonDto> _juridicalPersonDtoFetcher;
 
         public DomainTreeService()
         {
@@ -44,6 +46,8 @@ namespace Domain.Implementation
             _reportTypeDtoFetcher = new ReportTypeDtoFetcher(_treeRepository);
             _documentTypeDtoFetcher = new DocumentTypeDtoFetcher(_treeRepository);
             _documentDtoFetcher = new DocumentDtoFetcher(_treeRepository);
+            _reportDtoFetcher = new ReportDtoFetcher(_treeRepository);
+            _juridicalPersonDtoFetcher = new JuridicalPersonDtoFetcher(_treeRepository);
         }
 
         public List<Guid> GetSystemObjects()
@@ -469,7 +473,7 @@ namespace Domain.Implementation
                 Type = typeDao,
                 State = stateDao,
                 CreateDateTime = DateTime.Now,
-                DocumentParent = documentParentDao ?? null,
+                DocumentParent = documentParentDao,
                 DocumentType = documentTypeDao,
                 DocumentState = documentStateDao,
                 DocumentUser = documentUserDao,
@@ -491,6 +495,13 @@ namespace Domain.Implementation
             var documentDaos = _treeRepository.GetDocuments();
 
             return documentDaos == null ? null : _documentDtoFetcher.Fetch(documentDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
+        public DocumentDto GetLastDocumentChange(Guid documentId)
+        {
+            var documentDao = _treeRepository.GetLastDocumentChange(documentId);
+
+            return documentDao == null ? null : _documentDtoFetcher.Fetch(new List<DocumentDao> { documentDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public void UpdateDocument(DocumentDto documentDto)
@@ -518,8 +529,8 @@ namespace Domain.Implementation
 
             documentDao.Parent = parentDao;
             documentDao.Name = documentDto.Name;
-            documentDao.ShortName = documentDto.ShortName;            
-            documentDao.DocumentParent = documentParentDao ?? null;
+            documentDao.ShortName = documentDto.ShortName;
+            documentDao.DocumentParent = documentParentDao;
             documentDao.DocumentType = documentTypeDao;
             documentDao.DocumentState = documentStateDao;
             documentDao.DocumentUser = documentUserDao;
@@ -654,22 +665,279 @@ namespace Domain.Implementation
 
         public ReportDto CreateReport(ReportDto reportDto)
         {
-            return null;
+            TreeDao parentDao = null;
+            if (reportDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)reportDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            DocumentDao documentParentDao = null;
+            if (reportDto.DocumentParentId != null)
+            {
+                documentParentDao = _treeRepository.GetDocument((Guid)reportDto.DocumentParentId);
+            }
+
+            var documentTypeDao = _treeRepository.GetDocumentType(reportDto.DocumentTypeId);
+            var documentStateDao = _treeRepository.GetTree(reportDto.DocumentStateId);
+            var documentUserDao = _treeRepository.GetUser(reportDto.DocumentUserId);
+            var reportTypeDao = _treeRepository.GetReportType(reportDto.ReportTypeId);
+            var recipientDao = _treeRepository.GetTree(reportDto.RecipientId);
+
+            var reportDao = new ReportDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = reportDto.Name,
+                ShortName = reportDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now,
+                DocumentParent = null,//documentParentDao ?? null,
+                DocumentType = documentTypeDao,
+                DocumentState = documentStateDao,
+                DocumentUser = documentUserDao,
+                Notes = reportDto.Notes,
+                ReportType = reportTypeDao,
+                Recipient = recipientDao,
+                FillingDate = reportDto.FillingDate,
+                ExpiryFillingDate = reportDto.ExpiryFillingDate
+            };
+
+            return _reportDtoFetcher.Fetch(new List<ReportDao> { _treeRepository.CreateReport(reportDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public ReportDto GetReport(Guid reportId)
         {
-            return null;
+            var reportDao = _treeRepository.GetReport(reportId);
+
+            return reportDao == null ? null : _reportDtoFetcher.Fetch(new List<ReportDao> { reportDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public List<ReportDto> GetReports()
         {
-            return null;
+            var reportDaos = _treeRepository.GetReports();
+
+            return reportDaos == null ? null : _reportDtoFetcher.Fetch(reportDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public void UpdateReport(ReportDto reportDto)
         {
-            
+            var reportDao = _treeRepository.GetReport(reportDto.Id);
+
+            var oldReportDto = _reportDtoFetcher.Fetch(new List<ReportDao> { reportDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+
+            if (!oldReportDto.CompareFull(reportDto))
+            {
+                var canUpdateReport = true;
+
+                if (!oldReportDto.CompareState(reportDto))//(reportDao.DocumentStateId != reportDto.DocumentStateId)
+                {
+                    // Подготавливаем запись об измении реквизитов отчетов. Для этого создаем документ с типом "Изменение реквизитов отчета"
+                    var changeStateParentDao = _treeRepository.GetTree(SystemObjects.AllDocumentChanges);
+                    var changeStateTypeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
+                    var changeStateStateDao = _treeRepository.GetTree(ObjectStates.osActive);
+                    var changeStateDocumentTypeDao = _treeRepository.GetDocumentType(DocumentTypes.dtReportChangeState);
+
+                    var changeStateDao = new DocumentDao
+                    {
+                        Id = Guid.NewGuid(),
+                        Parent = changeStateParentDao,
+                        Name = string.Format("Изменение состояния отчета '{0}'", reportDao.Name),
+                        ShortName = string.Empty,
+                        Type = changeStateTypeDao,
+                        State = changeStateStateDao,
+                        CreateDateTime = DateTime.Now,
+                        DocumentParent = reportDao,
+                        DocumentType = changeStateDocumentTypeDao,
+                        DocumentState = reportDao.DocumentState,
+                        DocumentUser = reportDao.DocumentUser,
+                        Notes = reportDao.Notes
+                    };
+
+                    canUpdateReport = _treeRepository.CreateDocument(changeStateDao) != null;
+                }
+
+                if (canUpdateReport)
+                {
+                    if (!oldReportDto.CompareDetails(reportDto))
+                    {
+                        TreeDao parentDao = null;
+                        if (reportDto.ParentId != null)
+                        {
+                            parentDao = _treeRepository.GetTree((Guid) reportDto.ParentId);
+                        }
+
+                        var typeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
+                        var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+                        DocumentDao documentParentDao = null;
+                        if (reportDto.DocumentParentId != null)
+                        {
+                            documentParentDao = _treeRepository.GetDocument((Guid) reportDto.DocumentParentId);
+                        }
+
+                        var documentTypeDao = _treeRepository.GetDocumentType(reportDto.DocumentTypeId);
+                        var documentStateDao = _treeRepository.GetTree(reportDto.DocumentStateId);
+                        var documentUserDao = _treeRepository.GetUser(reportDto.DocumentUserId);
+                        var reportTypeDao = _treeRepository.GetReportType(reportDto.ReportTypeId);
+                        var recipientDao = _treeRepository.GetTree(reportDto.RecipientId);
+
+                        reportDao.Parent = parentDao;
+                        reportDao.Name = reportDto.Name;
+                        reportDao.ShortName = reportDto.ShortName;
+                        reportDao.DocumentParent = documentParentDao;
+                        reportDao.DocumentType = documentTypeDao;
+                        reportDao.DocumentState = documentStateDao;
+                        reportDao.DocumentUser = documentUserDao;
+                        reportDao.Notes = reportDto.Notes;
+
+                        reportDao.ReportType = reportTypeDao;
+                        reportDao.Recipient = recipientDao;
+                        reportDao.FillingDate = reportDto.FillingDate;
+                        reportDao.ExpiryFillingDate = reportDto.ExpiryFillingDate;
+
+                        // Подготавливаем запись об измении реквизитов отчетов. Для этого создаем документ с типом "Изменение реквизитов отчета"
+                        var changeDetailsParentDao = _treeRepository.GetTree(SystemObjects.AllDocumentChanges);
+                        var changeDetailsTypeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
+                        var changeDetailsStateDao = _treeRepository.GetTree(ObjectStates.osActive);
+                        var changeDetailsDocumentTypeDao =
+                            _treeRepository.GetDocumentType(DocumentTypes.dtReportChangeDetails);
+
+                        var changeDetailsDao = new DocumentDao
+                        {
+                            Id = Guid.NewGuid(),
+                            Parent = changeDetailsParentDao,
+                            Name = string.Format("Изменение реквизитов отчета '{0}'", reportDao.Name),
+                            ShortName = string.Empty,
+                            Type = changeDetailsTypeDao,
+                            State = changeDetailsStateDao,
+                            CreateDateTime = DateTime.Now,
+                            DocumentParent = reportDao,
+                            DocumentType = changeDetailsDocumentTypeDao,
+                            DocumentState = reportDao.DocumentState,
+                            DocumentUser = reportDao.DocumentUser,
+                            Notes = reportDao.Notes
+                        };
+
+                        canUpdateReport = _treeRepository.CreateDocument(changeDetailsDao) != null;
+                    }
+                }
+
+                if (canUpdateReport)
+                {
+                    _treeRepository.UpdateReport(reportDao);
+                }
+            }
+        }
+
+        public void UpdateReportState(Guid reportId, Guid newStateId)
+        {
+            var reportDao = _treeRepository.GetReport(reportId);
+
+            if (reportDao.DocumentStateId != newStateId)
+            {
+                var newStateDao = _treeRepository.GetTree(newStateId);
+
+                reportDao.DocumentState = newStateDao;
+
+                // Подготавливаем запись об измении реквизитов отчетов. Для этого создаем документ с типом "Изменение реквизитов отчета"
+                var cParentDao = _treeRepository.GetTree(SystemObjects.AllDocumentChanges);
+                var cTypeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
+                var cStateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+                var cDao = new DocumentDao
+                {
+                    Id = Guid.NewGuid(),
+                    Parent = cParentDao,
+                    Name = string.Format("Изменение состояния отчета '{0}'", reportDao.Name),
+                    ShortName = string.Empty,
+                    Type = cTypeDao,
+                    State = cStateDao,
+                    CreateDateTime = DateTime.Now,
+                    DocumentParent = reportDao,
+                    DocumentType = reportDao.DocumentType,
+                    DocumentState = reportDao.DocumentState,
+                    DocumentUser = reportDao.DocumentUser,
+                    Notes = reportDao.Notes
+                };
+
+                if (_treeRepository.CreateDocument(cDao) != null)
+                {
+                    _treeRepository.UpdateReport(reportDao);
+                }
+            }
+        }
+
+        public void DeleteReport(Guid reportId)
+        {
+            var reportDao = _treeRepository.GetReport(reportId);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osDeleted);
+            reportDao.State = stateDao;
+
+            _treeRepository.UpdateReport(reportDao);
+        }
+
+        public JuridicalPersonDto CreateJuridicalPerson(JuridicalPersonDto juridicalPersonDto)
+        {
+            TreeDao parentDao = null;
+            if (juridicalPersonDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)juridicalPersonDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otJuridicalPerson);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            var juridicalPersonDao = new JuridicalPersonDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = juridicalPersonDto.Name,
+                ShortName = juridicalPersonDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now
+            };
+
+            return _juridicalPersonDtoFetcher.Fetch(new List<JuridicalPersonDao> { _treeRepository.CreateJuridicalPerson(juridicalPersonDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public JuridicalPersonDto GetJuridicalPerson(Guid juridicalPersonId)
+        {
+            var juridicalPersonDao = _treeRepository.GetJuridicalPerson(juridicalPersonId);
+
+            return juridicalPersonDao == null ? null : _juridicalPersonDtoFetcher.Fetch(new List<JuridicalPersonDao> { juridicalPersonDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<JuridicalPersonDto> GetJuridicalPersons()
+        {
+            var juridicalPersonDaos = _treeRepository.GetJuridicalPersons();
+
+            return juridicalPersonDaos == null ? null : _juridicalPersonDtoFetcher.Fetch(juridicalPersonDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
+        public void UpdateJuridicalPerson(JuridicalPersonDto juridicalPersonDto)
+        {
+            var juridicalPersonDao = _treeRepository.GetJuridicalPerson(juridicalPersonDto.Id);
+
+            TreeDao parentDao = null;
+            if (juridicalPersonDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)juridicalPersonDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(juridicalPersonDto.TypeId);
+            var stateDao = _treeRepository.GetTree(juridicalPersonDto.StateId);
+
+            juridicalPersonDao.Parent = parentDao;
+            juridicalPersonDao.Name = juridicalPersonDto.Name;
+            juridicalPersonDao.ShortName = juridicalPersonDto.ShortName;
+            juridicalPersonDao.Type = typeDao;
+            juridicalPersonDao.State = stateDao;
+
+            _treeRepository.UpdateJuridicalPerson(juridicalPersonDao);
         }
     }   
 }

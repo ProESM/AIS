@@ -79,6 +79,8 @@ namespace Domain
 
         List<DocumentDto> GetDocuments();
 
+        DocumentDto GetLastDocumentChange(Guid documentId);
+
         void UpdateDocument(DocumentDto documentDto);
 
         ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto);
@@ -103,7 +105,19 @@ namespace Domain
 
         List<ReportDto> GetReports();
 
-        void UpdateReport(ReportDto reportDto);        
+        void UpdateReport(ReportDto reportDto);
+
+        void UpdateReportState(Guid reportId, Guid newStateId);
+
+        void DeleteReport(Guid reportId);
+
+        JuridicalPersonDto CreateJuridicalPerson(JuridicalPersonDto juridicalPersonDto);
+
+        JuridicalPersonDto GetJuridicalPerson(Guid juridicalPersonId);
+
+        List<JuridicalPersonDto> GetJuridicalPersons();
+
+        void UpdateJuridicalPerson(JuridicalPersonDto juridicalPersonDto);
     }
 
 }

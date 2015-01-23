@@ -149,6 +149,26 @@ namespace TreeService
             _domainTreeService.UpdateDocumentType(documentTypeDto);
         }
 
+        public DocumentDto CreateDocument(DocumentDto documentDto)
+        {
+            return _domainTreeService.CreateDocument(documentDto);
+        }
+
+        public DocumentDto GetDocument(Guid documentId)
+        {
+            return _domainTreeService.GetDocument(documentId);
+        }
+
+        public List<DocumentDto> GetDocuments()
+        {
+            return _domainTreeService.GetDocuments();
+        }
+
+        public void UpdateDocument(DocumentDto documentDto)
+        {
+            _domainTreeService.UpdateDocument(documentDto);
+        }
+
         public ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto)
         {
             return _domainTreeService.CreateReportTypeGroup(reportTypeGroupDto);
@@ -187,6 +207,46 @@ namespace TreeService
         public void UpdateReportType(ReportTypeDto reportTypeDto)
         {
             _domainTreeService.UpdateReportType(reportTypeDto);
+        }
+
+        public ReportDto CreateReport(ReportDto reportDto)
+        {
+            return _domainTreeService.CreateReport(reportDto);
+        }
+
+        public ReportDto GetReport(Guid reportId)
+        {
+            return _domainTreeService.GetReport(reportId);
+        }
+
+        public List<ReportDto> GetReports()
+        {
+            return _domainTreeService.GetReports();
+        }
+
+        public void UpdateReport(ReportDto reportDto)
+        {
+            _domainTreeService.UpdateReport(reportDto);
+        }
+
+        public JuridicalPersonDto CreateJuridicalPerson(JuridicalPersonDto juridicalPersonDto)
+        {
+            return _domainTreeService.CreateJuridicalPerson(juridicalPersonDto);
+        }
+
+        public JuridicalPersonDto GetJuridicalPerson(Guid juridicalPersonId)
+        {
+            return _domainTreeService.GetJuridicalPerson(juridicalPersonId);
+        }
+
+        public List<JuridicalPersonDto> GetJuridicalPersons()
+        {
+            return _domainTreeService.GetJuridicalPersons();
+        }
+
+        public void UpdateJuridicalPerson(JuridicalPersonDto juridicalPersonDto)
+        {
+            _domainTreeService.UpdateJuridicalPerson(juridicalPersonDto);
         }
     }
 }

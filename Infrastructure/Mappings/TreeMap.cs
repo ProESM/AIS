@@ -47,7 +47,7 @@ namespace Infrastructure.Mappings
             Polymorphism.Explicit();                        
             //Polymorphism.Implicit();
             Cache.ReadWrite();
-            DiscriminateSubClassesOnColumn("").Formula("TYPE_ID");            
+            DiscriminateSubClassesOnColumn("").Formula("TYPE_ID");
         }        
     }
 }

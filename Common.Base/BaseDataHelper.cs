@@ -33,6 +33,11 @@ namespace Common.Base
             {
                 return true;
             }
+            if (typeof(ReportStates).GetFields().Select(fieldInfo => fieldInfo.GetValue(fieldInfo)).Any(fieldValue => (Guid)fieldValue == objectId))
+            {
+                return true;
+            }
+            
             return false;
         }
         
@@ -47,6 +52,8 @@ namespace Common.Base
             systemObjects.AddRange(typeof(UserGroups).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)));
 
             systemObjects.AddRange(typeof(DocumentTypes).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)));
+
+            systemObjects.AddRange(typeof(ReportStates).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)));
 
             return systemObjects;
         }
@@ -114,15 +121,70 @@ namespace Common.Base
         [Display(Name = "Все группы типов отчетов")]
         public static readonly Guid AllReportTypeGroups = new Guid("cfe82c85-73b8-4de2-8cdf-a4240048d161");
         /// <summary>
+        /// Все типы документов и их изменений
+        /// </summary>
+        [Display(Name = "Все типы документов и их изменений")]
+        public static readonly Guid AllDocumentAndDocumentChangeTypes = new Guid("bfb342d1-ea82-4858-8855-a42400405fca");
+        /// <summary>
         /// Все типы документов
         /// </summary>
         [Display(Name = "Все типы документов")]
-        public static readonly Guid AllDocumentTypes = new Guid("bfb342d1-ea82-4858-8855-a42400405fca");
+        public static readonly Guid AllDocumentTypes = new Guid("74fe0fca-0f3a-46c4-bd1e-a42800f1325b");
+        /// <summary>
+        /// Все типы изменений документов
+        /// </summary>
+        [Display(Name = "Все типы изменений документов")]
+        public static readonly Guid AllDocumentChangeTypes = new Guid("1aef999d-164d-4725-87bf-a42800f7f564");
+        /// <summary>
+        /// Все типы изменений отчетов
+        /// </summary>
+        [Display(Name = "Все типы изменений отчетов")]
+        public static readonly Guid AllReportChangeTypes = new Guid("c82dd2c4-efee-41c3-8bd8-a42800f82acf");
         /// <summary>
         /// Все типы отчетов
         /// </summary>
         [Display(Name = "Все типы отчетов")]
         public static readonly Guid AllReportTypes = new Guid("8ac93783-ed20-4e80-b1e2-a4240042535c");
+        /// <summary>
+        /// Все состояния документов
+        /// </summary>
+        [Display(Name = "Все состояния документов")]
+        public static readonly Guid AllDocumentStates = new Guid("8d3c9325-7b95-4d24-9037-a42800cd0a9c");
+        /// <summary>
+        /// Все состояния отчетов
+        /// </summary>
+        [Display(Name = "Все состояния отчетов")]
+        public static readonly Guid AllReportStates = new Guid("70613b46-d228-431b-996a-a42800dcedee");
+        /// <summary>
+        /// Все документы
+        /// </summary>
+        [Display(Name = "Все документы")]
+        public static readonly Guid AllDocuments = new Guid("d77ae2b8-25ff-40e6-9163-a4240048fad7");
+        /// <summary>
+        /// Все изменения документов, отчетов и т.п.
+        /// </summary>
+        [Display(Name = "Все изменения документов, отчетов и т.п.")]
+        public static readonly Guid AllDocumentChanges = new Guid("8f4bc2e3-1739-411e-994c-a424004e4635");
+        /// <summary>
+        /// Все отчеты
+        /// </summary>
+        [Display(Name = "Все отчеты")]
+        public static readonly Guid AllReports = new Guid("c8f7fb12-938e-4d13-ae2f-a4240049085e");
+        /// <summary>
+        /// Все юридические лица
+        /// </summary>
+        [Display(Name = "Все юридические лица")]
+        public static readonly Guid AllJuridicalPersons = new Guid("2829d1d6-69bb-4305-aab2-a42900e2676a");
+        /// <summary>
+        /// Общие юридические лица
+        /// </summary>
+        [Display(Name = "Общие юридические лица")]
+        public static readonly Guid AllCommonJuridicalPersons = new Guid("698cb357-96b0-49f1-a672-a42900e29f14");
+        /// <summary>
+        /// Служебные юридические лица
+        /// </summary>
+        [Display(Name = "Служебные юридические лица")]
+        public static readonly Guid AllSystemJuridicalPersons = new Guid("e633b705-5132-40d9-9d9e-a42900e2b429");
     }
 
     /// <summary>
@@ -206,8 +268,8 @@ namespace Common.Base
         /// Документы, отчеты, изменения документов и т.п.
         /// </summary>
         [Display(Name = "Документы, отчеты, изменения документов и т.п.")]
-        public static readonly Guid otDocument = new Guid("4C4B28AE-578B-4358-99EA-2860139ABD85");
-
+        public static readonly Guid otDocument = new Guid("4c4b28ae-578b-4358-99ea-2860139abd85");
+        
         /// <summary>
         /// Тип документа
         /// </summary>
@@ -230,7 +292,7 @@ namespace Common.Base
         /// Юридическое лицо
         /// </summary>
         [Display(Name = "Юридическое лицо")]
-        public static readonly Guid otJuridicalPerson = new Guid("88AD30FC-92A1-4EC3-B168-C9FED4CA2C9D");
+        public static readonly Guid otJuridicalPerson = new Guid("88ad30fc-92a1-4ec3-b168-c9fed4ca2c9d");
     }
 
     /// <summary>
@@ -256,6 +318,39 @@ namespace Common.Base
     /// </summary>
     public static class DocumentTypes
     {
+        /// <summary>
+        /// Отчет
+        /// </summary>
         public static readonly Guid dtReport = new Guid("79cf409a-1897-416d-95cd-f64e342b8312");
+        /// <summary>
+        /// Изменение реквизитов отчета
+        /// </summary>
+        public static readonly Guid dtReportChangeDetails = new Guid("f7683dc1-5c0b-44d1-91bb-a42800f0776d");
+        /// <summary>
+        /// Изменение данных в отчете
+        /// </summary>
+        public static readonly Guid dtReportChangeData = new Guid("e515cdba-3680-4b83-a2fb-a428010fc0c9");
+        /// <summary>
+        /// Изменение состояния отчета
+        /// </summary>
+        public static readonly Guid dtReportChangeState = new Guid("25d98903-06da-4283-83e4-a428011197f7");
+    }
+
+    /// <summary>
+    /// Состояния документов с типом "отчет"
+    /// </summary>    
+    public static class ReportStates
+    {
+        /// <summary>
+        /// Создан
+        /// </summary>
+        [Display(Name = "Создан")]
+        public static readonly Guid rsCreated = new Guid("8260de6e-58a6-4004-84fa-a42800de4837");
+
+        /// <summary>
+        /// Заполнен
+        /// </summary>
+        [Display(Name = "Заполнен")]
+        public static readonly Guid rsFilled = new Guid("37b959eb-f8e5-4ea6-97ed-a4290130d736");        
     }
 }

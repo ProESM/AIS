@@ -93,6 +93,18 @@ namespace TreeService
         void UpdateDocumentType(DocumentTypeDto documentTypeDto);
 
         [OperationContract]
+        DocumentDto CreateDocument(DocumentDto documentDto);
+
+        [OperationContract]
+        DocumentDto GetDocument(Guid documentId);
+
+        [OperationContract]
+        List<DocumentDto> GetDocuments();
+
+        [OperationContract]
+        void UpdateDocument(DocumentDto documentDto);
+
+        [OperationContract]
         ReportTypeGroupDto CreateReportTypeGroup(ReportTypeGroupDto reportTypeGroupDto);
 
         [OperationContract]
@@ -115,5 +127,29 @@ namespace TreeService
 
         [OperationContract]
         void UpdateReportType(ReportTypeDto reportTypeDto);
+
+        [OperationContract]
+        ReportDto CreateReport(ReportDto reportDto);
+
+        [OperationContract]
+        ReportDto GetReport(Guid reportId);
+
+        [OperationContract]
+        List<ReportDto> GetReports();
+
+        [OperationContract]
+        void UpdateReport(ReportDto reportDto);
+
+        [OperationContract]
+        JuridicalPersonDto CreateJuridicalPerson(JuridicalPersonDto juridicalPersonDto);
+
+        [OperationContract]
+        JuridicalPersonDto GetJuridicalPerson(Guid juridicalPersonId);
+
+        [OperationContract]
+        List<JuridicalPersonDto> GetJuridicalPersons();
+
+        [OperationContract]
+        void UpdateJuridicalPerson(JuridicalPersonDto juridicalPersonDto);
     }
 }

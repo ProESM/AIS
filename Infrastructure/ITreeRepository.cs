@@ -70,7 +70,9 @@ namespace Infrastructure
 
         List<DocumentDao> GetDocuments();
 
-        void UpdateDocument(DocumentDao documentDao);
+        DocumentDao GetLastDocumentChange(Guid documentId);
+
+        void UpdateDocument(DocumentDao reportDao);        
         
         ReportTypeGroupDao CreateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao);
 
@@ -95,5 +97,13 @@ namespace Infrastructure
         List<ReportDao> GetReports();
 
         void UpdateReport(ReportDao reportDao);
+
+        JuridicalPersonDao CreateJuridicalPerson(JuridicalPersonDao juridicalPersonDao);
+
+        JuridicalPersonDao GetJuridicalPerson(Guid juridicalPersonId);
+
+        List<JuridicalPersonDao> GetJuridicalPersons();
+
+        void UpdateJuridicalPerson(JuridicalPersonDao juridicalPersonDao);
     }
 }

@@ -14,4 +14,3 @@ D:\git\AIS\Common.Base\bin\Debug\NHibernate.xml
 D:\git\AIS\Common.Base\bin\Debug\Ninject.xml
 D:\git\AIS\Common.Base\obj\Debug\Common.Base.dll
 D:\git\AIS\Common.Base\obj\Debug\Common.Base.pdb
-D:\git\AIS\Common.Base\obj\Debug\Common.Base.csprojResolveAssemblyReference.cache

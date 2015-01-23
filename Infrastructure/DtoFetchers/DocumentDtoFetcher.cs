@@ -39,7 +39,7 @@ namespace Infrastructure.DtoFetchers
                 .Map(d => d.StateId, e => e.State.Id)
                 .Map(d => d.CreateDateTime, e => e.CreateDateTime)
                 .Map(d => d.DocumentParentId, e => e.DocumentParentId)
-                .Map(d => d.DocumentParentName, e => e.DocumentParent.Name)
+                .Map(d => d.DocumentParentName, e => e.DocumentParentName)
                 .Map(d => d.DocumentTypeId, e => e.DocumentTypeId)
                 .Map(d => d.DocumentTypeName, e => e.DocumentType.Name)
                 .Map(d => d.DocumentStateId, e => e.DocumentStateId)
@@ -74,7 +74,7 @@ namespace Infrastructure.DtoFetchers
                 .Map(d => d.StateId, e => e.State.Id)
                 .Map(d => d.CreateDateTime, e => e.CreateDateTime)
                 .Map(d => d.DocumentParentId, e => e.DocumentParentId)
-                .Map(d => d.DocumentParentName, e => e.DocumentParent.Name)
+                .Map(d => d.DocumentParentName, e => e.DocumentParentName)
                 .Map(d => d.DocumentTypeId, e => e.DocumentTypeId)
                 .Map(d => d.DocumentTypeName, e => e.DocumentType.Name)
                 .Map(d => d.DocumentStateId, e => e.DocumentStateId)
@@ -82,7 +82,7 @@ namespace Infrastructure.DtoFetchers
                 .Map(d => d.DocumentUserId, e => e.DocumentUserId)
                 .Map(d => d.DocumentUserName, e => e.DocumentUser.Name)
                 .Map(d => d.Notes, e => e.Notes)
-                ;
+                ;            
 
             MapSpecificForCard(map);
         }
