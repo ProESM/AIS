@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot\AIS_TreeService</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Common.Base.dll">
+      <publishTime>01/22/2015 22:05:51</publishTime>
+    </File>
+    <File Include="bin/Common.Base.pdb">
+      <publishTime>01/22/2015 22:05:51</publishTime>
+    </File>
+    <File Include="bin/Common.Base.Web.dll">
+      <publishTime>01/22/2015 22:05:54</publishTime>
+    </File>
+    <File Include="bin/Common.Base.Web.pdb">
+      <publishTime>01/22/2015 22:05:54</publishTime>
+    </File>
+    <File Include="bin/Domain.dll">
+      <publishTime>01/22/2015 22:05:51</publishTime>
+    </File>
+    <File Include="bin/Domain.Implementation.dll">
+      <publishTime>01/22/2015 22:05:53</publishTime>
+    </File>
+    <File Include="bin/Domain.Implementation.pdb">
+      <publishTime>01/22/2015 22:05:53</publishTime>
+    </File>
+    <File Include="bin/Domain.pdb">
+      <publishTime>01/22/2015 22:05:51</publishTime>
+    </File>
+    <File Include="bin/DTO.dll">
+      <publishTime>01/22/2015 22:05:51</publishTime>
+    </File>
+    <File Include="bin/DTO.pdb">
+      <publishTime>01/22/2015 22:05:51</publishTime>
+    </File>
+    <File Include="bin/FirebirdSql.Data.FirebirdClient.dll">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="bin/FirebirdSql.Data.FirebirdClient.pdb">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="bin/FluentNHibernate.dll">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="bin/FluentNHibernate.pdb">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="bin/Iesi.Collections.dll">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="bin/Infrastructure.dll">
+      <publishTime>01/22/2015 22:05:52</publishTime>
+    </File>
+    <File Include="bin/Infrastructure.pdb">
+      <publishTime>01/22/2015 22:05:52</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>01/22/2015 09:34:05</publishTime>
+    </File>
+    <File Include="bin/NHibernate.dll">
+      <publishTime>01/22/2015 09:34:05</publishTime>
+    </File>
+    <File Include="bin/NHibernate.Mapping.Attributes.dll">
+      <publishTime>01/22/2015 09:34:05</publishTime>
+    </File>
+    <File Include="bin/Ninject.dll">
+      <publishTime>01/22/2015 09:34:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>01/22/2015 09:34:05</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>01/22/2015 09:34:05</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>01/22/2015 09:34:05</publishTime>
+    </File>
+    <File Include="bin/TreeService.dll">
+      <publishTime>01/22/2015 22:05:55</publishTime>
+    </File>
+    <File Include="bin/TreeService.pdb">
+      <publishTime>01/22/2015 22:05:55</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>01/22/2015 09:34:04</publishTime>
+    </File>
+    <File Include="TreeService.svc">
+      <publishTime>01/22/2015 09:34:03</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/22/2015 22:06:01</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

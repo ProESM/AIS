@@ -1,0 +1,12 @@
+D:\git\AIS\TestConsole\bin\Debug\TestConsole.exe.config
+D:\git\AIS\TestConsole\obj\Debug\TestConsole.exe
+D:\git\AIS\TestConsole\obj\Debug\TestConsole.pdb
+D:\git\AIS\TestConsole\bin\Debug\TestConsole.exe
+D:\git\AIS\TestConsole\bin\Debug\TestConsole.pdb
+D:\git\AIS\TestConsole\bin\Debug\Common.Base.dll
+D:\git\AIS\TestConsole\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
+D:\git\AIS\TestConsole\bin\Debug\Common.Base.pdb
+D:\git\AIS\TestConsole\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
+D:\git\AIS\TestConsole\obj\Debug\TestConsole.csprojResolveAssemblyReference.cache
+D:\git\AIS\TestConsole\bin\Debug\Newtonsoft.Json.dll
+D:\git\AIS\TestConsole\bin\Debug\Newtonsoft.Json.xml
