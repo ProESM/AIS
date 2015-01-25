@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,23 +16,28 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\users.xls;Extended Properties=Excel 8.0");
+            OleDbDataAdapter da = new OleDbDataAdapter("select * from [users$]", con);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            
             //var passwordMd5 = CryptHelper.GetMd5Hash("123456");
             //var salt = CryptHelper.GenerateSalt("user", passwordMd5, 12);
             //var passwordWithSaltMd5 = CryptHelper.GetMd5Hash(passwordMd5+salt);            
 
-            var treeServiceClient = new TreeServiceReference.TreeServiceClient();
+            //var treeServiceClient = new TreeServiceReference.TreeServiceClient();
 
-            treeServiceClient.ClientCredentials.UserName.UserName = "user";
-            treeServiceClient.ClientCredentials.UserName.Password = "123456";
+            //treeServiceClient.ClientCredentials.UserName.UserName = "user";
+            //treeServiceClient.ClientCredentials.UserName.Password = "123456";
 
-            var r = treeServiceClient.GetReport(new Guid("84f4dd1c-fadb-4add-a355-a42900a252b0"));
+            //var r = treeServiceClient.GetReport(new Guid("84f4dd1c-fadb-4add-a355-a42900a252b0"));
 
-            r.Name = "Тестовый отчет";
-            r.DocumentStateId = ReportStates.rsCreated;
+            //r.Name = "Тестовый отчет";
+            //r.DocumentStateId = ReportStates.rsCreated;
 
-            treeServiceClient.UpdateReport(r);
-            
-            var so = treeServiceClient.GetSystemObjects();
+            //treeServiceClient.UpdateReport(r);
+
+            //var so = treeServiceClient.GetSystemObjects();
 
             //var strees = treeServiceClient.SearchTreesByText("Настрой", SystemObjects.Root, new Guid[] { }, new Guid[] { }, SystemObjects.Root);
 

@@ -9,6 +9,9 @@ using Newtonsoft.Json;
 
 namespace DTO
 {
+    /// <summary>
+    /// Класс DTO восстановления пароля
+    /// </summary>
     public class RecoveryPasswordDto: BaseDto
     {
         /// <summary>

@@ -105,6 +105,8 @@ namespace Domain
 
         List<ReportDto> GetReports();
 
+        List<ReportDto> GetReportsByType(Guid reportTypeId);
+
         void UpdateReport(ReportDto reportDto);
 
         void UpdateReportState(Guid reportId, Guid newStateId);
@@ -118,6 +120,18 @@ namespace Domain
         List<JuridicalPersonDto> GetJuridicalPersons();
 
         void UpdateJuridicalPerson(JuridicalPersonDto juridicalPersonDto);
+
+        ReportDataDto CreateReportData(ReportDataDto reportDataDto);
+
+        ReportDataDto GetReportData(Guid reportDataId);
+
+        List<ReportDataDto> GetReportDataByReportAndPage(Guid reportId, int page);
+
+        void UpdateReportData(ReportDataDto reportDataDto);
+
+        void DeleteReportData(Guid reportDataId);
+
+        void DeleteReportDataByReport(Guid reportId);
     }
 
 }

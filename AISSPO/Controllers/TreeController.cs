@@ -32,8 +32,8 @@ namespace AISSPO.Controllers
         }
 
         [IntegrationAuthentication]
-        [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get")]        
-        public IEnumerable<VirtualTreeDto> Get()        
+        [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get")]
+        public IEnumerable<VirtualTreeDto> Get()
         {
             var treeDtos = _treeService.GetTrees(SystemObjects.Root, SystemObjects.Root);
             var trees = treeDtos.Select(t => new VirtualTreeDto
@@ -50,7 +50,7 @@ namespace AISSPO.Controllers
         }
 
         [IntegrationAuthentication]
-        [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get2")]        
+        [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get2")]
         public string Get2()
         {
 
@@ -69,10 +69,10 @@ namespace AISSPO.Controllers
 
             return "Hello, World2!";
         }
-        
+
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("AuthenticateUser")]
-        public PersonalUserDto AuthenticateUser(AuthenticationUserDto authenticationUser)        
-        {            
+        public PersonalUserDto AuthenticateUser(AuthenticationUserDto authenticationUser)
+        {
             var user = _treeService.AuthenticateUser(authenticationUser.Login, authenticationUser.Password);
 
             if (user == null)
@@ -110,11 +110,11 @@ namespace AISSPO.Controllers
             }
 
             return personalUserDto;
-            
+
             //return new DataContractJsonResult(personalUserDto, JsonRequestBehavior.AllowGet);
             //return Json(personalUserDto);
         }
-        
+
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("RegisterUser")]
         public PersonalUserDto RegisterUser(RegistrationUserDto registrationUser)
         {
@@ -127,7 +127,7 @@ namespace AISSPO.Controllers
             }
 
             var user = _treeService.RegisterUser(registrationUser);
-            
+
             if (user == null)
             {
                 return null;
@@ -152,11 +152,11 @@ namespace AISSPO.Controllers
                 personalUserDto.FirstName = person.FirstName;
                 personalUserDto.Patronymic = person.Patronymic;
                 personalUserDto.BirthDate = person.BirthDate;
-            }            
+            }
 
             return personalUserDto;
         }
-        
+
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("RecoveryPassword")]
         public RecoveryPasswordDto RecoveryPassword(EmailDto email)
         {
@@ -169,7 +169,7 @@ namespace AISSPO.Controllers
 
             var newPassword = PasswordHelper.CreateRandomPassword(8);
 
-            user.Password = newPassword;            
+            user.Password = newPassword;
 
             var recoveryPasswordDto = new RecoveryPasswordDto
             {
@@ -181,11 +181,11 @@ namespace AISSPO.Controllers
 
             return recoveryPasswordDto;
         }
-        
+
         [System.Web.Http.HttpGet, System.Web.Http.ActionName("Check")]
         public bool Check()
         {
-            var u = CreateReportTypeGroup("Тестовая группа отчетов");
+            //var u = CreateReportTypeGroup("Тестовая группа отчетов");
 
             //var authenticationUserDto = new AuthenticationUserDto
             //{
@@ -195,18 +195,18 @@ namespace AISSPO.Controllers
 
             //var u = AuthenticateUser(authenticationUserDto);
 
-            return (u != null);
+            return true;
         }
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("CreateReportTypeGroup")]
-        public ReportTypeGroupDto CreateReportTypeGroup(string name)
+        public ReportTypeGroupDto CreateReportTypeGroup(WebNameDto webNameDto)
         {
             var reportTypeGroupDto = new ReportTypeGroupDto
             {
                 Id = Guid.NewGuid(),
                 ParentId = SystemObjects.AllReportTypeGroups,
-                Name = name,
+                Name = webNameDto.Name,
                 ShortName = "",
                 TypeId = ObjectTypes.otReportTypeGroup,
                 StateId = ObjectStates.osActive,
@@ -218,9 +218,9 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReportTypeGroup")]
-        public ReportTypeGroupDto GetReportTypeGroup(Guid id)
+        public ReportTypeGroupDto GetReportTypeGroup(WebIdDto webIdDto)
         {
-            return _treeService.GetReportTypeGroup(id);
+            return _treeService.GetReportTypeGroup(webIdDto.Id);
         }
 
         [IntegrationAuthentication]
@@ -240,9 +240,9 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("DeleteReportTypeGroup")]
-        public ReportTypeGroupDto DeleteReportTypeGroup(Guid id)
+        public ReportTypeGroupDto DeleteReportTypeGroup(WebIdDto webIdDto)
         {
-            var reportTypeGroupDto = _treeService.GetReportTypeGroup(id);
+            var reportTypeGroupDto = _treeService.GetReportTypeGroup(webIdDto.Id);
             reportTypeGroupDto.StateId = ObjectStates.osDeleted;
             _treeService.UpdateReportTypeGroup(reportTypeGroupDto);
             return _treeService.GetReportTypeGroup(reportTypeGroupDto.Id);
@@ -270,9 +270,9 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReportType")]
-        public ReportTypeDto GetReportType(Guid id)
+        public ReportTypeDto GetReportType(WebIdDto webIdDto)
         {
-            return _treeService.GetReportType(id);
+            return _treeService.GetReportType(webIdDto.Id);
         }
 
         [IntegrationAuthentication]
@@ -285,7 +285,7 @@ namespace AISSPO.Controllers
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("UpdateReportType")]
         public ReportTypeDto UpdateReportType(WebUpdateReportTypeDto reportTypeDto)
-        {            
+        {
             var rtDto = _treeService.GetReportType(reportTypeDto.Id);
             rtDto.Name = reportTypeDto.Name;
             rtDto.GroupId = reportTypeDto.GroupId;
@@ -297,9 +297,9 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("DeleteReportType")]
-        public ReportTypeDto DeleteReportType(Guid id)
+        public ReportTypeDto DeleteReportType(WebIdDto webIdDto)
         {
-            var reportTypeDto = _treeService.GetReportType(id);
+            var reportTypeDto = _treeService.GetReportType(webIdDto.Id);
             reportTypeDto.StateId = ObjectStates.osDeleted;
             _treeService.UpdateReportType(reportTypeDto);
             return _treeService.GetReportType(reportTypeDto.Id);
@@ -325,9 +325,9 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetJuridicalPerson")]
-        public JuridicalPersonDto GetJuridicalPerson(Guid id)
+        public JuridicalPersonDto GetJuridicalPerson(WebIdDto webIdDto)
         {
-            return _treeService.GetJuridicalPerson(id);
+            return _treeService.GetJuridicalPerson(webIdDto.Id);
         }
 
         [IntegrationAuthentication]
@@ -361,18 +361,18 @@ namespace AISSPO.Controllers
                 RecipientId = webReportDto.RecipientId,
                 FillingDate = webReportDto.FillingDate,
                 ExpiryFillingDate = webReportDto.ExpiryFillingDate
-            };            
+            };
 
             return _treeService.CreateReport(reportDto);
         }
 
         [IntegrationAuthentication]
-        [System.Web.Http.HttpPost, System.Web.Http.ActionName("UpdateReport")]
-        public WebReportDto GetReport(Guid id)
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReport")]
+        public WebReportDto GetReport(WebIdDto webIdDto)
         {
-            var reportDto = _treeService.GetReport(id);
+            var reportDto = _treeService.GetReport(webIdDto.Id);
 
-            var lastDocumentChangeDto = _treeService.GetLastDocumentChange(id);
+            var lastDocumentChangeDto = _treeService.GetLastDocumentChange(webIdDto.Id);
 
             var r = new WebReportDto
             {
@@ -410,6 +410,13 @@ namespace AISSPO.Controllers
         }
 
         [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReportsByType")]
+        public List<ReportDto> GetReportsByType(WebIdDto webIdDto)
+        {
+            return _treeService.GetReportsByType(webIdDto.Id);
+        }
+
+        [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("UpdateReport")]
         public ReportDto UpdateReport(WebUpdateReportDto webReportDto)
         {
@@ -432,10 +439,62 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("DeleteReport")]
-        public ReportDto DeleteReport(Guid id)
-        {            
-            _treeService.DeleteReport(id);
-            return _treeService.GetReport(id);
+        public ReportDto DeleteReport(WebIdDto webIdDto)
+        {
+            _treeService.DeleteReport(webIdDto.Id);
+            return _treeService.GetReport(webIdDto.Id);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("CreateReportData")]
+        public ReportDataDto CreateReportData(WebCreateReportDataDto webReportDataDto)
+        {
+            var reportDataDto = new ReportDataDto
+            {
+                Id = Guid.NewGuid(),
+                ReportId = webReportDataDto.ReportId,
+                Column = webReportDataDto.Column,
+                Row = webReportDataDto.Row,
+                Page = webReportDataDto.Page,
+                Value = webReportDataDto.Value
+            };
+
+            return _treeService.CreateReportData(reportDataDto);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReportData")]
+        public ReportDataDto GetReportData(WebIdDto webIdDto)
+        {
+            return _treeService.GetReportData(webIdDto.Id);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReportDataByReportAndPage")]
+        public List<ReportDataDto> GetReportDataByReportAndPage(WebReportDataByReportAndPageDto webReportDataDto)
+        {
+            return _treeService.GetReportDataByReportAndPage(webReportDataDto.ReportId, webReportDataDto.Page);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("UpdateReportData")]
+        public void UpdateReportData(ReportDataDto reportDataDto)
+        {
+            _treeService.UpdateReportData(reportDataDto);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("DeleteReportData")]
+        public void DeleteReportData(WebIdDto webIdDto)
+        {
+            _treeService.DeleteReportData(webIdDto.Id);
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("DeleteReportDataByReport")]
+        public void DeleteReportDataByReport(WebIdDto webIdDto)
+        {
+            _treeService.DeleteReportDataByReport(webIdDto.Id);
         }
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="BaseTreeDto.cs" />
     <Compile Include="RecoveryPasswordDto.cs" />
     <Compile Include="RegistrationUserDto.cs" />
+    <Compile Include="ReportDataDto.cs" />
     <Compile Include="ReportDto.cs" />
     <Compile Include="ReportTypeDto.cs" />
     <Compile Include="ReportTypeGroupDto.cs" />
@@ -78,9 +79,13 @@
     <Compile Include="UserDto.cs" />
     <Compile Include="VirtualTreeDto.cs" />
     <Compile Include="Web\EmailDto.cs" />
+    <Compile Include="Web\WebCreateReportDataDto.cs" />
     <Compile Include="Web\WebCreateReportDto.cs" />
     <Compile Include="Web\WebCreateReportTypeDto.cs" />
     <Compile Include="Web\WebCreateJuridicalPersonDto.cs" />
+    <Compile Include="Web\WebIdDto.cs" />
+    <Compile Include="Web\WebNameDto.cs" />
+    <Compile Include="Web\WebReportDataByReportAndPageDto.cs" />
     <Compile Include="Web\WebReportDto.cs" />
     <Compile Include="Web\WebUpdateReportDto.cs" />
     <Compile Include="Web\WebUpdateReportTypeDto.cs" />

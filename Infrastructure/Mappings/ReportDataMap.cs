@@ -31,8 +31,6 @@ namespace Infrastructure.Mappings
             Map(x => x.Value)
                 .Column("VALUE")
                 .Nullable();
-            //Polymorphism.Explicit();
-            //Polymorphism.Implicit();
             Cache.ReadWrite();
         }
     }

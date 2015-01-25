@@ -96,6 +96,8 @@ namespace Infrastructure
 
         List<ReportDao> GetReports();
 
+        List<ReportDao> GetReportsByType(Guid reportTypeId);
+
         void UpdateReport(ReportDao reportDao);
 
         JuridicalPersonDao CreateJuridicalPerson(JuridicalPersonDao juridicalPersonDao);
@@ -105,5 +107,17 @@ namespace Infrastructure
         List<JuridicalPersonDao> GetJuridicalPersons();
 
         void UpdateJuridicalPerson(JuridicalPersonDao juridicalPersonDao);
+
+        ReportDataDao CreateReportData(ReportDataDao reportDataDao);
+
+        ReportDataDao GetReportData(Guid reportDataId);
+
+        List<ReportDataDao> GetReportDataByReportAndPage(Guid reportId, int page);
+
+        void UpdateReportData(ReportDataDao reportDataDao);
+
+        void DeleteReportData(Guid reportDataId);
+
+        void DeleteReportDataByReport(Guid reportId);
     }
 }

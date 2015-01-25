@@ -79,6 +79,7 @@
     <Compile Include="DtoFetchers\IFetchDtoMap.cs" />
     <Compile Include="DtoFetchers\JuridicalPersonDtoFetcher.cs" />
     <Compile Include="DtoFetchers\PersonDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\ReportDataDtoFetcher.cs" />
     <Compile Include="DtoFetchers\ReportDtoFetcher.cs" />
     <Compile Include="DtoFetchers\ReportTypeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeTypeDtoFetchers\ReportTypeGroupDtoFetcher.cs" />

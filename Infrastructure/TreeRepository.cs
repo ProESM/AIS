@@ -502,8 +502,8 @@ namespace Infrastructure
             using (var transaction = _session.StartTransaction())
             {
                 return _session.Query<DocumentDao>()
-                    .Where(p => p.DocumentParentId.ToString() == documentId.ToString())
-                    .Where(p => p.DocumentType.ParentId == SystemObjects.AllReportChangeTypes)
+                    .Where(p => p.DocumentParent.Id.ToString() == documentId.ToString())
+                    .Where(p => p.DocumentType.Parent.Id == SystemObjects.AllReportChangeTypes)
                     .OrderByDescending(p => p.CreateDateTime).FirstOrDefault();
             }
         }
@@ -619,6 +619,16 @@ namespace Infrastructure
             }
         }
 
+        public List<ReportDao> GetReportsByType(Guid reportTypeId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportDao>().
+                    Where(p => p.ReportType.Id.ToString() == reportTypeId.ToString()).
+                    Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
         public void UpdateReport(ReportDao reportDao)
         {
             using (var transaction = _session.StartTransaction())
@@ -660,7 +670,71 @@ namespace Infrastructure
         {
             using (var transaction = _session.StartTransaction())
             {
-                _session.SaveOrUpdate(juridicalPersonDao);
+                _session.Save(juridicalPersonDao);
+                transaction.Commit();
+            }
+        }
+
+        public ReportDataDao CreateReportData(ReportDataDao reportDataDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(reportDataDao);
+                transaction.Commit();
+                return _session.Query<ReportDataDao>().FirstOrDefault(p => p.Id.ToString() == reportDataDao.Id.ToString());
+            }
+        }
+
+        public ReportDataDao GetReportData(Guid reportDataId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<ReportDataDao>().FirstOrDefault(p => p.Id.ToString() == reportDataId.ToString());
+            }
+        }
+
+        public List<ReportDataDao> GetReportDataByReportAndPage(Guid reportId, int page)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return
+                    _session.Query<ReportDataDao>()
+                        .Where(p => p.Report.Id.ToString() == reportId.ToString())
+                        .Where(p => p.Page == page)
+                        .ToList();
+            }
+        }
+
+        public void UpdateReportData(ReportDataDao reportDataDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.SaveOrUpdate(reportDataDao);
+                transaction.Commit();
+            }
+        }
+
+        public void DeleteReportData(Guid reportDataId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                var reportDataDao = _session.Query<ReportDataDao>().FirstOrDefault(p => p.Id.ToString() == reportDataId.ToString());
+                _session.Delete(reportDataDao);
+                transaction.Commit();
+            }
+        }
+
+        public void DeleteReportDataByReport(Guid reportId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                var reportDataDaos = _session.Query<ReportDataDao>().Where(p => p.Report.Id.ToString() == reportId.ToString()).ToList();
+                
+                var queryString = string.Format("delete from l_report_data where group_id = :groupId");
+                _session.CreateQuery(queryString)
+                       .SetParameter("groupId", reportId)
+                       .ExecuteUpdate();
+
                 transaction.Commit();
             }
         }

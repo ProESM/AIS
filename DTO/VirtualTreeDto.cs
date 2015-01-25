@@ -9,6 +9,9 @@ using Newtonsoft.Json;
 
 namespace DTO
 {
+    /// <summary>
+    /// Расширенный класс DAO объекта виртуального дерева
+    /// </summary>
     public class VirtualTreeDto : TreeDto
     {
         /// <summary>

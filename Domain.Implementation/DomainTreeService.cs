@@ -31,6 +31,7 @@ namespace Domain.Implementation
         private readonly IDtoFetcher<DocumentDao, DocumentDto> _documentDtoFetcher;
         private readonly IDtoFetcher<ReportDao, ReportDto> _reportDtoFetcher;
         private readonly IDtoFetcher<JuridicalPersonDao, JuridicalPersonDto> _juridicalPersonDtoFetcher;
+        private readonly IDtoFetcher<ReportDataDao, ReportDataDto> _reportDataDtoFetcher;
 
         public DomainTreeService()
         {
@@ -48,6 +49,7 @@ namespace Domain.Implementation
             _documentDtoFetcher = new DocumentDtoFetcher(_treeRepository);
             _reportDtoFetcher = new ReportDtoFetcher(_treeRepository);
             _juridicalPersonDtoFetcher = new JuridicalPersonDtoFetcher(_treeRepository);
+            _reportDataDtoFetcher = new ReportDataDtoFetcher(_treeRepository);
         }
 
         public List<Guid> GetSystemObjects()
@@ -723,6 +725,13 @@ namespace Domain.Implementation
             return reportDaos == null ? null : _reportDtoFetcher.Fetch(reportDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
+        public List<ReportDto> GetReportsByType(Guid reportTypeId)
+        {
+            var reportDaos = _treeRepository.GetReportsByType(reportTypeId);
+
+            return reportDaos == null ? null : _reportDtoFetcher.Fetch(reportDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
         public void UpdateReport(ReportDto reportDto)
         {
             var reportDao = _treeRepository.GetReport(reportDto.Id);
@@ -938,6 +947,62 @@ namespace Domain.Implementation
             juridicalPersonDao.State = stateDao;
 
             _treeRepository.UpdateJuridicalPerson(juridicalPersonDao);
+        }
+
+        public ReportDataDto CreateReportData(ReportDataDto reportDataDto)
+        {
+            var reportDao = _treeRepository.GetReport(reportDataDto.ReportId);
+
+            var reportDataDao = new ReportDataDao
+            {
+                Id = Guid.NewGuid(),
+                Report = reportDao,
+                Column = reportDataDto.Column,
+                Row = reportDataDto.Row,
+                Page = reportDataDto.Page,
+                Value = reportDataDto.Value
+            };
+
+            return _reportDataDtoFetcher.Fetch(new List<ReportDataDao> { _treeRepository.CreateReportData(reportDataDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public ReportDataDto GetReportData(Guid reportDataId)
+        {
+            var reportDataDao = _treeRepository.GetReportData(reportDataId);
+
+            return reportDataDao == null ? null : _reportDataDtoFetcher.Fetch(new List<ReportDataDao> { reportDataDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<ReportDataDto> GetReportDataByReportAndPage(Guid reportId, int page)
+        {
+            var reportDataDaos = _treeRepository.GetReportDataByReportAndPage(reportId, page);
+
+            return reportDataDaos == null ? null : _reportDataDtoFetcher.Fetch(reportDataDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
+        public void UpdateReportData(ReportDataDto reportDataDto)
+        {
+            var reportDataDao = _treeRepository.GetReportData(reportDataDto.Id);
+
+            var reportDao = _treeRepository.GetReport(reportDataDto.ReportId);
+
+            reportDataDao.Report = reportDao;
+            reportDataDao.Column = reportDataDto.Column;
+            reportDataDao.Row = reportDataDto.Row;
+            reportDataDao.Page = reportDataDto.Page;
+            reportDataDao.Value = reportDataDto.Value;
+
+            _treeRepository.UpdateReportData(reportDataDao);
+        }
+
+        public void DeleteReportData(Guid reportDataId)
+        {
+            _treeRepository.DeleteReportData(reportDataId);
+        }
+
+        public void DeleteReportDataByReport(Guid reportId)
+        {
+            _treeRepository.DeleteReportDataByReport(reportId);
         }
     }   
 }

@@ -17,14 +17,14 @@ namespace DTO.Web
     public class WebReportDto : ReportDto
     {
         /// <summary>
-        /// Id последнего пользователя, которыл вносил изменения
+        /// Id последнего пользователя, который вносил изменения
         /// </summary>
         [Display(Name = "Id последнего пользователя, которыл вносил изменения")]
         [DataMember]
         [JsonProperty(PropertyName = "LastChangeUserId")]
         public Guid LastChangeUserId { get; set; }
         /// <summary>
-        /// Имя последнего пользователя, которыл вносил изменения
+        /// Имя последнего пользователя, который вносил изменения
         /// </summary>
         [Display(Name = "Имя последнего пользователя, которыл вносил изменения")]
         [DataMember]
