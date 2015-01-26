@@ -39,6 +39,7 @@ namespace AISSPO.Attributes
             if (CryptHelper.GetMd5Hash(CryptHelper.GetMd5Hash(password) + user.Salt) != user.Password)
                 return false;
 
+            SystemUser.Id = user.Id;
             return true;
         }
     }

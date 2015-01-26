@@ -339,19 +339,19 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("CreateReport")]
-        public ReportDto CreateReport(WebCreateReportDto webReportDto)
+        public ReportDto CreateReport(WebCreateReportDto webReportDto)        
         {
             var reportDto = new ReportDto
             {
                 Id = Guid.NewGuid(),
                 ParentId = SystemObjects.AllReports,
-                Name = webReportDto.Name,
+                Name = webReportDto.Name ?? "",
                 ShortName = "",
                 TypeId = ObjectTypes.otDocument,
                 StateId = ObjectStates.osActive,
                 CreateDateTime = DateTime.Now,
 
-                DocumentParentId = null,
+                //DocumentParentId = null,
                 DocumentTypeId = DocumentTypes.dtReport,
                 DocumentStateId = ReportStates.rsCreated,
                 DocumentUserId = SystemUser.Id,

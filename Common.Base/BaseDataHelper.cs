@@ -74,7 +74,7 @@ namespace Common.Base
         /// Корень (родитель) всех объектов
         /// </summary>
         [Display(Name = "Корень (родитель) всех объектов")]
-        public static readonly Guid Root = new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B");                                                     
+        public static readonly Guid Root = new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B");
         /// <summary>
         /// Настройки системы
         /// </summary>
@@ -109,7 +109,17 @@ namespace Common.Base
         /// Все люди (физические лица)
         /// </summary>
         [Display(Name = "Все люди (физические лица)")]
-        public static readonly Guid AllPeople = new Guid("E756FE32-EB84-4A79-BC3B-B73971F25BB4");
+        public static readonly Guid AllPeople = new Guid("e756fe32-eb84-4a79-bc3b-b73971f25bb4");
+        /// <summary>
+        /// Общие физические лица
+        /// </summary>
+        [Display(Name = "Общие физические лица")]
+        public static readonly Guid AllCommonPeople = new Guid("9e012798-95c7-4d71-acfc-a42500143ca0");
+        /// <summary>
+        /// Системные физические лица
+        /// </summary>
+        [Display(Name = "Системные физические лица")]
+        public static readonly Guid AllSystemPeople = new Guid("db8da5e6-b002-4d69-aa70-a42c00e395db");
         /// <summary>
         /// Настройки документооборота
         /// </summary>

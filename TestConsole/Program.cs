@@ -16,21 +16,42 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\users.xls;Extended Properties=Excel 8.0");
-            OleDbDataAdapter da = new OleDbDataAdapter("select * from [users$]", con);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            //OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\users.xls;Extended Properties=Excel 8.0");
+            //OleDbDataAdapter da = new OleDbDataAdapter("select * from [users$]", con);
+            //DataTable dt = new DataTable();
+            //da.Fill(dt);
             
             //var passwordMd5 = CryptHelper.GetMd5Hash("123456");
             //var salt = CryptHelper.GenerateSalt("user", passwordMd5, 12);
             //var passwordWithSaltMd5 = CryptHelper.GetMd5Hash(passwordMd5+salt);            
 
-            //var treeServiceClient = new TreeServiceReference.TreeServiceClient();
+            var treeServiceClient = new TreeServiceReference.TreeServiceClient();
 
-            //treeServiceClient.ClientCredentials.UserName.UserName = "user";
-            //treeServiceClient.ClientCredentials.UserName.Password = "123456";
+            treeServiceClient.ClientCredentials.UserName.UserName = "user";
+            treeServiceClient.ClientCredentials.UserName.Password = "123456";
 
-            //var r = treeServiceClient.GetReport(new Guid("84f4dd1c-fadb-4add-a355-a42900a252b0"));
+            var r = new ReportDto
+            {
+                Id = Guid.NewGuid(),
+                ParentId = SystemObjects.AllReports,
+                Name = "",
+                ShortName = "",
+                TypeId = ObjectTypes.otDocument,
+                StateId = ObjectStates.osActive,
+                CreateDateTime = DateTime.Now,
+                DocumentTypeId = DocumentTypes.dtReport,
+                DocumentStateId = ReportStates.rsCreated,
+                DocumentUserId = new Guid("2b0ffaa3-913b-4120-982e-736ee0af0f39"),
+                Notes = "",
+                ReportTypeId = new Guid("9fb803a2-630c-488a-bf2f-a4280114f471"),
+                RecipientId = new Guid("2b0ffaa3-913b-4120-982e-736ee0af0f39"),
+                FillingDate = DateTime.Now,
+                ExpiryFillingDate = DateTime.Now
+            };
+
+            var rep = treeServiceClient.CreateReport(r);
+
+            // r = treeServiceClient.GetReport(new Guid("84f4dd1c-fadb-4add-a355-a42900a252b0"));
 
             //r.Name = "Тестовый отчет";
             //r.DocumentStateId = ReportStates.rsCreated;
