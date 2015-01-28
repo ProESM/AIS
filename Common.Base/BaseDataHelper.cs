@@ -74,7 +74,7 @@ namespace Common.Base
         /// Корень (родитель) всех объектов
         /// </summary>
         [Display(Name = "Корень (родитель) всех объектов")]
-        public static readonly Guid Root = new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B");
+        public static readonly Guid Root = new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B");                                                    
         /// <summary>
         /// Настройки системы
         /// </summary>

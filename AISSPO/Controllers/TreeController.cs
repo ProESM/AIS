@@ -496,5 +496,12 @@ namespace AISSPO.Controllers
         {
             _treeService.DeleteReportDataByReport(webIdDto.Id);
         }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("InsertOrUpdateReportDataPacket")]
+        public void InsertOrUpdateReportDataPacket(List<ReportDataDto> reportDataDtos)
+        {
+            _treeService.InsertOrUpdateReportDataPacket(reportDataDtos);
+        }
     }
 }

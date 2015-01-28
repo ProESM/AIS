@@ -1004,5 +1004,42 @@ namespace Domain.Implementation
         {
             _treeRepository.DeleteReportDataByReport(reportId);
         }
+
+        public void InsertOrUpdateReportDataPacket(List<ReportDataDto> reportDataDtos)
+        {
+            foreach (var reportDataDto in reportDataDtos)
+            {
+                if (reportDataDto.Id == Guid.Empty)
+                {
+                    var reportDao = _treeRepository.GetReport(reportDataDto.ReportId);
+
+                    var reportDataDao = new ReportDataDao
+                    {
+                        Id = Guid.NewGuid(),
+                        Report = reportDao,
+                        Column = reportDataDto.Column,
+                        Row = reportDataDto.Row,
+                        Page = reportDataDto.Page,
+                        Value = reportDataDto.Value
+                    };
+
+                    _treeRepository.CreateReportData(reportDataDao);
+                }
+                else
+                {
+                    var reportDataDao = _treeRepository.GetReportData(reportDataDto.Id);
+
+                    var reportDao = _treeRepository.GetReport(reportDataDto.ReportId);
+
+                    reportDataDao.Report = reportDao;
+                    reportDataDao.Column = reportDataDto.Column;
+                    reportDataDao.Row = reportDataDto.Row;
+                    reportDataDao.Page = reportDataDto.Page;
+                    reportDataDao.Value = reportDataDto.Value;
+
+                    _treeRepository.UpdateReportData(reportDataDao);
+                }
+            }            
+        }
     }   
 }

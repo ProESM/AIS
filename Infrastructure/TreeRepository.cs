@@ -679,7 +679,20 @@ namespace Infrastructure
         {
             using (var transaction = _session.StartTransaction())
             {
-                _session.Save(reportDataDao);
+                var report = _session.Query<ReportDataDao>()
+                    .Where(p => p.Report.Id.ToString() == reportDataDao.Report.Id.ToString())
+                    .Where(p => p.Column == reportDataDao.Column)
+                    .Where(p => p.Row == reportDataDao.Row).FirstOrDefault(p => p.Page == reportDataDao.Page);
+
+                if (report == null)
+                {
+                    _session.Save(reportDataDao);
+                }
+                else
+                {
+                    report.Value = reportDataDao.Value;
+                    _session.Update(report);
+                }
                 transaction.Commit();
                 return _session.Query<ReportDataDao>().FirstOrDefault(p => p.Id.ToString() == reportDataDao.Id.ToString());
             }
@@ -709,7 +722,7 @@ namespace Infrastructure
         {
             using (var transaction = _session.StartTransaction())
             {
-                _session.SaveOrUpdate(reportDataDao);
+                _session.SaveOrUpdate(reportDataDao);                
                 transaction.Commit();
             }
         }

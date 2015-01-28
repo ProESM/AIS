@@ -20,16 +20,16 @@ namespace Infrastructure.Mappings
             References(x => x.Report)
                 .Column("REPORT_ID");
             Map(x => x.Column)
-                .Column("COLUMN")
+                .Column("CELL_COLUMN")
                 .Not.Nullable();
             Map(x => x.Row)
-                .Column("ROW")
+                .Column("CELL_ROW")
                 .Not.Nullable();
             Map(x => x.Page)
                 .Column("PAGE")
                 .Not.Nullable();
             Map(x => x.Value)
-                .Column("VALUE")
+                .Column("CELL_VALUE")
                 .Nullable();
             Cache.ReadWrite();
         }
