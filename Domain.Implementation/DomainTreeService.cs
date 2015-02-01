@@ -7,6 +7,7 @@ using System.Text;
 using Common.Base;
 using DTO;
 using DTO.TreeTypeDtos;
+using DTO.Web;
 using Infrastructure;
 using Infrastructure.DtoFetchers;
 using Infrastructure.DtoFetchers.TreeTypeDtoFetchers;
@@ -1039,7 +1040,15 @@ namespace Domain.Implementation
 
                     _treeRepository.UpdateReportData(reportDataDao);
                 }
-            }            
+            }
+        }
+
+        public void DeleteReportDataPacket(List<Guid> reportDataIds)
+        {
+            foreach (var reportDataId in reportDataIds)
+            {
+                _treeRepository.DeleteReportData(reportDataId);
+            }
         }
     }   
 }

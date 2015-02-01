@@ -43,7 +43,7 @@ namespace Infrastructure
                     {
                         treeParentDaos = _session.Query<TreeParentDao>()
                             .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level <= 1)
+                            .Where(tp => tp.Level >= 0)
                             .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
                             .OrderBy(tp => tp.Level)
                             .ThenBy(tp => tp.TreeChild.Name)
@@ -53,7 +53,7 @@ namespace Infrastructure
                     {
                         treeParentDaos = _session.Query<TreeParentDao>()
                             .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level <= 1)
+                            .Where(tp => tp.Level >= 0)
                             .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
                             .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
                             .OrderBy(tp => tp.Level)
@@ -67,7 +67,7 @@ namespace Infrastructure
                     {
                         treeParentDaos = _session.Query<TreeParentDao>()
                             .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level == 1)
+                            .Where(tp => tp.Level >= 1)
                             .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
                             .OrderBy(tp => tp.Level)
                             .ThenBy(tp => tp.TreeChild.Name)
@@ -77,7 +77,7 @@ namespace Infrastructure
                     {
                         treeParentDaos = _session.Query<TreeParentDao>()
                             .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level == 1)
+                            .Where(tp => tp.Level >= 1)
                             .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
                             .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
                             .OrderBy(tp => tp.Level)
@@ -131,22 +131,49 @@ namespace Infrastructure
 
                         if (includeChild)
                         {
-                            treeParentDaos = _session.Query<TreeParentDao>()
-                                .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
-                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                                .Where(tp => tp.Level <= limitLevel)
-                                .OrderByDescending(tp => tp.Level)
-                                .ToList();
+                            if (includeDeleted)
+                            {
+                                treeParentDaos = _session.Query<TreeParentDao>()
+                                    .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                    .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                    .Where(tp => tp.Level <= limitLevel)
+                                    .OrderByDescending(tp => tp.Level)
+                                    .ToList();
+                            }
+                            else
+                            {
+                                treeParentDaos = _session.Query<TreeParentDao>()
+                                    .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                    .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                    .Where(tp => tp.Level <= limitLevel)
+                                    .Where(tp => tp.TreeParent.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                    .OrderByDescending(tp => tp.Level)
+                                    .ToList();
+                            }
                         }
                         else
                         {
-                            treeParentDaos = _session.Query<TreeParentDao>()
-                                .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
-                                .Where(tp => tp.TreeParent.Id.ToString() == child.ToString())
-                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                                .Where(tp => tp.Level <= limitLevel)
-                                .OrderByDescending(tp => tp.Level)
-                                .ToList();
+                            if (includeDeleted)
+                            {
+                                treeParentDaos = _session.Query<TreeParentDao>()
+                                    .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                    .Where(tp => tp.TreeParent.Id.ToString() == child.ToString())
+                                    .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                    .Where(tp => tp.Level <= limitLevel)
+                                    .OrderByDescending(tp => tp.Level)
+                                    .ToList();
+                            }
+                            else
+                            {
+                                treeParentDaos = _session.Query<TreeParentDao>()
+                                    .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                    .Where(tp => tp.TreeParent.Id.ToString() == child.ToString())
+                                    .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                    .Where(tp => tp.Level <= limitLevel)
+                                    .Where(tp => tp.TreeParent.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                    .OrderByDescending(tp => tp.Level)
+                                    .ToList();
+                            }
                         }
                     }
                     else
@@ -157,21 +184,46 @@ namespace Infrastructure
                 else
                 {
                     if (includeChild)
-                    {
-                        treeParentDaos = _session.Query<TreeParentDao>()
-                            .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
-                            .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                            .OrderByDescending(tp => tp.Level)
-                            .ToList();
+                    {                        
+                        if (includeDeleted)
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .OrderByDescending(tp => tp.Level)
+                                .ToList();
+                        }
+                        else
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .Where(tp => tp.TreeParent.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                .OrderByDescending(tp => tp.Level)
+                                .ToList();
+                        }
                     }
                     else
                     {
-                        treeParentDaos = _session.Query<TreeParentDao>()
-                            .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
-                            .Where(tp => tp.TreeParent.Id.ToString() == child.ToString())
-                            .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                            .OrderByDescending(tp => tp.Level)
-                            .ToList();
+                        if (includeDeleted)
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                .Where(tp => tp.TreeParent.Id.ToString() == child.ToString())
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .OrderByDescending(tp => tp.Level)
+                                .ToList();
+                        }
+                        else
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeChild.Id.ToString() == child.ToString())
+                                .Where(tp => tp.TreeParent.Id.ToString() == child.ToString())
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .Where(tp => tp.TreeParent.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                .OrderByDescending(tp => tp.Level)
+                                .ToList();
+                        }
                     }
                 }                
 

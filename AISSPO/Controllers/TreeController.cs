@@ -399,12 +399,21 @@ namespace AISSPO.Controllers
                 RecipientId = reportDto.RecipientId,
                 RecipientName = reportDto.RecipientName,
                 FillingDate = reportDto.FillingDate,
-                ExpiryFillingDate = reportDto.ExpiryFillingDate,
-
-                LastChangeUserId = lastDocumentChangeDto.DocumentUserId,
-                LastChangeUserName = lastDocumentChangeDto.DocumentUserName,
-                LastChangeDateTime = lastDocumentChangeDto.CreateDateTime
+                ExpiryFillingDate = reportDto.ExpiryFillingDate,                
             };
+
+            if (lastDocumentChangeDto != null)
+            {
+                r.LastChangeUserId = lastDocumentChangeDto.DocumentUserId;
+                r.LastChangeUserName = lastDocumentChangeDto.DocumentUserName;
+                r.LastChangeDateTime = lastDocumentChangeDto.CreateDateTime;
+            }
+            else
+            {
+                r.LastChangeUserId = reportDto.DocumentUserId;
+                r.LastChangeUserName = reportDto.DocumentUserName;
+                r.LastChangeDateTime = reportDto.CreateDateTime;
+            }
 
             return r;
         }
@@ -503,5 +512,13 @@ namespace AISSPO.Controllers
         {
             _treeService.InsertOrUpdateReportDataPacket(reportDataDtos);
         }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("DeleteReportDataPacket")]
+        public void DeleteReportDataPacket(List<WebIdDto> reportDataIds)
+        {
+            var ids = reportDataIds.Select(reportDataId => reportDataId.Id).ToList();
+            _treeService.DeleteReportDataPacket(ids);
+        }        
     }
 }

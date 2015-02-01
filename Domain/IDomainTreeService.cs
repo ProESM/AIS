@@ -134,6 +134,8 @@ namespace Domain
         void DeleteReportDataByReport(Guid reportId);
 
         void InsertOrUpdateReportDataPacket(List<ReportDataDto> reportDataDtos);
+
+        void DeleteReportDataPacket(List<Guid> reportDataIds);
     }
 
 }
