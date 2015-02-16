@@ -30,7 +30,6 @@ D:\git\AIS\TreeService\bin\Common.Base.Web.pdb
 D:\git\AIS\TreeService\bin\FluentNHibernate.dll
 D:\git\AIS\TreeService\bin\FluentNHibernate.pdb
 D:\git\AIS\TreeService\bin\FluentNHibernate.xml
-D:\git\AIS\TreeService\bin\hibernate.cfg.xml
 D:\git\AIS\TreeService\bin\System.Web.Mvc.dll
 D:\git\AIS\TreeService\bin\System.Web.Razor.dll
 D:\git\AIS\TreeService\bin\System.Web.WebPages.Razor.dll
@@ -41,3 +40,4 @@ D:\git\AIS\TreeService\bin\System.Web.Razor.xml
 D:\git\AIS\TreeService\bin\System.Web.WebPages.Razor.xml
 D:\git\AIS\TreeService\bin\System.Web.WebPages.xml
 D:\git\AIS\TreeService\bin\System.Web.WebPages.Deployment.xml
+D:\git\AIS\TreeService\bin\hibernate.cfg.xml
