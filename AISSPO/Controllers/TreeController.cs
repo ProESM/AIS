@@ -31,43 +31,10 @@ namespace AISSPO.Controllers
             _treeService = _kernel.Get<IDomainTreeService>();
         }
 
-        [IntegrationAuthentication]
-        [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get")]
-        public IEnumerable<VirtualTreeDto> Get()
-        {
-            var treeDtos = _treeService.GetTrees(SystemObjects.Root, SystemObjects.Root);
-            var trees = treeDtos.Select(t => new VirtualTreeDto
-            {
-                Id = t.Id,
-                ParentId = t.ParentId,
-                Name = t.Name,
-                ShortName = t.ShortName,
-                TypeId = t.TypeId,
-                StateId = t.StateId,
-                CreateDateTime = t.CreateDateTime
-            }).ToList();
-            return trees.AsEnumerable();
-        }
-
-        [IntegrationAuthentication]
         [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get2")]
-        public string Get2()
+        public int Get2()
         {
-
-            //var treeDtos = _treeService.GetTrees();
-            //var trees = treeDtos.Select(t => new TreeDto
-            //{
-            //    Id = t.Id,
-            //    ParentId = t.ParentId,
-            //    Name = t.Name,
-            //    ShortName = t.ShortName,
-            //    TypeId = t.TypeId,
-            //    StateId = t.StateId,
-            //    CreateDateTime = t.CreateDateTime
-            //}).ToList();
-            //return Json(trees.AsEnumerable());
-
-            return "Hello, World2!";
+            return _treeService.GetReportDataPageCountByReportId(new Guid("d26c8417-016c-49a1-beda-a42d0151ed5c"));
         }
 
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("AuthenticateUser")]
@@ -339,7 +306,7 @@ namespace AISSPO.Controllers
 
         [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("CreateReport")]
-        public ReportDto CreateReport(WebCreateReportDto webReportDto)        
+        public ReportDto CreateReport(WebCreateReportDto webReportDto)
         {
             var reportDto = new ReportDto
             {
@@ -353,7 +320,7 @@ namespace AISSPO.Controllers
 
                 //DocumentParentId = null,
                 DocumentTypeId = DocumentTypes.dtReport,
-                DocumentStateId = ReportStates.rsCreated,
+                DocumentStateId = ReportStates.rsNew,
                 DocumentUserId = SystemUser.Id,
                 Notes = webReportDto.Notes,
 
@@ -399,7 +366,7 @@ namespace AISSPO.Controllers
                 RecipientId = reportDto.RecipientId,
                 RecipientName = reportDto.RecipientName,
                 FillingDate = reportDto.FillingDate,
-                ExpiryFillingDate = reportDto.ExpiryFillingDate,                
+                ExpiryFillingDate = reportDto.ExpiryFillingDate,
             };
 
             if (lastDocumentChangeDto != null)
@@ -486,6 +453,13 @@ namespace AISSPO.Controllers
         }
 
         [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetReportDataPageCountByReportId")]
+        public int GetReportDataPageCountByReportId(WebIdDto webIdDto)
+        {
+            return _treeService.GetReportDataPageCountByReportId(webIdDto.Id);
+        }
+
+        [IntegrationAuthentication]
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("UpdateReportData")]
         public void UpdateReportData(ReportDataDto reportDataDto)
         {
@@ -519,6 +493,6 @@ namespace AISSPO.Controllers
         {
             var ids = reportDataIds.Select(reportDataId => reportDataId.Id).ToList();
             _treeService.DeleteReportDataPacket(ids);
-        }        
+        }
     }
 }

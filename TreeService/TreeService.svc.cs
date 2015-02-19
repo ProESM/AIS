@@ -29,7 +29,7 @@ namespace TreeService
             _kernel.AddBindings();
 
             _domainTreeService = _kernel.Get<IDomainTreeService>();
-            
+
             var current = HttpContext.Current;
 
             string authHeader = current.Request.Headers["Authorization"];
@@ -41,8 +41,8 @@ namespace TreeService
                 {
                     SystemUser.Id = user.Id;
                 }
-            }            
-        }                      
+            }
+        }
 
         public List<string> GetSystemObjects()
         {
@@ -52,9 +52,9 @@ namespace TreeService
             //return _domainTreeService.GetSystemObjects();
         }
 
-        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
+        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false, bool includeSubChildren = false)
         {
-            return _domainTreeService.GetTrees(parent, treeParentType, includeParent, includeDeleted);
+            return _domainTreeService.GetTrees(parent, treeParentType, includeParent, includeDeleted, includeSubChildren);
         }
 
         public List<VirtualTreeDto> GetTreeParents(Guid? parent, Guid child, Guid treeParentType,

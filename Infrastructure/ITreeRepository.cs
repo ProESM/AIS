@@ -10,7 +10,7 @@ namespace Infrastructure
 {
     public interface ITreeRepository : IRepository
     {
-        List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
+        List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false, bool includeSubChildren = false);
 
         /// <summary>
         /// Получаем список родительских объектов для указанного дочернего объекта
@@ -72,8 +72,8 @@ namespace Infrastructure
 
         DocumentDao GetLastDocumentChange(Guid documentId);
 
-        void UpdateDocument(DocumentDao reportDao);        
-        
+        void UpdateDocument(DocumentDao reportDao);
+
         ReportTypeGroupDao CreateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao);
 
         ReportTypeGroupDao GetReportTypeGroup(Guid reportTypeGroupId);
@@ -113,6 +113,8 @@ namespace Infrastructure
         ReportDataDao GetReportData(Guid reportDataId);
 
         List<ReportDataDao> GetReportDataByReportAndPage(Guid reportId, int page);
+
+        int GetReportDataPageCountByReportId(Guid reportId);
 
         void UpdateReportData(ReportDataDao reportDataDao);
 

@@ -18,7 +18,7 @@ namespace TreeService
         List<string> GetSystemObjects();
 
         [OperationContract]
-        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
+        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false, bool includeSubChildren = false);
 
         /// <summary>
         /// Получаем список родительских объектов для указанного дочернего объекта

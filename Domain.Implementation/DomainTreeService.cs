@@ -58,9 +58,9 @@ namespace Domain.Implementation
             return BaseDataHelper.GetSystemObjects();
         }
 
-        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
+        public List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false, bool includeSubChildren = false)
         {
-            var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType, includeParent, includeDeleted);
+            var virtualTreeDaos = _treeRepository.GetTrees(parent, treeParentType, includeParent, includeDeleted, includeSubChildren);
 
             return virtualTreeDaos == null ? null : _virtualTreeDtoFetcher.Fetch(virtualTreeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
@@ -415,7 +415,7 @@ namespace Domain.Implementation
         {
             var documentTypeDao = _treeRepository.GetDocumentType(documentTypeId);
 
-            return documentTypeDao == null ? null : _documentTypeDtoFetcher.Fetch(new List<DocumentTypeDao> { documentTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
+            return documentTypeDao == null ? null : _documentTypeDtoFetcher.Fetch(new List<DocumentTypeDao> { documentTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public List<DocumentTypeDto> GetDocumentTypes()
@@ -633,7 +633,7 @@ namespace Domain.Implementation
         {
             var reportTypeDao = _treeRepository.GetReportType(reportTypeId);
 
-            return reportTypeDao == null ? null : _reportTypeDtoFetcher.Fetch(new List<ReportTypeDao> { reportTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();            
+            return reportTypeDao == null ? null : _reportTypeDtoFetcher.Fetch(new List<ReportTypeDao> { reportTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
         public List<ReportTypeDto> GetReportTypes()
@@ -768,6 +768,12 @@ namespace Domain.Implementation
                     };
 
                     canUpdateReport = _treeRepository.CreateDocument(changeStateDao) != null;
+
+                    if (canUpdateReport)
+                    {
+                        var documentStateDao = _treeRepository.GetTree(reportDto.DocumentStateId);
+                        reportDao.DocumentState = documentStateDao;
+                    }
                 }
 
                 if (canUpdateReport)
@@ -777,7 +783,7 @@ namespace Domain.Implementation
                         TreeDao parentDao = null;
                         if (reportDto.ParentId != null)
                         {
-                            parentDao = _treeRepository.GetTree((Guid) reportDto.ParentId);
+                            parentDao = _treeRepository.GetTree((Guid)reportDto.ParentId);
                         }
 
                         var typeDao = _treeRepository.GetTree(ObjectTypes.otDocument);
@@ -786,11 +792,10 @@ namespace Domain.Implementation
                         DocumentDao documentParentDao = null;
                         if (reportDto.DocumentParentId != null)
                         {
-                            documentParentDao = _treeRepository.GetDocument((Guid) reportDto.DocumentParentId);
+                            documentParentDao = _treeRepository.GetDocument((Guid)reportDto.DocumentParentId);
                         }
 
                         var documentTypeDao = _treeRepository.GetDocumentType(reportDto.DocumentTypeId);
-                        var documentStateDao = _treeRepository.GetTree(reportDto.DocumentStateId);
                         var documentUserDao = _treeRepository.GetUser(reportDto.DocumentUserId);
                         var reportTypeDao = _treeRepository.GetReportType(reportDto.ReportTypeId);
                         var recipientDao = _treeRepository.GetTree(reportDto.RecipientId);
@@ -800,7 +805,7 @@ namespace Domain.Implementation
                         reportDao.ShortName = reportDto.ShortName;
                         reportDao.DocumentParent = documentParentDao;
                         reportDao.DocumentType = documentTypeDao;
-                        reportDao.DocumentState = documentStateDao;
+
                         reportDao.DocumentUser = documentUserDao;
                         reportDao.Notes = reportDto.Notes;
 
@@ -981,6 +986,11 @@ namespace Domain.Implementation
             return reportDataDaos == null ? null : _reportDataDtoFetcher.Fetch(reportDataDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
+        public int GetReportDataPageCountByReportId(Guid reportId)
+        {
+            return _treeRepository.GetReportDataPageCountByReportId(reportId);
+        }
+
         public void UpdateReportData(ReportDataDto reportDataDto)
         {
             var reportDataDao = _treeRepository.GetReportData(reportDataDto.Id);
@@ -1050,5 +1060,5 @@ namespace Domain.Implementation
                 _treeRepository.DeleteReportData(reportDataId);
             }
         }
-    }   
+    }
 }

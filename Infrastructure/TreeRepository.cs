@@ -29,9 +29,9 @@ namespace Infrastructure
         public IQueryable<T> Query<T>()
         {
             return _session.Query<T>();
-        }        
+        }
 
-        public List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false)
+        public List<VirtualTreeDao> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false, bool includeSubChildren = false)
         {
             using (var transaction = _session.StartTransaction())
             {
@@ -41,50 +41,106 @@ namespace Infrastructure
                 {
                     if (includeDeleted)
                     {
-                        treeParentDaos = _session.Query<TreeParentDao>()
-                            .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level >= 0)
-                            .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                            .OrderBy(tp => tp.Level)
-                            .ThenBy(tp => tp.TreeChild.Name)
-                            .ToList();
+                        if (includeSubChildren)
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level >= 0)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
+                        else
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level >= 0)
+                                .Where(tp => tp.Level <= 1)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
                     }
                     else
                     {
-                        treeParentDaos = _session.Query<TreeParentDao>()
-                            .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level >= 0)
-                            .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                            .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
-                            .OrderBy(tp => tp.Level)
-                            .ThenBy(tp => tp.TreeChild.Name)
-                            .ToList();   
-                    }                    
+                        if (includeSubChildren)
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level >= 0)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
+                        else
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level >= 0)
+                                .Where(tp => tp.Level <= 1)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
+                    }
                 }
                 else
                 {
                     if (includeDeleted)
                     {
-                        treeParentDaos = _session.Query<TreeParentDao>()
-                            .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level >= 1)
-                            .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                            .OrderBy(tp => tp.Level)
-                            .ThenBy(tp => tp.TreeChild.Name)
-                            .ToList();
+                        if (includeSubChildren)
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level >= 1)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
+                        else
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level == 1)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
                     }
                     else
                     {
-                        treeParentDaos = _session.Query<TreeParentDao>()
-                            .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
-                            .Where(tp => tp.Level >= 1)
-                            .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
-                            .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
-                            .OrderBy(tp => tp.Level)
-                            .ThenBy(tp => tp.TreeChild.Name)
-                            .ToList();
+                        if (includeSubChildren)
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level >= 1)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
+                        else
+                        {
+                            treeParentDaos = _session.Query<TreeParentDao>()
+                                .Where(tp => tp.TreeParent.Id.ToString() == parent.ToString())
+                                .Where(tp => tp.Level == 1)
+                                .Where(tp => tp.TreeParentType.Id.ToString() == treeParentType.ToString())
+                                .Where(tp => tp.TreeChild.State.Id.ToString() != ObjectStates.osDeleted.ToString())
+                                .OrderBy(tp => tp.Level)
+                                .ThenBy(tp => tp.TreeChild.Name)
+                                .ToList();
+                        }
                     }
-                    
+
                 }
 
                 var virtualTreeDaos = new List<VirtualTreeDao>();
@@ -184,7 +240,7 @@ namespace Infrastructure
                 else
                 {
                     if (includeChild)
-                    {                        
+                    {
                         if (includeDeleted)
                         {
                             treeParentDaos = _session.Query<TreeParentDao>()
@@ -225,7 +281,7 @@ namespace Infrastructure
                                 .ToList();
                         }
                     }
-                }                
+                }
 
                 var virtualTreeDaos = new List<VirtualTreeDao>();
 
@@ -253,16 +309,16 @@ namespace Infrastructure
                 return virtualTreeDaos;
             }
         }
-        
+
         public List<VirtualTreeDao> SearchTreesByText(string searchText, Guid treeParentType, List<Guid> typeIds,
             List<Guid> ignoreTypeIds, Guid? parent = null)
         {
             using (var transaction = _session.StartTransaction())
             {
-                ICriteria criteria;                
+                ICriteria criteria;
 
                 if (parent == null)
-                {                    
+                {
                     if (typeIds.IsEmpty())
                     {
                         if (ignoreTypeIds.IsEmpty())
@@ -280,7 +336,7 @@ namespace Infrastructure
                                     .Add(Restrictions.Like("lt.Name", searchText, MatchMode.Anywhere))
                                     .Add(Restrictions.Not(Restrictions.In("lt.Type.Id", ignoreTypeIds)));
                         }
-                        
+
                     }
                     else
                     {
@@ -300,7 +356,7 @@ namespace Infrastructure
                                     .Add(Restrictions.Like("lt.Name", searchText, MatchMode.Anywhere))
                                     .Add(Restrictions.In("lt.Type.Id", typeIds))
                                     .Add(Restrictions.Not(Restrictions.In("lt.Type.Id", ignoreTypeIds)));
-                        }                        
+                        }
                     }
                 }
                 else
@@ -385,7 +441,7 @@ namespace Infrastructure
             {
                 _session.Save(treeDao);
 
-                transaction.Commit();                
+                transaction.Commit();
 
                 return _session.Query<TreeDao>().FirstOrDefault(t => t.Id.ToString() == treeDao.Id.ToString());
             }
@@ -394,7 +450,7 @@ namespace Infrastructure
         public TreeDao GetTree(Guid treeId)
         {
             using (var transaction = _session.StartTransaction())
-            {                
+            {
                 return _session.Query<TreeDao>().FirstOrDefault(t => t.Id.ToString() == treeId.ToString());
             }
         }
@@ -402,8 +458,8 @@ namespace Infrastructure
         public void UpdateTree(TreeDao treeDao)
         {
             using (var transaction = _session.StartTransaction())
-            {                
-                _session.SaveOrUpdate(treeDao);                
+            {
+                _session.SaveOrUpdate(treeDao);
                 transaction.Commit();
             }
         }
@@ -423,24 +479,24 @@ namespace Infrastructure
         public UserDao GetUser(Guid userId)
         {
             using (var transaction = _session.StartTransaction())
-            {                                
-                return _session.Query<UserDao>().FirstOrDefault(u => u.Id.ToString() == userId.ToString());                
+            {
+                return _session.Query<UserDao>().FirstOrDefault(u => u.Id.ToString() == userId.ToString());
             }
         }
 
         public void UpdateUser(UserDao userDao)
         {
             using (var transaction = _session.StartTransaction())
-            {                
-                _session.SaveOrUpdate(userDao);                
-                transaction.Commit();                
-            }                        
+            {
+                _session.SaveOrUpdate(userDao);
+                transaction.Commit();
+            }
         }
 
         public UserDao FindUserByLogin(string login)
         {
             using (var transaction = _session.StartTransaction())
-            {                
+            {
                 var userDao = _session.Query<UserDao>().FirstOrDefault(u => u.Login == login);
                 return userDao;
             }
@@ -449,7 +505,7 @@ namespace Infrastructure
         public UserDao FindUserByEmail(string email)
         {
             using (var transaction = _session.StartTransaction())
-            {                
+            {
                 var userDao = _session.Query<UserDao>().FirstOrDefault(u => u.Email == email);
                 return userDao;
             }
@@ -470,7 +526,7 @@ namespace Infrastructure
         public PersonDao GetPerson(Guid personId)
         {
             using (var transaction = _session.StartTransaction())
-            {                
+            {
                 return _session.Query<PersonDao>().FirstOrDefault(p => p.Id.ToString() == personId.ToString());
             }
         }
@@ -481,7 +537,7 @@ namespace Infrastructure
             {
                 _session.SaveOrUpdate(personDao);
                 transaction.Commit();
-            } 
+            }
         }
 
         public DocumentTypeDao CreateDocumentType(DocumentTypeDao documentTypeDao)
@@ -567,7 +623,7 @@ namespace Infrastructure
                 _session.SaveOrUpdate(documentDao);
                 transaction.Commit();
             }
-        }       
+        }
 
         public ReportTypeGroupDao CreateReportTypeGroup(ReportTypeGroupDao reportTypeGroupDao)
         {
@@ -770,11 +826,23 @@ namespace Infrastructure
             }
         }
 
+        public int GetReportDataPageCountByReportId(Guid reportId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {                
+                return _session.Query<ReportDataDao>()                        
+                    .Where(p => p.Report.Id.ToString() == reportId.ToString())
+                    .Select(p => p.Page)
+                    .Distinct()
+                    .ToList().Count;
+            }
+        }
+
         public void UpdateReportData(ReportDataDao reportDataDao)
         {
             using (var transaction = _session.StartTransaction())
             {
-                _session.SaveOrUpdate(reportDataDao);                
+                _session.SaveOrUpdate(reportDataDao);
                 transaction.Commit();
             }
         }
@@ -794,7 +862,7 @@ namespace Infrastructure
             using (var transaction = _session.StartTransaction())
             {
                 var reportDataDaos = _session.Query<ReportDataDao>().Where(p => p.Report.Id.ToString() == reportId.ToString()).ToList();
-                
+
                 var queryString = string.Format("delete from l_report_data where group_id = :groupId");
                 _session.CreateQuery(queryString)
                        .SetParameter("groupId", reportId)

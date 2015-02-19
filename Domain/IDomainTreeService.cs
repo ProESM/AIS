@@ -8,12 +8,12 @@ using DTO;
 using DTO.TreeTypeDtos;
 
 namespace Domain
-{    
+{
     public interface IDomainTreeService
     {
         List<Guid> GetSystemObjects();
 
-        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false);
+        List<VirtualTreeDto> GetTrees(Guid? parent, Guid treeParentType, bool includeParent = false, bool includeDeleted = false, bool includeSubChildren = false);
 
         /// <summary>
         /// Получаем список родительских объектов для указанного дочернего объекта
@@ -126,6 +126,8 @@ namespace Domain
         ReportDataDto GetReportData(Guid reportDataId);
 
         List<ReportDataDto> GetReportDataByReportAndPage(Guid reportId, int page);
+
+        int GetReportDataPageCountByReportId(Guid reportId);
 
         void UpdateReportData(ReportDataDto reportDataDto);
 

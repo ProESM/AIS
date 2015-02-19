@@ -37,17 +37,17 @@ namespace Common.Base
             {
                 return true;
             }
-            
+
             return false;
         }
-        
+
         public static List<Guid> GetSystemObjects()
         {
-            var systemObjects = typeof (SystemObjects).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)).ToList();
+            var systemObjects = typeof(SystemObjects).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)).ToList();
 
-            systemObjects.AddRange(typeof (ObjectStates).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)));
+            systemObjects.AddRange(typeof(ObjectStates).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)));
 
-            systemObjects.AddRange(typeof (ObjectTypes).GetFields().Select(fieldInfo => (Guid) fieldInfo.GetValue(fieldInfo)));
+            systemObjects.AddRange(typeof(ObjectTypes).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)));
 
             systemObjects.AddRange(typeof(UserGroups).GetFields().Select(fieldInfo => (Guid)fieldInfo.GetValue(fieldInfo)));
 
@@ -74,7 +74,7 @@ namespace Common.Base
         /// Корень (родитель) всех объектов
         /// </summary>
         [Display(Name = "Корень (родитель) всех объектов")]
-        public static readonly Guid Root = new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B");                                                    
+        public static readonly Guid Root = new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B");
         /// <summary>
         /// Настройки системы
         /// </summary>
@@ -261,7 +261,7 @@ namespace Common.Base
         /// </summary>
         [Display(Name = "Пользователь")]
         public static readonly Guid otUser = new Guid("A92B6B05-D6B7-47F6-880D-78C784D4FAD5");
-        
+
         /// <summary>
         /// Группа пользователей
         /// </summary>
@@ -279,7 +279,7 @@ namespace Common.Base
         /// </summary>
         [Display(Name = "Документы, отчеты, изменения документов и т.п.")]
         public static readonly Guid otDocument = new Guid("4c4b28ae-578b-4358-99ea-2860139abd85");
-        
+
         /// <summary>
         /// Тип документа
         /// </summary>
@@ -303,6 +303,36 @@ namespace Common.Base
         /// </summary>
         [Display(Name = "Юридическое лицо")]
         public static readonly Guid otJuridicalPerson = new Guid("88ad30fc-92a1-4ec3-b168-c9fed4ca2c9d");
+
+        /// <summary>
+        /// Регион
+        /// </summary>
+        [Display(Name = "Регион")]
+        public static readonly Guid otRegion = new Guid("97ba0907-b9fa-4705-a4a9-604f8c5a014f");
+
+        /// <summary>
+        /// Район
+        /// </summary>
+        [Display(Name = "Район")]
+        public static readonly Guid otDistrict = new Guid("56057318-c4f2-463e-b05f-781112e62e96");
+
+        /// <summary>
+        /// Административно-территориальное деление
+        /// </summary>
+        [Display(Name = "Административно-территориальное деление")]
+        public static readonly Guid otAdministrativeTerritorialDivision = new Guid("33d8c2e0-3426-42e9-a703-a444016952c5");
+
+        /// <summary>
+        /// Все регионы
+        /// </summary>
+        [Display(Name = "Все регионы")]
+        public static readonly Guid otAllRegions = new Guid("b07e85a7-fcb4-4a8d-8b9d-a4440169b873");
+
+        /// <summary>
+        /// Все районы
+        /// </summary>
+        [Display(Name = "Все районы")]
+        public static readonly Guid otAllDistricts = new Guid("44cad9bb-e933-4e16-a2de-a444016a4e9d");
     }
 
     /// <summary>
@@ -352,15 +382,27 @@ namespace Common.Base
     public static class ReportStates
     {
         /// <summary>
-        /// Создан
+        /// Новый
         /// </summary>
-        [Display(Name = "Создан")]
-        public static readonly Guid rsCreated = new Guid("8260de6e-58a6-4004-84fa-a42800de4837");
+        [Display(Name = "Новый")]
+        public static readonly Guid rsNew = new Guid("8260de6e-58a6-4004-84fa-a42800de4837");
 
         /// <summary>
         /// Заполнен
         /// </summary>
         [Display(Name = "Заполнен")]
-        public static readonly Guid rsFilled = new Guid("37b959eb-f8e5-4ea6-97ed-a4290130d736");        
+        public static readonly Guid rsFilled = new Guid("37b959eb-f8e5-4ea6-97ed-a4290130d736");
+
+        /// <summary>
+        /// Архив
+        /// </summary>
+        [Display(Name = "Архив")]
+        public static readonly Guid rsArchive = new Guid("c96cb2af-933f-4a98-bce6-618f5d4ca152");
+
+        /// <summary>
+        /// Доработать
+        /// </summary>
+        [Display(Name = "Доработать")]
+        public static readonly Guid rsToComplete = new Guid("3fc136d9-a754-4f7e-abfd-3c3fd6b67cb6");
     }
 }

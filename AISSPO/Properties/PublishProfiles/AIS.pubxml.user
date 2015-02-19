@@ -10,22 +10,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AISSPO.dll">
-      <publishTime>01/31/2015 23:18:01</publishTime>
+      <publishTime>02/19/2015 22:32:57</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>01/23/2015 20:43:43</publishTime>
     </File>
     <File Include="bin/Common.Base.dll">
-      <publishTime>01/27/2015 23:09:57</publishTime>
+      <publishTime>02/19/2015 22:24:58</publishTime>
     </File>
     <File Include="bin/Common.Base.Web.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/Domain.dll">
-      <publishTime>01/29/2015 02:04:05</publishTime>
+      <publishTime>02/19/2015 22:24:58</publishTime>
     </File>
     <File Include="bin/Domain.Implementation.dll">
-      <publishTime>01/31/2015 23:17:58</publishTime>
+      <publishTime>02/19/2015 22:24:59</publishTime>
     </File>
     <File Include="bin/DTO.dll">
       <publishTime>01/28/2015 00:03:14</publishTime>
@@ -49,7 +49,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/23/2015 20:43:44</publishTime>
     </File>
     <File Include="bin/Infrastructure.dll">
-      <publishTime>01/31/2015 23:17:58</publishTime>
+      <publishTime>02/19/2015 22:24:58</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>01/23/2015 20:43:44</publishTime>

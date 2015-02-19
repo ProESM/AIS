@@ -39,3 +39,4 @@ D:\git\AIS\Common.Base.Web\bin\Release\System.Web.Razor.xml
 D:\git\AIS\Common.Base.Web\bin\Release\System.Web.WebPages.xml
 D:\git\AIS\Common.Base.Web\bin\Release\System.Web.WebPages.Deployment.xml
 D:\git\AIS\Common.Base.Web\bin\Release\System.Web.WebPages.Razor.xml
+D:\git\AIS\Common.Base.Web\bin\Release\System.Data.DataSetExtensions.dll
