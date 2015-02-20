@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TreeService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DTO" />
+      <xsd:import schemaLocation="http://localhost:46271/TreeService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/DTO.TreeTypeDtos" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITreeService_GetSystemObjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemObjects" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetSystemObjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemObjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetTrees_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrees" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetTrees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetTreeParents_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreeParents" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetTreeParents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreeParentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_SearchTreesByText_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTreesByText" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_SearchTreesByText_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTreesByTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTree" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTree" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTree" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_DeleteTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTree" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_DeleteTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_FindUserByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindUserByLogin" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_FindUserByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindUserByLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_AuthenticateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateUser" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_AuthenticateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreatePerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreatePerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdatePerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdatePerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateDocumentType_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocumentType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateDocumentType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocumentTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocumentType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocumentType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocumentTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentTypes" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocumentTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateDocumentType_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateDocumentType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocument" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocument" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocuments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocuments" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDocuments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocument" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReportTypeGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReportTypeGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReportTypeGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReportTypeGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroups" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypeGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReportTypeGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReportTypeGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReportTypeGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReportTypeGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReportType_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReportType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReportType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReportTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypes" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReportType_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReportType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReportType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReportTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReport" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReport" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReports_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReports" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReports_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReport" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateJuridicalPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateJuridicalPerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateJuridicalPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateJuridicalPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetJuridicalPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJuridicalPerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetJuridicalPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJuridicalPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetJuridicalPersons_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJuridicalPersons" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetJuridicalPersons_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJuridicalPersonsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateJuridicalPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateJuridicalPerson" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateJuridicalPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateJuridicalPersonResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITreeService">
+    <wsdl:operation name="GetSystemObjects">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetSystemObjects" message="tns:ITreeService_GetSystemObjects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetSystemObjectsResponse" message="tns:ITreeService_GetSystemObjects_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrees">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetTrees" message="tns:ITreeService_GetTrees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetTreesResponse" message="tns:ITreeService_GetTrees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTreeParents">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetTreeParents" message="tns:ITreeService_GetTreeParents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetTreeParentsResponse" message="tns:ITreeService_GetTreeParents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchTreesByText">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/SearchTreesByText" message="tns:ITreeService_SearchTreesByText_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/SearchTreesByTextResponse" message="tns:ITreeService_SearchTreesByText_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateTree" message="tns:ITreeService_CreateTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateTreeResponse" message="tns:ITreeService_CreateTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetTree" message="tns:ITreeService_GetTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetTreeResponse" message="tns:ITreeService_GetTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateTree" message="tns:ITreeService_UpdateTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateTreeResponse" message="tns:ITreeService_UpdateTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/DeleteTree" message="tns:ITreeService_DeleteTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/DeleteTreeResponse" message="tns:ITreeService_DeleteTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateUser" message="tns:ITreeService_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateUserResponse" message="tns:ITreeService_CreateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetUser" message="tns:ITreeService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetUserResponse" message="tns:ITreeService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateUser" message="tns:ITreeService_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateUserResponse" message="tns:ITreeService_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/FindUserByLogin" message="tns:ITreeService_FindUserByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/FindUserByLoginResponse" message="tns:ITreeService_FindUserByLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/AuthenticateUser" message="tns:ITreeService_AuthenticateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/AuthenticateUserResponse" message="tns:ITreeService_AuthenticateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreatePerson" message="tns:ITreeService_CreatePerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreatePersonResponse" message="tns:ITreeService_CreatePerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetPerson" message="tns:ITreeService_GetPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetPersonResponse" message="tns:ITreeService_GetPerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdatePerson" message="tns:ITreeService_UpdatePerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdatePersonResponse" message="tns:ITreeService_UpdatePerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocumentType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateDocumentType" message="tns:ITreeService_CreateDocumentType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateDocumentTypeResponse" message="tns:ITreeService_CreateDocumentType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetDocumentType" message="tns:ITreeService_GetDocumentType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetDocumentTypeResponse" message="tns:ITreeService_GetDocumentType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetDocumentTypes" message="tns:ITreeService_GetDocumentTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetDocumentTypesResponse" message="tns:ITreeService_GetDocumentTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateDocumentType" message="tns:ITreeService_UpdateDocumentType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateDocumentTypeResponse" message="tns:ITreeService_UpdateDocumentType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateDocument" message="tns:ITreeService_CreateDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateDocumentResponse" message="tns:ITreeService_CreateDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetDocument" message="tns:ITreeService_GetDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetDocumentResponse" message="tns:ITreeService_GetDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocuments">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetDocuments" message="tns:ITreeService_GetDocuments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetDocumentsResponse" message="tns:ITreeService_GetDocuments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateDocument" message="tns:ITreeService_UpdateDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateDocumentResponse" message="tns:ITreeService_UpdateDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReportTypeGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateReportTypeGroup" message="tns:ITreeService_CreateReportTypeGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateReportTypeGroupResponse" message="tns:ITreeService_CreateReportTypeGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroup" message="tns:ITreeService_GetReportTypeGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroupResponse" message="tns:ITreeService_GetReportTypeGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroups" message="tns:ITreeService_GetReportTypeGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeGroupsResponse" message="tns:ITreeService_GetReportTypeGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReportTypeGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateReportTypeGroup" message="tns:ITreeService_UpdateReportTypeGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateReportTypeGroupResponse" message="tns:ITreeService_UpdateReportTypeGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReportType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateReportType" message="tns:ITreeService_CreateReportType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateReportTypeResponse" message="tns:ITreeService_CreateReportType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReportType" message="tns:ITreeService_GetReportType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportTypeResponse" message="tns:ITreeService_GetReportType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReportTypes" message="tns:ITreeService_GetReportTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportTypesResponse" message="tns:ITreeService_GetReportTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReportType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateReportType" message="tns:ITreeService_UpdateReportType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateReportTypeResponse" message="tns:ITreeService_UpdateReportType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateReport" message="tns:ITreeService_CreateReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateReportResponse" message="tns:ITreeService_CreateReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReport" message="tns:ITreeService_GetReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportResponse" message="tns:ITreeService_GetReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReports">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReports" message="tns:ITreeService_GetReports_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportsResponse" message="tns:ITreeService_GetReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateReport" message="tns:ITreeService_UpdateReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateReportResponse" message="tns:ITreeService_UpdateReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateJuridicalPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateJuridicalPerson" message="tns:ITreeService_CreateJuridicalPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateJuridicalPersonResponse" message="tns:ITreeService_CreateJuridicalPerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJuridicalPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetJuridicalPerson" message="tns:ITreeService_GetJuridicalPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetJuridicalPersonResponse" message="tns:ITreeService_GetJuridicalPerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJuridicalPersons">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetJuridicalPersons" message="tns:ITreeService_GetJuridicalPersons_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetJuridicalPersonsResponse" message="tns:ITreeService_GetJuridicalPersons_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJuridicalPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateJuridicalPerson" message="tns:ITreeService_UpdateJuridicalPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateJuridicalPersonResponse" message="tns:ITreeService_UpdateJuridicalPerson_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITreeService" type="tns:ITreeService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSystemObjects">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetSystemObjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrees">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetTrees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTreeParents">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetTreeParents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTreesByText">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/SearchTreesByText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTree">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTree">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTree">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTree">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/DeleteTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByLogin">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/FindUserByLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/AuthenticateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreatePerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdatePerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocumentType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateDocumentType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetDocumentType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentTypes">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateDocumentType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocument">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocuments">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetDocuments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocument">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReportTypeGroup">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateReportTypeGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroup">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReportTypeGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypeGroups">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReportTypeGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReportTypeGroup">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateReportTypeGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReportType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateReportType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReportType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportTypes">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReportTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReportType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateReportType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReport">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReport">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReports">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReports" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReport">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateJuridicalPerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateJuridicalPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJuridicalPerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetJuridicalPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJuridicalPersons">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetJuridicalPersons" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJuridicalPerson">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateJuridicalPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TreeService">
+    <wsdl:port name="BasicHttpBinding_ITreeService" binding="tns:BasicHttpBinding_ITreeService">
+      <soap:address location="http://localhost:46271/TreeService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
