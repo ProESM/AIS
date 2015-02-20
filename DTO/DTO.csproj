@@ -62,7 +62,9 @@
   <ItemGroup>
     <Compile Include="AuthenticationUserDto.cs" />
     <Compile Include="BaseDto.cs" />
+    <Compile Include="DistrictDto.cs" />
     <Compile Include="DocumentDto.cs" />
+    <Compile Include="InstituteDto.cs" />
     <Compile Include="PersonalUserDto.cs" />
     <Compile Include="PersonDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="TreeDto.cs" />
     <Compile Include="TreeTypeDtos\DocumentTypeDto.cs" />
     <Compile Include="TreeTypeDtos\JuridicalPersonDto.cs" />
+    <Compile Include="TreeTypeDtos\RegionDto.cs" />
     <Compile Include="UserDto.cs" />
     <Compile Include="VirtualTreeDto.cs" />
     <Compile Include="Web\EmailDto.cs" />

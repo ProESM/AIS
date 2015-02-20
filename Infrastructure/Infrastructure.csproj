@@ -73,10 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DtoFetchers\BaseDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\DistrictDtoFetcher.cs" />
     <Compile Include="DtoFetchers\DocumentDtoFetcher.cs" />
     <Compile Include="DtoFetchers\FetchDtoMap.cs" />
     <Compile Include="DtoFetchers\IDtoFetcher.cs" />
     <Compile Include="DtoFetchers\IFetchDtoMap.cs" />
+    <Compile Include="DtoFetchers\InstiteDtoFetcher.cs" />
     <Compile Include="DtoFetchers\JuridicalPersonDtoFetcher.cs" />
     <Compile Include="DtoFetchers\PersonDtoFetcher.cs" />
     <Compile Include="DtoFetchers\ReportDataDtoFetcher.cs" />
@@ -87,7 +89,13 @@
     <Compile Include="DtoFetchers\TreeTypeDtoFetchers\DocumentTypeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\UserDtoFetcher.cs" />
     <Compile Include="DtoFetchers\VirtualTreeDtoFetcher.cs" />
+    <Compile Include="Entities\DistrictDao.cs" />
     <Compile Include="Entities\DocumentDao.cs" />
+    <Compile Include="Entities\InstituteDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\EducationLevelDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\LocalityTypeDao.cs" />
+    <Compile Include="Entities\TreeTypeDaos\RegionDao.cs" />
+    <Compile Include="Mappings\DistrictMap.cs" />
     <Compile Include="Mappings\DocumentMap.cs" />
     <Compile Include="Entities\PersonDao.cs" />
     <Compile Include="Entities\ReportDao.cs" />
@@ -112,6 +120,7 @@
     <Compile Include="FetchAim.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ITreeRepository.cs" />
+    <Compile Include="Mappings\InstituteMap.cs" />
     <Compile Include="Mappings\PersonMap.cs" />
     <Compile Include="Mappings\ReportDataMap.cs" />
     <Compile Include="Mappings\ReportMap.cs" />
@@ -120,8 +129,11 @@
     <Compile Include="Mappings\TreeParentMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\ClassTreeTypeMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\DocumentTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\EducationLevelMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\FolderTreeTypeMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\JuridicalPersonMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\LocalityTypeMap.cs" />
+    <Compile Include="Mappings\TreeTypeMaps\RegionMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\ReportTypeGroupMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\StateTreeTypeMap.cs" />
     <Compile Include="Mappings\TreeTypeMaps\TypeTreeTypeMap.cs" />

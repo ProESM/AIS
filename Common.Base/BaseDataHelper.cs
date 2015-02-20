@@ -191,10 +191,40 @@ namespace Common.Base
         [Display(Name = "Общие юридические лица")]
         public static readonly Guid AllCommonJuridicalPersons = new Guid("698cb357-96b0-49f1-a672-a42900e29f14");
         /// <summary>
+        /// Внешние юридические лица
+        /// </summary>
+        [Display(Name = "Внешние юридические лица")]
+        public static readonly Guid AllForeignJuridicalPersons = new Guid("88d8e28b-bf25-4615-9d51-a44500fefc14");
+        /// <summary>
+        /// Все образовательные учреждения
+        /// </summary>
+        [Display(Name = "Все образовательные учреждения")]
+        public static readonly Guid AllInstiteJuridicalPersons = new Guid("952ed885-29f8-4f39-937c-a445010afe4b");
+        /// <summary>
         /// Служебные юридические лица
         /// </summary>
         [Display(Name = "Служебные юридические лица")]
         public static readonly Guid AllSystemJuridicalPersons = new Guid("e633b705-5132-40d9-9d9e-a42900e2b429");
+
+        /// <summary>
+        /// Административно-территориальное деление
+        /// </summary>
+        [Display(Name = "Административно-территориальное деление")]
+        public static readonly Guid AdministrativeTerritorialDivision = new Guid("33d8c2e0-3426-42e9-a703-a444016952c5");
+
+        /// <summary>
+        /// Все регионы
+        /// </summary>
+        [Display(Name = "Все регионы")]
+        public static readonly Guid AllRegions = new Guid("b07e85a7-fcb4-4a8d-8b9d-a4440169b873");
+
+        /// <summary>
+        /// Все районы
+        /// </summary>
+        [Display(Name = "Все районы")]
+        public static readonly Guid AllDistricts = new Guid("44cad9bb-e933-4e16-a2de-a444016a4e9d");
+
+
     }
 
     /// <summary>
@@ -317,22 +347,16 @@ namespace Common.Base
         public static readonly Guid otDistrict = new Guid("56057318-c4f2-463e-b05f-781112e62e96");
 
         /// <summary>
-        /// Административно-территориальное деление
+        /// Уровень профессионального образования
         /// </summary>
-        [Display(Name = "Административно-территориальное деление")]
-        public static readonly Guid otAdministrativeTerritorialDivision = new Guid("33d8c2e0-3426-42e9-a703-a444016952c5");
+        [Display(Name = "Уровень профессионального образования")]
+        public static readonly Guid otEducationLevel = new Guid("bd3c4813-9d0a-4fa0-bf53-a44500e84914");
 
         /// <summary>
-        /// Все регионы
+        /// Тип населенного пункта (город, село)
         /// </summary>
-        [Display(Name = "Все регионы")]
-        public static readonly Guid otAllRegions = new Guid("b07e85a7-fcb4-4a8d-8b9d-a4440169b873");
-
-        /// <summary>
-        /// Все районы
-        /// </summary>
-        [Display(Name = "Все районы")]
-        public static readonly Guid otAllDistricts = new Guid("44cad9bb-e933-4e16-a2de-a444016a4e9d");
+        [Display(Name = "Тип населенного пункта (город, село)")]
+        public static readonly Guid otLocalityType = new Guid("0fd2f761-1570-4ef3-9be6-a44500e85760");        
     }
 
     /// <summary>
