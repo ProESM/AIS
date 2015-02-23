@@ -30,26 +30,73 @@ namespace TestConsole
             treeServiceClient.ClientCredentials.UserName.UserName = "user";
             treeServiceClient.ClientCredentials.UserName.Password = "123456";
 
-            var r = new ReportDto
+            /*var r = new RegionDto
             {
                 Id = Guid.NewGuid(),
-                ParentId = SystemObjects.AllReports,
-                Name = "",
+                ParentId = SystemObjects.AllRegions,
+                Name = "Пермский край",
                 ShortName = "",
-                TypeId = ObjectTypes.otDocument,
+                TypeId = ObjectTypes.otRegion,
+                StateId = ObjectStates.osActive,
+                CreateDateTime = DateTime.Now
+            };}
+
+            var regionDto = treeServiceClient.CreateRegion(r); */ 
+
+            var regionDto = treeServiceClient.GetRegion(new Guid("c9d34f0f-3578-4f79-b7d3-a44800283bc0"));
+
+            var d = new DistrictDto
+            {
+                Id = Guid.NewGuid(),
+                ParentId = SystemObjects.AllDistricts,
+                Name = "МО Юсьвинский район",
+                ShortName = "",
+                TypeId = ObjectTypes.otDistrict,
                 StateId = ObjectStates.osActive,
                 CreateDateTime = DateTime.Now,
-                DocumentTypeId = DocumentTypes.dtReport,
-                DocumentStateId = ReportStates.rsCreated,
-                DocumentUserId = new Guid("2b0ffaa3-913b-4120-982e-736ee0af0f39"),
-                Notes = "",
-                ReportTypeId = new Guid("9fb803a2-630c-488a-bf2f-a4280114f471"),
-                RecipientId = new Guid("2b0ffaa3-913b-4120-982e-736ee0af0f39"),
-                FillingDate = DateTime.Now,
-                ExpiryFillingDate = DateTime.Now
+                RegionId = regionDto.Id,
+                RegionName = regionDto.Name
             };
 
-            var rep = treeServiceClient.CreateReport(r);
+            var districtDto = treeServiceClient.CreateDistrict(d);
+
+            //var districtDto = treeServiceClient.GetDistrict(new Guid("a9b13dd5-fa17-46ac-9f3a-a448003303e4"));
+
+            var eduLevelDto = treeServiceClient.GetEducationLevel(new Guid("14174718-ccfa-4c98-842b-a4470149bf98"));
+            var localityTypeDto = treeServiceClient.GetLocalityType(new Guid("4370ba28-6130-42cc-8545-a447014a1e79")); // город
+            var localityTypeDto2 = treeServiceClient.GetLocalityType(new Guid("171d83c9-d03a-4a8e-9c89-a447014a3136")); // село
+
+            var instituteNames = new List<string>()
+            {                
+                "ГБПОУ \"Юсьвинский агротехнический техникум\""
+            };
+
+            foreach (var i in instituteNames.Select(instituteName => new InstituteDto
+            {
+                Id = Guid.NewGuid(),
+                ParentId = SystemObjects.AllInstituteJuridicalPersons,
+                Name = instituteName,
+                ShortName = "",
+                TypeId = ObjectTypes.otJuridicalPerson,
+                StateId = ObjectStates.osActive,
+                CreateDateTime = DateTime.Now,
+                LocationId = districtDto.Id,
+                LocationName = districtDto.Name,
+                EducationLevelId = eduLevelDto.Id,
+                EducationLevelName = eduLevelDto.Name,
+                LocalityTypeId = localityTypeDto.Id,
+                LocalityTypeName = localityTypeDto.Name
+            }))
+            {
+                if (i.Name == "ГБОУ СПО Зюкайский аграрный техникум")
+                {
+                    i.LocalityTypeId = localityTypeDto2.Id;
+                    i.LocalityTypeName = localityTypeDto2.Name;
+                }
+                treeServiceClient.CreateInstitute(i);
+            }
+
+            var ss = 1;
 
             // r = treeServiceClient.GetReport(new Guid("84f4dd1c-fadb-4add-a355-a42900a252b0"));
 

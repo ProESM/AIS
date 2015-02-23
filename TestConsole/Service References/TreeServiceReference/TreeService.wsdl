@@ -225,6 +225,12 @@
   <wsdl:message name="ITreeService_UpdateReport_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateReportResponse" />
   </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportDataByReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportDataByReport" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetReportDataByReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportDataByReportResponse" />
+  </wsdl:message>
   <wsdl:message name="ITreeService_CreateJuridicalPerson_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateJuridicalPerson" />
   </wsdl:message>
@@ -248,6 +254,96 @@
   </wsdl:message>
   <wsdl:message name="ITreeService_UpdateJuridicalPerson_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateJuridicalPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateRegion_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRegion" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateRegion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRegionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetRegion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRegion" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetRegion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRegionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateRegion_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRegion" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateRegion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRegionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateDistrict_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDistrict" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateDistrict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDistrictResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDistrict_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDistrict" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetDistrict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDistrictResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateDistrict_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDistrict" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateDistrict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDistrictResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateInstitute_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateInstitute" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateInstitute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateInstituteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetInstitute_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitute" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetInstitute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstituteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateInstitute_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateInstitute" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateInstitute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateInstituteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateEducationLevel_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEducationLevel" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateEducationLevel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEducationLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetEducationLevel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEducationLevel" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetEducationLevel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEducationLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateEducationLevel_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEducationLevel" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateEducationLevel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEducationLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateLocalityType_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLocalityType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_CreateLocalityType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLocalityTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetLocalityType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocalityType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_GetLocalityType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocalityTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateLocalityType_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLocalityType" />
+  </wsdl:message>
+  <wsdl:message name="ITreeService_UpdateLocalityType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLocalityTypeResponse" />
   </wsdl:message>
   <wsdl:portType name="ITreeService">
     <wsdl:operation name="GetSystemObjects">
@@ -394,6 +490,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateReport" message="tns:ITreeService_UpdateReport_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateReportResponse" message="tns:ITreeService_UpdateReport_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetReportDataByReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetReportDataByReport" message="tns:ITreeService_GetReportDataByReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetReportDataByReportResponse" message="tns:ITreeService_GetReportDataByReport_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateJuridicalPerson">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateJuridicalPerson" message="tns:ITreeService_CreateJuridicalPerson_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateJuridicalPersonResponse" message="tns:ITreeService_CreateJuridicalPerson_OutputMessage" />
@@ -409,6 +509,66 @@
     <wsdl:operation name="UpdateJuridicalPerson">
       <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateJuridicalPerson" message="tns:ITreeService_UpdateJuridicalPerson_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateJuridicalPersonResponse" message="tns:ITreeService_UpdateJuridicalPerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRegion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateRegion" message="tns:ITreeService_CreateRegion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateRegionResponse" message="tns:ITreeService_CreateRegion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetRegion" message="tns:ITreeService_GetRegion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetRegionResponse" message="tns:ITreeService_GetRegion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRegion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateRegion" message="tns:ITreeService_UpdateRegion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateRegionResponse" message="tns:ITreeService_UpdateRegion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDistrict">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateDistrict" message="tns:ITreeService_CreateDistrict_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateDistrictResponse" message="tns:ITreeService_CreateDistrict_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDistrict">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetDistrict" message="tns:ITreeService_GetDistrict_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetDistrictResponse" message="tns:ITreeService_GetDistrict_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDistrict">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateDistrict" message="tns:ITreeService_UpdateDistrict_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateDistrictResponse" message="tns:ITreeService_UpdateDistrict_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateInstitute">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateInstitute" message="tns:ITreeService_CreateInstitute_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateInstituteResponse" message="tns:ITreeService_CreateInstitute_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitute">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetInstitute" message="tns:ITreeService_GetInstitute_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetInstituteResponse" message="tns:ITreeService_GetInstitute_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateInstitute">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateInstitute" message="tns:ITreeService_UpdateInstitute_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateInstituteResponse" message="tns:ITreeService_UpdateInstitute_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateEducationLevel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateEducationLevel" message="tns:ITreeService_CreateEducationLevel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateEducationLevelResponse" message="tns:ITreeService_CreateEducationLevel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationLevel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetEducationLevel" message="tns:ITreeService_GetEducationLevel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetEducationLevelResponse" message="tns:ITreeService_GetEducationLevel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEducationLevel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateEducationLevel" message="tns:ITreeService_UpdateEducationLevel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateEducationLevelResponse" message="tns:ITreeService_UpdateEducationLevel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocalityType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/CreateLocalityType" message="tns:ITreeService_CreateLocalityType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/CreateLocalityTypeResponse" message="tns:ITreeService_CreateLocalityType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocalityType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/GetLocalityType" message="tns:ITreeService_GetLocalityType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/GetLocalityTypeResponse" message="tns:ITreeService_GetLocalityType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLocalityType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITreeService/UpdateLocalityType" message="tns:ITreeService_UpdateLocalityType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITreeService/UpdateLocalityTypeResponse" message="tns:ITreeService_UpdateLocalityType_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITreeService" type="tns:ITreeService">
@@ -737,6 +897,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetReportDataByReport">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetReportDataByReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateJuridicalPerson">
       <soap:operation soapAction="http://tempuri.org/ITreeService/CreateJuridicalPerson" style="document" />
       <wsdl:input>
@@ -766,6 +935,141 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateJuridicalPerson">
       <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateJuridicalPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRegion">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateRegion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegion">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetRegion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRegion">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateRegion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDistrict">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateDistrict" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistrict">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetDistrict" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDistrict">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateDistrict" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateInstitute">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateInstitute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitute">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetInstitute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateInstitute">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateInstitute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEducationLevel">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateEducationLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationLevel">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetEducationLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEducationLevel">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateEducationLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocalityType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/CreateLocalityType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocalityType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/GetLocalityType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLocalityType">
+      <soap:operation soapAction="http://tempuri.org/ITreeService/UpdateLocalityType" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

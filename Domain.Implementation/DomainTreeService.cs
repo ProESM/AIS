@@ -33,6 +33,11 @@ namespace Domain.Implementation
         private readonly IDtoFetcher<ReportDao, ReportDto> _reportDtoFetcher;
         private readonly IDtoFetcher<JuridicalPersonDao, JuridicalPersonDto> _juridicalPersonDtoFetcher;
         private readonly IDtoFetcher<ReportDataDao, ReportDataDto> _reportDataDtoFetcher;
+        private readonly IDtoFetcher<RegionDao, RegionDto> _regionDtoFetcher;
+        private readonly IDtoFetcher<DistrictDao, DistrictDto> _districtDtoFetcher;
+        private readonly IDtoFetcher<InstituteDao, InstituteDto> _instituteDtoFetcher;
+        private readonly IDtoFetcher<EducationLevelDao, EducationLevelDto> _educationLevelDtoFetcher;
+        private readonly IDtoFetcher<LocalityTypeDao, LocalityTypeDto> _localityTypeDtoFetcher;
 
         public DomainTreeService()
         {
@@ -51,6 +56,11 @@ namespace Domain.Implementation
             _reportDtoFetcher = new ReportDtoFetcher(_treeRepository);
             _juridicalPersonDtoFetcher = new JuridicalPersonDtoFetcher(_treeRepository);
             _reportDataDtoFetcher = new ReportDataDtoFetcher(_treeRepository);
+            _regionDtoFetcher = new RegionDtoFetcher(_treeRepository);
+            _districtDtoFetcher = new DistrictDtoFetcher(_treeRepository);
+            _instituteDtoFetcher = new InstiteDtoFetcher(_treeRepository);
+            _educationLevelDtoFetcher = new EducationLevelDtoFetcher(_treeRepository);
+            _localityTypeDtoFetcher = new LocalityTypeDtoFetcher(_treeRepository);
         }
 
         public List<Guid> GetSystemObjects()
@@ -986,6 +996,13 @@ namespace Domain.Implementation
             return reportDataDaos == null ? null : _reportDataDtoFetcher.Fetch(reportDataDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
+        public List<ReportDataDto> GetReportDataByReport(Guid reportId)
+        {
+            var reportDataDaos = _treeRepository.GetReportDataByReport(reportId);
+
+            return reportDataDaos == null ? null : _reportDataDtoFetcher.Fetch(reportDataDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
         public int GetReportDataPageCountByReportId(Guid reportId)
         {
             return _treeRepository.GetReportDataPageCountByReportId(reportId);
@@ -1059,6 +1076,301 @@ namespace Domain.Implementation
             {
                 _treeRepository.DeleteReportData(reportDataId);
             }
+        }
+
+        public RegionDto CreateRegion(RegionDto regionDto)
+        {
+            TreeDao parentDao = null;
+            if (regionDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)regionDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otRegion);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            var regionDao = new RegionDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = regionDto.Name,
+                ShortName = regionDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now
+            };
+
+            return _regionDtoFetcher.Fetch(new List<RegionDao> { _treeRepository.CreateRegion(regionDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public RegionDto GetRegion(Guid regionId)
+        {
+            var regionDao = _treeRepository.GetRegion(regionId);
+
+            return regionDao == null ? null : _regionDtoFetcher.Fetch(new List<RegionDao> { regionDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<RegionDto> GetRegions()
+        {
+            var regionDaos = _treeRepository.GetRegions();
+
+            return regionDaos == null ? null : _regionDtoFetcher.Fetch(regionDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
+        public void UpdateRegion(RegionDto regionDto)
+        {
+            var regionDao = _treeRepository.GetRegion(regionDto.Id);
+
+            TreeDao parentDao = null;
+            if (regionDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)regionDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(regionDto.TypeId);
+            var stateDao = _treeRepository.GetTree(regionDto.StateId);
+
+            regionDao.Parent = parentDao;
+            regionDao.Name = regionDto.Name;
+            regionDao.ShortName = regionDto.ShortName;
+            regionDao.Type = typeDao;
+            regionDao.State = stateDao;
+
+            _treeRepository.UpdateRegion(regionDao);
+        }
+
+        public DistrictDto CreateDistrict(DistrictDto districtDto)
+        {
+            TreeDao parentDao = null;
+            if (districtDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)districtDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otDistrict);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+            var regionDao = _treeRepository.GetRegion(districtDto.RegionId);
+
+            var districtDao = new DistrictDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = districtDto.Name,
+                ShortName = districtDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now,
+                Region = regionDao
+            };
+
+            return _districtDtoFetcher.Fetch(new List<DistrictDao> { _treeRepository.CreateDistrict(districtDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public DistrictDto GetDistrict(Guid districtId)
+        {
+            var districtDao = _treeRepository.GetDistrict(districtId);
+
+            return districtDao == null ? null : _districtDtoFetcher.Fetch(new List<DistrictDao> { districtDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<DistrictDto> GetDistricts()
+        {
+            var districtDaos = _treeRepository.GetDistricts();
+
+            return districtDaos == null ? null : _districtDtoFetcher.Fetch(districtDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
+        public void UpdateDistrict(DistrictDto districtDto)
+        {
+            var districtDao = _treeRepository.GetDistrict(districtDto.Id);
+
+            TreeDao parentDao = null;
+            if (districtDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)districtDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(districtDto.TypeId);
+            var stateDao = _treeRepository.GetTree(districtDto.StateId);
+            var regionDao = _treeRepository.GetRegion(districtDto.RegionId);
+
+            districtDao.Parent = parentDao;
+            districtDao.Name = districtDto.Name;
+            districtDao.ShortName = districtDto.ShortName;
+            districtDao.Type = typeDao;
+            districtDao.State = stateDao;
+            districtDao.Region = regionDao;
+
+            _treeRepository.UpdateDistrict(districtDao);
+        }
+
+        public InstituteDto CreateInstitute(InstituteDto instituteDto)
+        {
+            TreeDao parentDao = null;
+            if (instituteDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)instituteDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otJuridicalPerson);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+            var districtDao = _treeRepository.GetDistrict(instituteDto.LocationId);
+            var educationLevelDao = _treeRepository.GetEducationLevel(instituteDto.EducationLevelId);
+            var localityTypeDao = _treeRepository.GetLocalityType(instituteDto.LocalityTypeId);
+
+            var instituteDao = new InstituteDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = instituteDto.Name,
+                ShortName = instituteDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now,
+                Location = districtDao,
+                EducationLevel = educationLevelDao,
+                LocalityType = localityTypeDao
+            };
+
+            return _instituteDtoFetcher.Fetch(new List<InstituteDao> { _treeRepository.CreateInstitute(instituteDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public InstituteDto GetInstitute(Guid instituteId)
+        {
+            var instituteDao = _treeRepository.GetInstitute(instituteId);
+
+            return instituteDao == null ? null : _instituteDtoFetcher.Fetch(new List<InstituteDao> { instituteDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public void UpdateInstitute(InstituteDto instituteDto)
+        {
+            var instituteDao = _treeRepository.GetInstitute(instituteDto.Id);
+
+            TreeDao parentDao = null;
+            if (instituteDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)instituteDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(instituteDto.TypeId);
+            var stateDao = _treeRepository.GetTree(instituteDto.StateId);
+            var districtDao = _treeRepository.GetRegion(instituteDto.LocationId);
+            var educationLevelDao = _treeRepository.GetEducationLevel(instituteDto.EducationLevelId);
+            var localityTypeDao = _treeRepository.GetLocalityType(instituteDto.LocalityTypeId);
+
+            instituteDao.Parent = parentDao;
+            instituteDao.Name = instituteDto.Name;
+            instituteDao.ShortName = instituteDto.ShortName;
+            instituteDao.Type = typeDao;
+            instituteDao.State = stateDao;
+            instituteDao.Location = districtDao;
+            instituteDao.EducationLevel = educationLevelDao;
+            instituteDao.LocalityType = localityTypeDao;
+
+            _treeRepository.UpdateInstitute(instituteDao);
+        }
+
+        public EducationLevelDto CreateEducationLevel(EducationLevelDto educationLevelDto)
+        {
+            TreeDao parentDao = null;
+            if (educationLevelDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)educationLevelDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otEducationLevel);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            var educationLevelDao = new EducationLevelDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = educationLevelDto.Name,
+                ShortName = educationLevelDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now
+            };
+
+            return _educationLevelDtoFetcher.Fetch(new List<EducationLevelDao> { _treeRepository.CreateEducationLevel(educationLevelDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public EducationLevelDto GetEducationLevel(Guid educationLevelId)
+        {
+            var educationLevelDao = _treeRepository.GetEducationLevel(educationLevelId);
+
+            return educationLevelDao == null ? null : _educationLevelDtoFetcher.Fetch(new List<EducationLevelDao> { educationLevelDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public void UpdateEducationLevel(EducationLevelDto educationLevelDto)
+        {
+            var educationLevelDao = _treeRepository.GetEducationLevel(educationLevelDto.Id);
+
+            TreeDao parentDao = null;
+            if (educationLevelDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)educationLevelDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(educationLevelDto.TypeId);
+            var stateDao = _treeRepository.GetTree(educationLevelDto.StateId);
+
+            educationLevelDao.Parent = parentDao;
+            educationLevelDao.Name = educationLevelDto.Name;
+            educationLevelDao.ShortName = educationLevelDto.ShortName;
+            educationLevelDao.Type = typeDao;
+            educationLevelDao.State = stateDao;
+
+            _treeRepository.UpdateEducationLevel(educationLevelDao);
+        }
+
+        public LocalityTypeDto CreateLocalityType(LocalityTypeDto localityTypeDto)
+        {
+            TreeDao parentDao = null;
+            if (localityTypeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)localityTypeDto.ParentId);
+            }
+
+            var typeDao = _treeRepository.GetTree(ObjectTypes.otEducationLevel);
+            var stateDao = _treeRepository.GetTree(ObjectStates.osActive);
+
+            var localityTypeDao = new LocalityTypeDao
+            {
+                Id = Guid.NewGuid(),
+                Parent = parentDao,
+                Name = localityTypeDto.Name,
+                ShortName = localityTypeDto.ShortName,
+                Type = typeDao,
+                State = stateDao,
+                CreateDateTime = DateTime.Now
+            };
+
+            return _localityTypeDtoFetcher.Fetch(new List<LocalityTypeDao> { _treeRepository.CreateLocalityType(localityTypeDao) }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public LocalityTypeDto GetLocalityType(Guid localityTypeId)
+        {
+            var localityTypeDao = _treeRepository.GetLocalityType(localityTypeId);
+
+            return localityTypeDao == null ? null : _localityTypeDtoFetcher.Fetch(new List<LocalityTypeDao> { localityTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public void UpdateLocalityType(LocalityTypeDto localityTypeDto)
+        {
+            var localityTypeDao = _treeRepository.GetLocalityType(localityTypeDto.Id);
+
+            TreeDao parentDao = null;
+            if (localityTypeDto.ParentId != null)
+            {
+                parentDao = _treeRepository.GetTree((Guid)localityTypeDto.ParentId);
+            }
+            var typeDao = _treeRepository.GetTree(localityTypeDto.TypeId);
+            var stateDao = _treeRepository.GetTree(localityTypeDto.StateId);
+
+            localityTypeDao.Parent = parentDao;
+            localityTypeDao.Name = localityTypeDto.Name;
+            localityTypeDao.ShortName = localityTypeDto.ShortName;
+            localityTypeDao.Type = typeDao;
+            localityTypeDao.State = stateDao;
+
+            _treeRepository.UpdateLocalityType(localityTypeDao);
         }
     }
 }

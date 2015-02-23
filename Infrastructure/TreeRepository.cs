@@ -826,6 +826,17 @@ namespace Infrastructure
             }
         }
 
+        public List<ReportDataDao> GetReportDataByReport(Guid reportId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return
+                    _session.Query<ReportDataDao>()
+                        .Where(p => p.Report.Id.ToString() == reportId.ToString())                        
+                        .ToList();
+            }
+        }
+
         public int GetReportDataPageCountByReportId(Guid reportId)
         {
             using (var transaction = _session.StartTransaction())
@@ -868,6 +879,167 @@ namespace Infrastructure
                        .SetParameter("groupId", reportId)
                        .ExecuteUpdate();
 
+                transaction.Commit();
+            }
+        }
+
+        public RegionDao CreateRegion(RegionDao regionDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(regionDao);
+
+                transaction.Commit();
+
+                return _session.Query<RegionDao>().FirstOrDefault(p => p.Id.ToString() == regionDao.Id.ToString());
+            }
+        }
+
+        public RegionDao GetRegion(Guid regionId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<RegionDao>().FirstOrDefault(p => p.Id.ToString() == regionId.ToString());
+            }
+        }
+
+        public List<RegionDao> GetRegions()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<RegionDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateRegion(RegionDao regionDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(regionDao);
+                transaction.Commit();
+            }
+        }
+
+        public DistrictDao CreateDistrict(DistrictDao districtDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(districtDao);
+
+                transaction.Commit();
+
+                return _session.Query<DistrictDao>().FirstOrDefault(p => p.Id.ToString() == districtDao.Id.ToString());
+            }
+        }
+
+        public DistrictDao GetDistrict(Guid districtId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<DistrictDao>().FirstOrDefault(p => p.Id.ToString() == districtId.ToString());
+            }
+        }
+
+        public List<DistrictDao> GetDistricts()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<DistrictDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+            }
+        }
+
+        public void UpdateDistrict(DistrictDao districtDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(districtDao);
+                transaction.Commit();
+            }
+        }
+
+        public InstituteDao CreateInstitute(InstituteDao instituteDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(instituteDao);
+
+                transaction.Commit();
+
+                return _session.Query<InstituteDao>().FirstOrDefault(p => p.Id.ToString() == instituteDao.Id.ToString());
+            }
+        }
+
+        public InstituteDao GetInstitute(Guid instituteId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<InstituteDao>().FirstOrDefault(p => p.Id.ToString() == instituteId.ToString());
+            }
+        }
+
+        public void UpdateInstitute(InstituteDao instituteDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(instituteDao);
+                transaction.Commit();
+            }
+        }
+
+        public EducationLevelDao CreateEducationLevel(EducationLevelDao educationLevelDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(educationLevelDao);
+
+                transaction.Commit();
+
+                return _session.Query<EducationLevelDao>().FirstOrDefault(p => p.Id.ToString() == educationLevelDao.Id.ToString());
+            }
+        }
+
+        public EducationLevelDao GetEducationLevel(Guid educationLevelId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<EducationLevelDao>().FirstOrDefault(p => p.Id.ToString() == educationLevelId.ToString());
+            }
+        }
+
+        public void UpdateEducationLevel(EducationLevelDao educationLevelDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(educationLevelDao);
+                transaction.Commit();
+            }
+        }
+
+        public LocalityTypeDao CreateLocalityType(LocalityTypeDao localityTypeDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(localityTypeDao);
+
+                transaction.Commit();
+
+                return _session.Query<LocalityTypeDao>().FirstOrDefault(p => p.Id.ToString() == localityTypeDao.Id.ToString());
+            }
+        }
+
+        public LocalityTypeDao GetLocalityType(Guid localityTypeId)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<LocalityTypeDao>().FirstOrDefault(p => p.Id.ToString() == localityTypeId.ToString());
+            }
+        }
+
+        public void UpdateLocalityType(LocalityTypeDao localityTypeDao)
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                _session.Save(localityTypeDao);
                 transaction.Commit();
             }
         }

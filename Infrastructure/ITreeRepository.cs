@@ -114,6 +114,8 @@ namespace Infrastructure
 
         List<ReportDataDao> GetReportDataByReportAndPage(Guid reportId, int page);
 
+        List<ReportDataDao> GetReportDataByReport(Guid reportId);
+
         int GetReportDataPageCountByReportId(Guid reportId);
 
         void UpdateReportData(ReportDataDao reportDataDao);
@@ -121,5 +123,39 @@ namespace Infrastructure
         void DeleteReportData(Guid reportDataId);
 
         void DeleteReportDataByReport(Guid reportId);
+
+        RegionDao CreateRegion(RegionDao regionDao);
+
+        RegionDao GetRegion(Guid regionId);
+
+        List<RegionDao> GetRegions();
+
+        void UpdateRegion(RegionDao regionDao);
+
+        DistrictDao CreateDistrict(DistrictDao districtDao);
+
+        DistrictDao GetDistrict(Guid districtId);
+
+        List<DistrictDao> GetDistricts();
+
+        void UpdateDistrict(DistrictDao districtDao);
+
+        InstituteDao CreateInstitute(InstituteDao instituteDao);
+
+        InstituteDao GetInstitute(Guid instituteId);
+
+        void UpdateInstitute(InstituteDao instituteDao);
+
+        EducationLevelDao CreateEducationLevel(EducationLevelDao educationLevelDao);
+
+        EducationLevelDao GetEducationLevel(Guid educationLevelId);
+
+        void UpdateEducationLevel(EducationLevelDao educationLevelDao);
+
+        LocalityTypeDao CreateLocalityType(LocalityTypeDao localityTypeDao);
+
+        LocalityTypeDao GetLocalityType(Guid localityTypeId);
+
+        void UpdateLocalityType(LocalityTypeDao localityTypeDao);
     }
 }

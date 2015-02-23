@@ -199,7 +199,7 @@ namespace Common.Base
         /// Все образовательные учреждения
         /// </summary>
         [Display(Name = "Все образовательные учреждения")]
-        public static readonly Guid AllInstiteJuridicalPersons = new Guid("952ed885-29f8-4f39-937c-a445010afe4b");
+        public static readonly Guid AllInstituteJuridicalPersons = new Guid("952ed885-29f8-4f39-937c-a445010afe4b");
         /// <summary>
         /// Служебные юридические лица
         /// </summary>
@@ -224,7 +224,11 @@ namespace Common.Base
         [Display(Name = "Все районы")]
         public static readonly Guid AllDistricts = new Guid("44cad9bb-e933-4e16-a2de-a444016a4e9d");
 
-
+        /// <summary>
+        /// Все уровни профессионального образования
+        /// </summary>
+        [Display(Name = "Все уровни профессионального образования")]
+        public static readonly Guid AllEducationLevels = new Guid("3e1b842e-d1d3-45ba-b345-a44500fe346d");        
     }
 
     /// <summary>

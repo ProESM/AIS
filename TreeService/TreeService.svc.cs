@@ -229,6 +229,11 @@ namespace TreeService
             _domainTreeService.UpdateReport(reportDto);
         }
 
+        public List<ReportDataDto> GetReportDataByReport(Guid reportId)
+        {
+            return _domainTreeService.GetReportDataByReport(reportId);
+        }
+
         public JuridicalPersonDto CreateJuridicalPerson(JuridicalPersonDto juridicalPersonDto)
         {
             return _domainTreeService.CreateJuridicalPerson(juridicalPersonDto);
@@ -247,6 +252,81 @@ namespace TreeService
         public void UpdateJuridicalPerson(JuridicalPersonDto juridicalPersonDto)
         {
             _domainTreeService.UpdateJuridicalPerson(juridicalPersonDto);
+        }
+
+        public RegionDto CreateRegion(RegionDto regionDto)
+        {
+            return _domainTreeService.CreateRegion(regionDto);
+        }
+
+        public RegionDto GetRegion(Guid regionId)
+        {
+            return _domainTreeService.GetRegion(regionId);
+        }
+
+        public void UpdateRegion(RegionDto regionDto)
+        {
+            _domainTreeService.UpdateRegion(regionDto);
+        }
+
+        public DistrictDto CreateDistrict(DistrictDto districtDto)
+        {
+            return _domainTreeService.CreateDistrict(districtDto);
+        }
+
+        public DistrictDto GetDistrict(Guid districtId)
+        {
+            return _domainTreeService.GetDistrict(districtId);
+        }
+
+        public void UpdateDistrict(DistrictDto districtDto)
+        {
+            _domainTreeService.UpdateDistrict(districtDto);
+        }
+
+        public InstituteDto CreateInstitute(InstituteDto instituteDto)
+        {
+            return _domainTreeService.CreateInstitute(instituteDto);
+        }
+
+        public InstituteDto GetInstitute(Guid instituteId)
+        {
+            return _domainTreeService.GetInstitute(instituteId);
+        }
+
+        public void UpdateInstitute(InstituteDto instituteDto)
+        {
+            _domainTreeService.UpdateInstitute(instituteDto);
+        }
+
+        public EducationLevelDto CreateEducationLevel(EducationLevelDto educationLevelDto)
+        {
+            return _domainTreeService.CreateEducationLevel(educationLevelDto);
+        }
+
+        public EducationLevelDto GetEducationLevel(Guid educationLevelId)
+        {
+            return _domainTreeService.GetEducationLevel(educationLevelId);
+        }
+
+        public void UpdateEducationLevel(EducationLevelDto educationLevelDto)
+        {
+            _domainTreeService.UpdateEducationLevel(educationLevelDto);
+        }
+
+        public LocalityTypeDto CreateLocalityType(LocalityTypeDto localityTypeDto)
+        {
+            return _domainTreeService.CreateLocalityType(localityTypeDto);
+        }
+
+        public LocalityTypeDto GetLocalityType(Guid localityTypeId)
+        {
+            return _domainTreeService.GetLocalityType(localityTypeId);
+        }
+
+        public void UpdateLocalityType(LocalityTypeDto localityTypeDto)
+        {
+            _domainTreeService.UpdateLocalityType(localityTypeDto);
         }
     }
 }

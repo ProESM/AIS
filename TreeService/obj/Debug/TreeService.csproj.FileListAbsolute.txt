@@ -40,4 +40,3 @@ D:\git\AIS\TreeService\bin\System.Web.Razor.xml
 D:\git\AIS\TreeService\bin\System.Web.WebPages.Razor.xml
 D:\git\AIS\TreeService\bin\System.Web.WebPages.xml
 D:\git\AIS\TreeService\bin\System.Web.WebPages.Deployment.xml
-D:\git\AIS\TreeService\bin\hibernate.cfg.xml

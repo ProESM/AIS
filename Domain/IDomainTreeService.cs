@@ -127,6 +127,8 @@ namespace Domain
 
         List<ReportDataDto> GetReportDataByReportAndPage(Guid reportId, int page);
 
+        List<ReportDataDto> GetReportDataByReport(Guid reportId);
+
         int GetReportDataPageCountByReportId(Guid reportId);
 
         void UpdateReportData(ReportDataDto reportDataDto);
@@ -138,6 +140,40 @@ namespace Domain
         void InsertOrUpdateReportDataPacket(List<ReportDataDto> reportDataDtos);
 
         void DeleteReportDataPacket(List<Guid> reportDataIds);
+
+        RegionDto CreateRegion(RegionDto regionDto);
+
+        RegionDto GetRegion(Guid regionId);
+
+        List<RegionDto> GetRegions();
+
+        void UpdateRegion(RegionDto regionDto);
+
+        DistrictDto CreateDistrict(DistrictDto districtDto);
+
+        DistrictDto GetDistrict(Guid districtId);
+
+        List<DistrictDto> GetDistricts();
+
+        void UpdateDistrict(DistrictDto districtDto);
+
+        InstituteDto CreateInstitute(InstituteDto instituteDto);
+
+        InstituteDto GetInstitute(Guid instituteId);
+
+        void UpdateInstitute(InstituteDto instituteDto);
+
+        EducationLevelDto CreateEducationLevel(EducationLevelDto educationLevelDto);
+
+        EducationLevelDto GetEducationLevel(Guid educationLevelId);
+
+        void UpdateEducationLevel(EducationLevelDto educationLevelDto);
+
+        LocalityTypeDto CreateLocalityType(LocalityTypeDto localityTypeDto);
+
+        LocalityTypeDto GetLocalityType(Guid localityTypeId);
+
+        void UpdateLocalityType(LocalityTypeDto localityTypeDto);
     }
 
 }

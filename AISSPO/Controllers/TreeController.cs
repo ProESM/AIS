@@ -34,6 +34,8 @@ namespace AISSPO.Controllers
         [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get2")]
         public int Get2()
         {
+            
+            
             return _treeService.GetReportDataPageCountByReportId(new Guid("d26c8417-016c-49a1-beda-a42d0151ed5c"));
         }
 

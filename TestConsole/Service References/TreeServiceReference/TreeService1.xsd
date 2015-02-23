@@ -29,4 +29,28 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfJuridicalPersonDto" nillable="true" type="tns:ArrayOfJuridicalPersonDto" />
+  <xs:complexType name="RegionDto">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/DTO" base="q3:TreeDto">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RegionDto" nillable="true" type="tns:RegionDto" />
+  <xs:complexType name="EducationLevelDto">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/DTO" base="q4:TreeDto">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EducationLevelDto" nillable="true" type="tns:EducationLevelDto" />
+  <xs:complexType name="LocalityTypeDto">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/DTO" base="q5:TreeDto">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LocalityTypeDto" nillable="true" type="tns:LocalityTypeDto" />
 </xs:schema>

@@ -81,9 +81,12 @@
     <Compile Include="DtoFetchers\InstiteDtoFetcher.cs" />
     <Compile Include="DtoFetchers\JuridicalPersonDtoFetcher.cs" />
     <Compile Include="DtoFetchers\PersonDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\RegionDtoFetcher.cs" />
     <Compile Include="DtoFetchers\ReportDataDtoFetcher.cs" />
     <Compile Include="DtoFetchers\ReportDtoFetcher.cs" />
     <Compile Include="DtoFetchers\ReportTypeDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\TreeTypeDtoFetchers\EducationLevelDtoFetcher.cs" />
+    <Compile Include="DtoFetchers\TreeTypeDtoFetchers\LocalityTypeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeTypeDtoFetchers\ReportTypeGroupDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeDtoFetcher.cs" />
     <Compile Include="DtoFetchers\TreeTypeDtoFetchers\DocumentTypeDtoFetcher.cs" />

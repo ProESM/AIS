@@ -63,16 +63,34 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.DistrictDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.DocumentDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.DocumentTypeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.EducationLevelDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.InstituteDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.JuridicalPersonDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.LocalityTypeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.PersonDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.RegionDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.ReportDataDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TreeServiceReference\TestConsole.TreeServiceReference.ReportDto.datasource">

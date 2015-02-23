@@ -141,6 +141,9 @@ namespace TreeService
         void UpdateReport(ReportDto reportDto);
 
         [OperationContract]
+        List<ReportDataDto> GetReportDataByReport(Guid reportId);
+
+        [OperationContract]
         JuridicalPersonDto CreateJuridicalPerson(JuridicalPersonDto juridicalPersonDto);
 
         [OperationContract]
@@ -151,5 +154,50 @@ namespace TreeService
 
         [OperationContract]
         void UpdateJuridicalPerson(JuridicalPersonDto juridicalPersonDto);
+
+        [OperationContract]
+        RegionDto CreateRegion(RegionDto regionDto);
+
+        [OperationContract]
+        RegionDto GetRegion(Guid regionId);
+
+        [OperationContract]
+        void UpdateRegion(RegionDto regionDto);
+
+        [OperationContract]
+        DistrictDto CreateDistrict(DistrictDto districtDto);
+
+        [OperationContract]
+        DistrictDto GetDistrict(Guid districtId);
+        
+        [OperationContract]
+        void UpdateDistrict(DistrictDto districtDto);
+
+        [OperationContract]
+        InstituteDto CreateInstitute(InstituteDto instituteDto);
+
+        [OperationContract]
+        InstituteDto GetInstitute(Guid instituteId);
+
+        [OperationContract]
+        void UpdateInstitute(InstituteDto instituteDto);
+
+        [OperationContract]
+        EducationLevelDto CreateEducationLevel(EducationLevelDto educationLevelDto);
+
+        [OperationContract]
+        EducationLevelDto GetEducationLevel(Guid educationLevelId);
+
+        [OperationContract]
+        void UpdateEducationLevel(EducationLevelDto educationLevelDto);
+
+        [OperationContract]
+        LocalityTypeDto CreateLocalityType(LocalityTypeDto localityTypeDto);
+
+        [OperationContract]
+        LocalityTypeDto GetLocalityType(Guid localityTypeId);
+
+        [OperationContract]
+        void UpdateLocalityType(LocalityTypeDto localityTypeDto);        
     }
 }
