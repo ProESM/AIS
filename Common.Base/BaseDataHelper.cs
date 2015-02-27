@@ -74,37 +74,37 @@ namespace Common.Base
         /// Корень (родитель) всех объектов
         /// </summary>
         [Display(Name = "Корень (родитель) всех объектов")]
-        public static readonly Guid Root = new Guid("C034E889-3B80-42D3-BDAD-5F4E729A905B");
+        public static readonly Guid Root = new Guid("c034e889-3b80-42d3-bdad-5f4e729a905b");
         /// <summary>
         /// Настройки системы
         /// </summary>
         [Display(Name = "Настройки системы")]
-        public static readonly Guid SystemSettings = new Guid("0322648B-488A-40C0-9CEE-B3A4F9B572EF");
+        public static readonly Guid SystemSettings = new Guid("0322648b-488a-40c0-9cee-b3a4f9b572ef");
         /// <summary>
         /// Служебные состояния дерева объектов
         /// </summary>
         [Display(Name = "Все служебные состояния дерева объектов")]
-        public static readonly Guid SystemObjectStates = new Guid("FB782982-8E78-4DD0-B678-DDC24AF694FC");
+        public static readonly Guid SystemObjectStates = new Guid("fb782982-8e78-4dd0-b678-ddc24af694fc");
         /// <summary>
         /// Все типы объектов
         /// </summary>
         [Display(Name = "Все типы объектов")]
-        public static readonly Guid SystemObjectTypes = new Guid("F8984CD8-3409-4C19-8FCE-85A5BD2E3161");
+        public static readonly Guid SystemObjectTypes = new Guid("f8984cd8-3409-4c19-8fce-85a5bd2e3161");
         /// <summary>
         /// Служебные состояния дерева объектов
         /// </summary>
         [Display(Name = "Общие состояния дерева объектов")]
-        public static readonly Guid CommonObjectStates = new Guid("CFEEADC1-D140-4CA3-AC94-588A4D33C12B");
+        public static readonly Guid CommonObjectStates = new Guid("cfeeadc1-d140-4ca3-ac94-588a4d33c12b");
         /// <summary>
         /// Все пользователи системы
         /// </summary>
         [Display(Name = "Все пользователи системы")]
-        public static readonly Guid SystemUsers = new Guid("540BC313-F0A3-412C-857B-0157F23C601B");
+        public static readonly Guid SystemUsers = new Guid("540bc313-f0a3-412c-857b-0157f23c601b");
         /// <summary>
         /// Все группы пользователей
         /// </summary>
         [Display(Name = "Все группы пользователей")]
-        public static readonly Guid UserGroups = new Guid("20F9B9CE-8769-4569-AE71-1ECF18BE90B3");
+        public static readonly Guid UserGroups = new Guid("20f9b9ce-8769-4569-ae71-1ecf18be90b3");
         /// <summary>
         /// Все люди (физические лица)
         /// </summary>
@@ -228,7 +228,13 @@ namespace Common.Base
         /// Все уровни профессионального образования
         /// </summary>
         [Display(Name = "Все уровни профессионального образования")]
-        public static readonly Guid AllEducationLevels = new Guid("3e1b842e-d1d3-45ba-b345-a44500fe346d");        
+        public static readonly Guid AllEducationLevels = new Guid("3e1b842e-d1d3-45ba-b345-a44500fe346d");
+
+        /// <summary>
+        /// Типы населенных пунктов (город, село)
+        /// </summary>
+        [Display(Name = "Типы населенных пунктов (город, село)")]
+        public static readonly Guid AllLocalityTypes = new Guid("f777406d-6ae7-4163-9fc9-a44500fe474b");
     }
 
     /// <summary>
@@ -240,25 +246,25 @@ namespace Common.Base
         /// Активен
         /// </summary>
         [Display(Name = "Активен")]
-        public static readonly Guid osActive = new Guid("63B43B53-DD11-4283-BE14-099A6C33EF49");
+        public static readonly Guid osActive = new Guid("63b43b53-dd11-4283-be14-099a6c33ef49");
 
         /// <summary>
         /// В разработке
         /// </summary>
         [Display(Name = "В разработке")]
-        public static readonly Guid osInDevelopment = new Guid("F37FF71C-D144-4B67-A411-7216E2FBD328");
+        public static readonly Guid osInDevelopment = new Guid("f37ff71c-d144-4b67-a411-7216e2fbd328");
 
         /// <summary>
         /// Заблокирован
         /// </summary>
         [Display(Name = "Заблокирован")]
-        public static readonly Guid osBlocked = new Guid("A20417F7-7BC2-4DDD-8F8D-A486FDBFB1CF");
+        public static readonly Guid osBlocked = new Guid("a20417f7-7bc2-4ddd-8f8d-a486fdbfb1cf");
 
         /// <summary>
         /// Удален
         /// </summary>
         [Display(Name = "Удален")]
-        public static readonly Guid osDeleted = new Guid("339A6D38-7A40-4F79-BD03-760D470C9258");
+        public static readonly Guid osDeleted = new Guid("339a6d38-7a40-4f79-bd03-760d470c9258");
     }
 
     /// <summary>
@@ -270,43 +276,43 @@ namespace Common.Base
         /// Папка
         /// </summary>
         [Display(Name = "Папка")]
-        public static readonly Guid otFolder = new Guid("A15D22B8-B18D-48FD-8964-DC91E4F7652B");
+        public static readonly Guid otFolder = new Guid("a15d22b8-b18d-48fd-8964-dc91e4f7652b");
 
         /// <summary>
         /// Класс
         /// </summary>
         [Display(Name = "Класс")]
-        public static readonly Guid otClass = new Guid("77FF88F5-B741-459E-BCE6-DACC83EC1FE3");
+        public static readonly Guid otClass = new Guid("77ff88f5-b741-459e-bce6-dacc83ec1fe3");
 
         /// <summary>
         /// Состояние объекта
         /// </summary>
         [Display(Name = "Состояние объекта")]
-        public static readonly Guid otState = new Guid("99F326AC-A722-4C81-9D00-87CFF1EA5F25");
+        public static readonly Guid otState = new Guid("99f326ac-a722-4c81-9d00-87cff1ea5f25");
 
         /// <summary>
         /// Тип объекта
         /// </summary>
         [Display(Name = "Тип объекта")]
-        public static readonly Guid otType = new Guid("B840752E-5C79-49FF-B985-ACD3862E4530");
+        public static readonly Guid otType = new Guid("b840752e-5c79-49ff-b985-acd3862e4530");
 
         /// <summary>
         /// Пользователь
         /// </summary>
         [Display(Name = "Пользователь")]
-        public static readonly Guid otUser = new Guid("A92B6B05-D6B7-47F6-880D-78C784D4FAD5");
+        public static readonly Guid otUser = new Guid("a92b6b05-d6b7-47f6-880d-78c784d4fad5");
 
         /// <summary>
         /// Группа пользователей
         /// </summary>
         [Display(Name = "Группа пользователей")]
-        public static readonly Guid otUserGroup = new Guid("D43FAAA2-427C-412F-B92C-11B78EA7BE9B");
+        public static readonly Guid otUserGroup = new Guid("d43faaa2-427c-412f-b92c-11b78ea7be9b");
 
         /// <summary>
         /// Человек (физическое лицо)
         /// </summary>
         [Display(Name = "Человек (физическое лицо)")]
-        public static readonly Guid otIndividualPerson = new Guid("E815F4FF-0DE5-4D39-AFAA-95BC9D72B9C7");
+        public static readonly Guid otIndividualPerson = new Guid("e815f4ff-0de5-4d39-afaa-95bc9d72b9c7");
 
         /// <summary>
         /// Документы, отчеты, изменения документов и т.п.
@@ -318,19 +324,19 @@ namespace Common.Base
         /// Тип документа
         /// </summary>
         [Display(Name = "Тип документа")]
-        public static readonly Guid otDocumentType = new Guid("91463768-D5E2-4DCD-A125-AC4B60FE7B51");
+        public static readonly Guid otDocumentType = new Guid("91463768-d5e2-4dcd-a125-ac4b60fe7b51");
 
         /// <summary>
         /// Группа типов отчетов
         /// </summary>
         [Display(Name = "Тип отчетов")]
-        public static readonly Guid otReportType = new Guid("0A1087D5-AB77-449D-9677-4B825E80E847");
+        public static readonly Guid otReportType = new Guid("0a1087d5-ab77-449d-9677-4b825e80e847");
 
         /// <summary>
         /// Группа типов отчетов
         /// </summary>
         [Display(Name = "Группа типов отчетов")]
-        public static readonly Guid otReportTypeGroup = new Guid("AD4AAA57-A71B-48A9-AD8A-9542A3D8711F");
+        public static readonly Guid otReportTypeGroup = new Guid("ad4aaa57-a71b-48a9-ad8a-9542a3d8711f");
 
         /// <summary>
         /// Юридическое лицо
@@ -372,13 +378,13 @@ namespace Common.Base
         /// Системный архитектор
         /// </summary>
         [Display(Name = "Системный архитектор")]
-        public static readonly Guid ugArchitect = new Guid("85034FD6-4F23-4F0B-8FE4-56F4EFD17FB1");
+        public static readonly Guid ugArchitect = new Guid("85034fd6-4f23-4f0b-8fe4-56f4efd17fb1");
 
         /// <summary>
         /// Общая группа пользователей
         /// </summary>
         [Display(Name = "Общая группа пользователей")]
-        public static readonly Guid ugCommonUserGroup = new Guid("E1977546-F3C3-47CD-BD23-BC05EC3F58FC");
+        public static readonly Guid ugCommonUserGroup = new Guid("e1977546-f3c3-47cd-bd23-bc05ec3f58fc");
     }
 
     /// <summary>

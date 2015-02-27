@@ -161,17 +161,23 @@ namespace Domain
 
         InstituteDto GetInstitute(Guid instituteId);
 
+        List<InstituteDto> GetInstitutes();
+
         void UpdateInstitute(InstituteDto instituteDto);
 
         EducationLevelDto CreateEducationLevel(EducationLevelDto educationLevelDto);
 
         EducationLevelDto GetEducationLevel(Guid educationLevelId);
 
+        List<EducationLevelDto> GetEducationLevels();
+
         void UpdateEducationLevel(EducationLevelDto educationLevelDto);
 
         LocalityTypeDto CreateLocalityType(LocalityTypeDto localityTypeDto);
 
         LocalityTypeDto GetLocalityType(Guid localityTypeId);
+
+        List<LocalityTypeDto> GetLocalityTypes();
 
         void UpdateLocalityType(LocalityTypeDto localityTypeDto);
     }

@@ -144,17 +144,23 @@ namespace Infrastructure
 
         InstituteDao GetInstitute(Guid instituteId);
 
+        List<InstituteDao> GetInstitutes();
+
         void UpdateInstitute(InstituteDao instituteDao);
 
         EducationLevelDao CreateEducationLevel(EducationLevelDao educationLevelDao);
 
         EducationLevelDao GetEducationLevel(Guid educationLevelId);
 
+        List<EducationLevelDao> GetEducationLevels();
+
         void UpdateEducationLevel(EducationLevelDao educationLevelDao);
 
         LocalityTypeDao CreateLocalityType(LocalityTypeDao localityTypeDao);
 
         LocalityTypeDao GetLocalityType(Guid localityTypeId);
+
+        List<LocalityTypeDao> GetLocalityTypes();
 
         void UpdateLocalityType(LocalityTypeDao localityTypeDao);
     }

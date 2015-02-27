@@ -34,9 +34,9 @@ namespace AISSPO.Controllers
         [System.Web.Http.HttpGet, System.Web.Http.ActionName("Get2")]
         public int Get2()
         {
+            var inDtos = _treeService.GetInstitutes();
             
-            
-            return _treeService.GetReportDataPageCountByReportId(new Guid("d26c8417-016c-49a1-beda-a42d0151ed5c"));
+            return 1;
         }
 
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("AuthenticateUser")]
@@ -496,5 +496,33 @@ namespace AISSPO.Controllers
             var ids = reportDataIds.Select(reportDataId => reportDataId.Id).ToList();
             _treeService.DeleteReportDataPacket(ids);
         }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetInstitutes")]
+        public List<InstituteDto> GetInstitutes()
+        {
+            return _treeService.GetInstitutes();
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetEducationLevels")]
+        public List<EducationLevelDto> GetEducationLevels()
+        {
+            return _treeService.GetEducationLevels();
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetLocalityTypes")]
+        public List<LocalityTypeDto> GetLocalityTypes()
+        {
+            return _treeService.GetLocalityTypes();
+        }
+
+        [IntegrationAuthentication]
+        [System.Web.Http.HttpPost, System.Web.Http.ActionName("GetDistricts")]
+        public List<DistrictDto> GetDistricts()
+        {
+            return _treeService.GetDistricts();
+        }        
     }
 }

@@ -944,7 +944,8 @@ namespace Infrastructure
         {
             using (var transaction = _session.StartTransaction())
             {
-                return _session.Query<DistrictDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString()).ToList();
+                return _session.Query<DistrictDao>().Where(p => p.State.ToString() != ObjectStates.osDeleted.ToString())
+                    .Where(p => p.Parent.Id.ToString() != SystemObjects.AllDistricts.ToString()).ToList();
             }
         }
 
@@ -977,6 +978,14 @@ namespace Infrastructure
             }
         }
 
+        public List<InstituteDao> GetInstitutes()
+        {
+            using (var transaction = _session.StartTransaction())
+            {   
+                return _session.Query<InstituteDao>().Where(p => p.Parent.Id.ToString() == SystemObjects.AllInstituteJuridicalPersons.ToString()).ToList();
+            }
+        }
+
         public void UpdateInstitute(InstituteDao instituteDao)
         {
             using (var transaction = _session.StartTransaction())
@@ -1006,6 +1015,14 @@ namespace Infrastructure
             }
         }
 
+        public List<EducationLevelDao> GetEducationLevels()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<EducationLevelDao>().Where(p => p.Parent.Id.ToString() == SystemObjects.AllEducationLevels.ToString()).ToList();
+            }
+        }
+
         public void UpdateEducationLevel(EducationLevelDao educationLevelDao)
         {
             using (var transaction = _session.StartTransaction())
@@ -1032,6 +1049,14 @@ namespace Infrastructure
             using (var transaction = _session.StartTransaction())
             {
                 return _session.Query<LocalityTypeDao>().FirstOrDefault(p => p.Id.ToString() == localityTypeId.ToString());
+            }
+        }
+
+        public List<LocalityTypeDao> GetLocalityTypes()
+        {
+            using (var transaction = _session.StartTransaction())
+            {
+                return _session.Query<LocalityTypeDao>().Where(p => p.Parent.Id.ToString() == SystemObjects.AllLocalityTypes.ToString()).ToList();
             }
         }
 

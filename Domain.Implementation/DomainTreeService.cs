@@ -1240,6 +1240,12 @@ namespace Domain.Implementation
             return instituteDao == null ? null : _instituteDtoFetcher.Fetch(new List<InstituteDao> { instituteDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
+        public List<InstituteDto> GetInstitutes()
+        {
+            var instituteDaos = _treeRepository.GetInstitutes();
+            return instituteDaos == null ? null : _instituteDtoFetcher.Fetch(instituteDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();            
+        }
+
         public void UpdateInstitute(InstituteDto instituteDto)
         {
             var instituteDao = _treeRepository.GetInstitute(instituteDto.Id);
@@ -1299,6 +1305,12 @@ namespace Domain.Implementation
             return educationLevelDao == null ? null : _educationLevelDtoFetcher.Fetch(new List<EducationLevelDao> { educationLevelDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
         }
 
+        public List<EducationLevelDto> GetEducationLevels()
+        {
+            var educationLevelDaos = _treeRepository.GetEducationLevels();
+            return educationLevelDaos == null ? null : _educationLevelDtoFetcher.Fetch(educationLevelDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
+        }
+
         public void UpdateEducationLevel(EducationLevelDto educationLevelDto)
         {
             var educationLevelDao = _treeRepository.GetEducationLevel(educationLevelDto.Id);
@@ -1350,6 +1362,12 @@ namespace Domain.Implementation
             var localityTypeDao = _treeRepository.GetLocalityType(localityTypeId);
 
             return localityTypeDao == null ? null : _localityTypeDtoFetcher.Fetch(new List<LocalityTypeDao> { localityTypeDao }.AsQueryable(), Page.All, FetchAim.Card).FirstOrDefault();
+        }
+
+        public List<LocalityTypeDto> GetLocalityTypes()
+        {
+            var localityTypeDaos = _treeRepository.GetLocalityTypes();
+            return localityTypeDaos == null ? null : _localityTypeDtoFetcher.Fetch(localityTypeDaos.AsQueryable(), Page.All, FetchAim.Card).ToList();
         }
 
         public void UpdateLocalityType(LocalityTypeDto localityTypeDto)
